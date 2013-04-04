@@ -3,7 +3,7 @@
     {
       "name": "Static Text",
       "type": "STATIC_TEXT",
-      "html": "<div></div>",
+      "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
       "properties": {
         "font": {
           "Face": {
@@ -69,7 +69,7 @@
     {
       "name": "Variable Text",
       "type": "VARIABLE_TEXT",
-      "html": "<div></div>",
+      "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
       "properties": {
         "font": {
           "Face": {
@@ -171,9 +171,23 @@
             "editable": false,
             "selection": [
               "solid",
-              "dot"
+              "dotted",
+              "dashed"
             ],
-            "default": "solid"
+            "default": "solid",
+            "css": "border-bottom-style:%s;"
+          },
+          "height": {
+            "input_type": "int",
+            "editable": true,
+            "default": 1,
+            "css": "border-bottom-width:%dpx;"
+          },
+          "color": {
+            "input_type": "string",
+            "editable": true,
+            "default": "#000000",
+            "css": "border-bottom-color:%s;"
           }
         }
       }
@@ -183,9 +197,14 @@
       "type": "IMAGE",
       "html": "<div><img/></div>",
       "properties": {
-        "location": "url",
-        "ratio": "bool",
-        "border": "bool"
+        "image": {
+          "location": {
+            "input_type": "string",
+            "editable": true,
+            "default": "",
+            "css": "background-image:url(%s);"
+          }
+        }
       }
     }
   ],

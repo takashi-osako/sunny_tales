@@ -1,0 +1,7 @@
+{{#elements}}
+<li id="{{type}}" value="{{html}}">
+	<div>
+		{{name}}
+	</div>
+</li>
+{{/elements}}

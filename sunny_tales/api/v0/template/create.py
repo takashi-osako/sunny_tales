@@ -12,5 +12,6 @@ from sunny_tales.utils.element_loader import get_element_json
 def new_template(request):
     document={}
     document['id'] = str(uuid.uuid4())
-    document['elements'] = get_element_json()
+    document['elements'] = get_element_json()['elements']
+    document['template'] = {}
     return document
