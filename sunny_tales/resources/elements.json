@@ -4,68 +4,64 @@
       "name": "Static Text",
       "type": "STATIC_TEXT",
       "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
+      "resizable": true,
       "properties": {
-        "font": {
-          "Face": {
-            "input_type": "string",
-            "editable": false,
-            "selection": [
-              "arial",
-              "courier"
-            ],
-            "css": "font-family: %s;",
-            "default": "courier"
-          },
-          "Size": {
-            "input_type": "int",
-            "editable": true,
-            "selection": [
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14
-            ],
-            "css": "font-size: %dpt;",
-            "default": 12
-          },
-          "Italic": {
-            "input_type": "bool",
-            "editable": true,
-            "css": "font-style:italic;",
-            "default": false
-          },
-          "Bold": {
-            "intput_type": "bool",
-            "editable": true,
-            "css": "font-weight: bold;",
-            "default": false
-          },
-          "Underline": {
-            "input_type": "bool",
-            "editable": true,
-            "css": "text-decoration:underline;",
-            "default": false
-          },
-          "Alignment": {
-            "input_type": "string",
-            "editable": false,
-            "selection": [
-              "right",
-              "center",
-              "left",
-              "justify"
-            ],
-            "css": "text-align:%s;",
-            "default": "left"
-          }
+        "font-face": {
+          "input_type": "string",
+          "editable": false,
+          "selection": [
+            "arial",
+            "courier"
+          ],
+          "css": "font-family: %s;",
+          "default": "courier"
         },
-        "component": {
-          "resizable": true
+        "font-size": {
+          "input_type": "int",
+          "editable": true,
+          "selection": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "css": "font-size: %dpt;",
+          "default": 12
+        },
+        "Italic": {
+          "input_type": "bool",
+          "editable": true,
+          "css": "font-style:italic;",
+          "default": false
+        },
+        "Bold": {
+          "intput_type": "bool",
+          "editable": true,
+          "css": "font-weight: bold;",
+          "default": false
+        },
+        "Underline": {
+          "input_type": "bool",
+          "editable": true,
+          "css": "text-decoration:underline;",
+          "default": false
+        },
+        "text-align": {
+          "input_type": "string",
+          "editable": false,
+          "selection": [
+            "right",
+            "center",
+            "left",
+            "justify"
+          ],
+          "css": "text-align:%s;",
+          "default": "left"
         }
       }
     },
@@ -73,65 +69,64 @@
       "name": "Variable Text",
       "type": "VARIABLE_TEXT",
       "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
+      "resizable": true,
       "properties": {
-        "font": {
-          "Face": {
-            "input_type": "string",
-            "editable": false,
-            "selection": [
-              "arial",
-              "courier"
-            ],
-            "css": "font-family: %s;",
-            "default": "courier"
-          },
-          "Size": {
-            "input_type": "int",
-            "editable": true,
-            "selection": [
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14
-            ],
-            "css": "font-size: %dpt;",
-            "default": 12
-          },
-          "Italic": {
-            "input_type": "bool",
-            "editable": true,
-            "css": "font-style:italic;",
-            "default": false
-          },
-          "Bold": {
-            "intput_type": "bool",
-            "editable": true,
-            "css": "font-weight: bold;",
-            "default": false
-          },
-          "Underline": {
-            "input_type": "bool",
-            "editable": true,
-            "css": "text-decoration:underline;",
-            "default": false
-          },
-          "Alignment": {
-            "input_type": "string",
-            "editable": false,
-            "selection": [
-              "right",
-              "center",
-              "left",
-              "justify"
-            ],
-            "css": "text-align:%s;",
-            "default": "left"
-          }
+        "font-face": {
+          "input_type": "string",
+          "editable": false,
+          "selection": [
+            "arial",
+            "courier"
+          ],
+          "css": "font-family: %s;",
+          "default": "courier"
+        },
+        "font-size": {
+          "input_type": "int",
+          "editable": true,
+          "selection": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "css": "font-size: %dpt;",
+          "default": 12
+        },
+        "Italic": {
+          "input_type": "bool",
+          "editable": true,
+          "css": "font-style:italic;",
+          "default": false
+        },
+        "Bold": {
+          "intput_type": "bool",
+          "editable": true,
+          "css": "font-weight: bold;",
+          "default": false
+        },
+        "Underline": {
+          "input_type": "bool",
+          "editable": true,
+          "css": "text-decoration:underline;",
+          "default": false
+        },
+        "text-align": {
+          "input_type": "string",
+          "editable": false,
+          "selection": [
+            "right",
+            "center",
+            "left",
+            "justify"
+          ],
+          "css": "text-align:%s;",
+          "default": "left"
         },
         "Formatter": [
           {
@@ -160,44 +155,37 @@
               }
             }
           }
-        ],
-        "component": {
-          "resizable": true
-        }
+        ]
       }
     },
     {
       "name": "line",
       "type": "LINE",
       "html": "<div><hr/></div>",
+      "resizable": true,
       "properties": {
-        "line": {
-          "style": {
-            "input_type": "string",
-            "editable": false,
-            "selection": [
-              "solid",
-              "dotted",
-              "dashed"
-            ],
-            "default": "solid",
-            "css": "border-bottom-style:%s;"
-          },
-          "height": {
-            "input_type": "int",
-            "editable": true,
-            "default": 1,
-            "css": "border-bottom-width:%dpx;"
-          },
-          "color": {
-            "input_type": "string",
-            "editable": true,
-            "default": "#000000",
-            "css": "border-bottom-color:%s;"
-          }
+        "style": {
+          "input_type": "string",
+          "editable": false,
+          "selection": [
+            "solid",
+            "dotted",
+            "dashed"
+          ],
+          "default": "solid",
+          "css": "border-bottom-style:%s;"
         },
-        "component": {
-          "resizable": false
+        "height": {
+          "input_type": "int",
+          "editable": true,
+          "default": 1,
+          "css": "border-bottom-width:%dpx;"
+        },
+        "color": {
+          "input_type": "string",
+          "editable": true,
+          "default": "#000000",
+          "css": "border-bottom-color:%s;"
         }
       }
     },
@@ -205,17 +193,13 @@
       "name": "image",
       "type": "IMAGE",
       "html": "<div><img/></div>",
+      "resizable": true,
       "properties": {
-        "image": {
-          "location": {
-            "input_type": "string",
-            "editable": true,
-            "default": "",
-            "css": "background-image:url(%s);"
-          }
-        },
-        "component": {
-          "resizable": true
+        "location": {
+          "input_type": "string",
+          "editable": true,
+          "default": "",
+          "css": "background-image:url(%s);"
         }
       }
     }
