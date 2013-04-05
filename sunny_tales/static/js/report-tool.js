@@ -23,7 +23,7 @@ $(function () {
 				new_element = $(value);
 				new_element.attr("id", my_selection_id);
 				new_element.attr("element_id", element_id);
-				new_element.attr('style','cursor:move;');
+				new_element.attr('style',new_element.attr('style')+'cursor:move;');
 				new_element.appendTo(this);
 				if(properties[element_id].resizable)
 					$("#" + my_selection_id).resizable();

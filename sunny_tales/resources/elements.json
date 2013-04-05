@@ -3,7 +3,7 @@
     {
       "name": "Static Text",
       "type": "STATIC_TEXT",
-      "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
+      "html": "<div class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
       "style": {
         "font-face": {
@@ -68,7 +68,7 @@
     {
       "name": "Variable Text",
       "type": "VARIABLE_TEXT",
-      "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
+      "html": "<div class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
       "style": {
         "font-face": {
@@ -192,14 +192,14 @@
     {
       "name": "image",
       "type": "IMAGE",
-      "html": "<div><img/></div>",
+      "html": "<div class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
       "style": {
         "location": {
           "input_type": "string",
           "editable": true,
-          "default": "",
-          "css": "background-image:url(%s);"
+          "default": "../png/glyphicons_194_circle_question_mark.png",
+          "css": "background-image:url(%s);background-repeat:no-repeat;"
         }
       }
     }
