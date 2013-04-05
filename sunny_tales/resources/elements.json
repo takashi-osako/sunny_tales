@@ -162,7 +162,7 @@
       "name": "line",
       "type": "LINE",
       "html": "<div><hr/></div>",
-      "resizable": true,
+      "resizable": false,
       "style": {
         "line-style": {
           "input_type": "string",

@@ -1,31 +1,36 @@
 selection_id={}
+properties={}
 $(function () {
 	$('body').layout({
 		applyDefaultStyles : true
 	});
 	load_document();
-	/*
-	$("#selections").accordion();
-	$("#selections li").draggable({
-		appendTo : "body",
-		helper : "clone"
-	});
-	*/
+
 	$("#canvas").droppable({
 		activeClass : "ui-state-default",
 		hoverClass : "ui-state-hover",
 		drop : function(event, ui) {
-			id = ui.draggable.attr("id");
-			value = ui.draggable.attr("value");
-			my_selection_id = get_selection_id(id);
-			new_element = $(value);
-			new_element.attr("id", my_selection_id);
-			//span_element = $('<span></span>');
-			//span_element.attr("id","span_" + my_selection_id);
-			//new_element.appendTo(span_element);
-			new_element.appendTo(this);
-			$("#" + my_selection_id).resizable();
-			$("#" + my_selection_id).draggable();
+			element_id = ui.draggable.attr("element_id");
+			my_selection_id = ui.draggable.attr("id");
+			
+			if (element_id===undefined) {
+				element_id = my_selection_id;
+				//this is first time dragging.  
+				//make it unique and save original id to element_id
+				ui.draggable.attr('element_id',element_id)
+				my_selection_id = get_selection_id(element_id);
+				value = ui.draggable.attr("value");
+				new_element = $(value);
+				new_element.attr("id", my_selection_id);
+				new_element.attr("element_id", element_id);
+				new_element.attr('style','cursor:move;');
+				new_element.appendTo(this);
+				if(properties[element_id].resizable)
+					$("#" + my_selection_id).resizable();
+				$("#" + my_selection_id).draggable();
+			}
+			
+			
 		}
 	});
 	
@@ -64,8 +69,12 @@ function load_template(template_name, data, render_area) {
 		success: function(template) {
 			output = Mustache.render(template, data)
 			render_area.append(output)
-			for(var i=0; i<data.elements.length; i++)
-				make_draggable($("#" + data.elements[i].type))
+			for(var i=0; i<data.elements.length; i++) {
+				id = "#" + data.elements[i].type
+				properties[data.elements[i].type]=data.elements[i]
+				make_draggable($(id))
+			}
+				
 		}, error: function() {
 			alart('error')
 		}
@@ -78,3 +87,4 @@ function make_draggable(id) {
 		helper : "clone"
 	});
 }
+
