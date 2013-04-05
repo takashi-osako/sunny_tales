@@ -5,7 +5,7 @@
       "type": "STATIC_TEXT",
       "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
-      "properties": {
+      "style": {
         "font-face": {
           "input_type": "string",
           "editable": false,
@@ -70,7 +70,7 @@
       "type": "VARIABLE_TEXT",
       "html": "<div id='resizable' class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
-      "properties": {
+      "style": {
         "font-face": {
           "input_type": "string",
           "editable": false,
@@ -163,8 +163,8 @@
       "type": "LINE",
       "html": "<div><hr/></div>",
       "resizable": true,
-      "properties": {
-        "style": {
+      "style": {
+        "line-style": {
           "input_type": "string",
           "editable": false,
           "selection": [
@@ -194,7 +194,7 @@
       "type": "IMAGE",
       "html": "<div><img/></div>",
       "resizable": true,
-      "properties": {
+      "style": {
         "location": {
           "input_type": "string",
           "editable": true,
@@ -204,7 +204,7 @@
       }
     }
   ],
-  "properties": {
+  "style": {
     "position": {
       "x": {
         "input_type": "int",
