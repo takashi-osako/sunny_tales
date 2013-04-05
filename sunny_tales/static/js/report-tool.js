@@ -20,10 +20,10 @@ $(function () {
 			my_selection_id = get_selection_id(id);
 			new_element = $(value);
 			new_element.attr("id", my_selection_id);
-			span_element = $('<span></span>');
-			span_element.attr("id","span_" + my_selection_id);
-			new_element.appendTo(span_element);
-			span_element.appendTo(this);
+			//span_element = $('<span></span>');
+			//span_element.attr("id","span_" + my_selection_id);
+			//new_element.appendTo(span_element);
+			new_element.appendTo(this);
 			$("#" + my_selection_id).resizable();
 			$("#" + my_selection_id).draggable();
 		}
@@ -45,7 +45,7 @@ function get_selection_id(id) {
 function load_document() {
 	$.ajax({
 		dataType: 'json',
-		url: 'http://localhost:6543/api/v0/template/new',
+		url: '/api/v0/template/new',
 		success: function(data) {
 			id = data.id
 			elements = data.elements
@@ -57,7 +57,7 @@ function load_document() {
 }
 
 function load_template(template_name, data, render_area) {
-	target = 'http://localhost:6543/templates/' + template_name
+	target = '/templates/' + template_name
 	$.ajax({
 		dataType: 'html',
 		url: target,
