@@ -63,6 +63,9 @@
             "css": "text-align:%s;",
             "default": "left"
           }
+        },
+        "component": {
+          "resizable": true
         }
       }
     },
@@ -157,7 +160,10 @@
               }
             }
           }
-        ]
+        ],
+        "component": {
+          "resizable": true
+        }
       }
     },
     {
@@ -189,6 +195,9 @@
             "default": "#000000",
             "css": "border-bottom-color:%s;"
           }
+        },
+        "component": {
+          "resizable": false
         }
       }
     },
@@ -204,6 +213,9 @@
             "default": "",
             "css": "background-image:url(%s);"
           }
+        },
+        "component": {
+          "resizable": true
         }
       }
     }
