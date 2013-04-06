@@ -1,0 +1,13 @@
+{{name}}
+<table>
+<tr>
+<td>Property</td>
+<td>Value</td>
+</tr>
+{{#style}}
+<tr>
+<td>{{name}}</td>
+<td>hello</td>
+</tr>
+{{/style}}
+</table>

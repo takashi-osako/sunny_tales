@@ -5,8 +5,9 @@
       "type": "STATIC_TEXT",
       "html": "<div class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
-      "style": {
-        "font-face": {
+      "style": [
+        {
+          "name": "font face",
           "input_type": "string",
           "editable": false,
           "selection": [
@@ -16,7 +17,8 @@
           "css": "font-family: %s;",
           "default": "courier"
         },
-        "font-size": {
+        {
+          "name": "font size",
           "input_type": "int",
           "editable": true,
           "selection": [
@@ -33,25 +35,29 @@
           "css": "font-size: %dpt;",
           "default": 12
         },
-        "Italic": {
+        {
+          "name": "Italic",
           "input_type": "bool",
           "editable": true,
           "css": "font-style:italic;",
           "default": false
         },
-        "Bold": {
+        {
+          "name": "Bold,",
           "intput_type": "bool",
           "editable": true,
           "css": "font-weight: bold;",
           "default": false
         },
-        "Underline": {
+        {
+          "name": "Underline",
           "input_type": "bool",
           "editable": true,
           "css": "text-decoration:underline;",
           "default": false
         },
-        "text-align": {
+        {
+          "name": "text-align",
           "input_type": "string",
           "editable": false,
           "selection": [
@@ -63,15 +69,16 @@
           "css": "text-align:%s;",
           "default": "left"
         }
-      }
+      ]
     },
     {
       "name": "Variable Text",
       "type": "VARIABLE_TEXT",
       "html": "<div class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
-      "style": {
-        "font-face": {
+      "style": [
+        {
+          "name": "font face",
           "input_type": "string",
           "editable": false,
           "selection": [
@@ -81,7 +88,8 @@
           "css": "font-family: %s;",
           "default": "courier"
         },
-        "font-size": {
+        {
+          "name": "font size",
           "input_type": "int",
           "editable": true,
           "selection": [
@@ -98,25 +106,29 @@
           "css": "font-size: %dpt;",
           "default": 12
         },
-        "Italic": {
+        {
+          "name": "Italic",
           "input_type": "bool",
           "editable": true,
           "css": "font-style:italic;",
           "default": false
         },
-        "Bold": {
+        {
+          "name": "Bold,",
           "intput_type": "bool",
           "editable": true,
           "css": "font-weight: bold;",
           "default": false
         },
-        "Underline": {
+        {
+          "name": "Underline",
           "input_type": "bool",
           "editable": true,
           "css": "text-decoration:underline;",
           "default": false
         },
-        "text-align": {
+        {
+          "name": "text-align",
           "input_type": "string",
           "editable": false,
           "selection": [
@@ -127,36 +139,8 @@
           ],
           "css": "text-align:%s;",
           "default": "left"
-        },
-        "Formatter": [
-          {
-            "Number": {
-              "format": {
-                "intput_type": "string",
-                "editable": true,
-                "selection": [
-                  "#",
-                  "#,###",
-                  "#.#",
-                  "#,###.#",
-                  "#.##"
-                ],
-                "default": "#,###"
-              }
-            }
-          },
-          {
-            "String": {
-              "length": {
-                "input_type": "int",
-                "editable": true,
-                "disabled": true,
-                "default": -1
-              }
-            }
-          }
-        ]
-      }
+        }
+      ]
     },
     {
       "name": "line",

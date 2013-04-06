@@ -18,15 +18,15 @@ $(function () {
 				//this is first time dragging.  
 				//make it unique and save original id to element_id
 				ui.draggable.attr('element_id',element_id)
-				my_selection_id = get_selection_id(element_id);
+				my_selection_id = generate_selection_id(element_id);
 				value = ui.draggable.attr("value");
 				new_element = $(value);
 				new_element.attr("id", my_selection_id);
 				new_element.attr("element_id", element_id);
-				style = new_element.attr('style');
-				if (style === undefined)
-					style="";
-				new_element.attr('style',style+'cursor:move;');
+				new_element.css('cursor','move')
+				new_element.click(function() {
+					populateStyleLayout($(this))
+				})
 				new_element.appendTo(this);
 				if(properties[element_id].resizable)
 					$("#" + my_selection_id).resizable();
@@ -40,7 +40,7 @@ $(function () {
 	
 });
 
-function get_selection_id(id) {
+function generate_selection_id(id) {
 	uid = selection_id[id];
 	if (uid === undefined) {
 		selection_id[id] = 0;
@@ -57,31 +57,34 @@ function load_document() {
 		success: function(data) {
 			id = data.id
 			elements = data.elements
-			load_template('elements.template', data, $("#selections"))
+			template = get_template('elements.template')
+			output = Mustache.render(template, data)
+			$("#selections").append(output)
+			for(var i=0; i<data.elements.length; i++) {
+				id = "#" + data.elements[i].type
+				properties[data.elements[i].type]=data.elements[i]
+				make_draggable($(id))
+			}
 		}, error: function() {
 			alart('error')
 		}
 	})
 }
 
-function load_template(template_name, data, render_area) {
+function get_template(template_name) {
+	var template;
 	target = '/templates/' + template_name
 	$.ajax({
 		dataType: 'html',
 		url: target,
-		success: function(template) {
-			output = Mustache.render(template, data)
-			render_area.append(output)
-			for(var i=0; i<data.elements.length; i++) {
-				id = "#" + data.elements[i].type
-				properties[data.elements[i].type]=data.elements[i]
-				make_draggable($(id))
-			}
-				
+		async: false,
+		success: function(response) {
+			template=response;
 		}, error: function() {
 			alart('error')
 		}
-	})
+	});
+	return template;
 }
 
 function make_draggable(id) {
@@ -91,3 +94,10 @@ function make_draggable(id) {
 	});
 }
 
+function populateStyleLayout(clicked_element) {
+	element_id = clicked_element.attr('element_id')
+	property = properties[element_id]
+	template = get_template('element_style.template')
+	output = Mustache.render(template, property)
+	$("#style").html(output)
+}
