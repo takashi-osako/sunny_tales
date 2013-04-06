@@ -147,8 +147,9 @@
       "type": "LINE",
       "html": "<div><hr/></div>",
       "resizable": false,
-      "style": {
-        "line-style": {
+      "style": [
+        {
+          "name": "line style",
           "input_type": "string",
           "editable": false,
           "selection": [
@@ -159,88 +160,91 @@
           "default": "solid",
           "css": "border-bottom-style:%s;"
         },
-        "height": {
+        {
+          "name": "height",
           "input_type": "int",
           "editable": true,
           "default": 1,
           "css": "border-bottom-width:%dpx;"
         },
-        "color": {
+        {
+          "name": "color",
           "input_type": "string",
           "editable": true,
           "default": "#000000",
           "css": "border-bottom-color:%s;"
         }
-      }
+      ]
     },
     {
       "name": "image",
       "type": "IMAGE",
       "html": "<div class='ui-widget-content resizable draggable'></div>",
       "resizable": true,
-      "style": {
-        "location": {
+      "style": [
+        {
+          "name": "location",
           "input_type": "string",
           "editable": true,
           "default": "../png/glyphicons_194_circle_question_mark.png",
           "css": "background-image:url(%s);background-repeat:no-repeat;"
         }
-      }
+      ]
     }
   ],
-  "style": {
-    "position": {
-      "x": {
-        "input_type": "int",
-        "editable": true,
-        "default": 0,
-        "css": "left:%dpx;"
-      },
-      "y": {
-        "input_type": "int",
-        "editable": true,
-        "default": 0,
-        "css": "top:%dpx;"
-      }
+  "style": [
+    {
+      "name": "X position",
+      "input_type": "int",
+      "editable": true,
+      "default": 0,
+      "css": "left:%dpx;"
     },
-    "area": {
-      "width": {
-        "input_type": "int",
-        "editable": true,
-        "default": 150,
-        "css": "width:%dpx;"
-      },
-      "height": {
-        "input_type": "int",
-        "editable": true,
-        "default": 100,
-        "css": "height:%dpx;"
-      }
+    {
+      "name": " Y position",
+      "input_type": "int",
+      "editable": true,
+      "default": 0,
+      "css": "top:%dpx;"
     },
-    "Border": {
-      "style": {
-        "input_type": "string",
-        "editable": false,
-        "selection": [
-          "none",
-          "solid"
-        ],
-        "css": "border-style:%s;",
-        "default": "none"
-      },
-      "width": {
-        "input_type": "int",
-        "editable": true,
-        "selection": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "css": "border-width:%dpx;",
-        "default": 1
-      }
+    {
+      "name": "width",
+      "input_type": "int",
+      "editable": true,
+      "default": 150,
+      "css": "width:%dpx;"
+    },
+    {
+      "name": "height",
+      "input_type": "int",
+      "editable": true,
+      "default": 100,
+      "css": "height:%dpx;"
+    },
+    {
+      "name": "Border style",
+      "input_type": "string",
+      "editable": false,
+      "selection": [
+        "none",
+        "solid"
+      ],
+      "css": "border-style:%s;",
+      "default": "none"
+    },
+    {
+      "name": "Border width",
+      "input_type": "int",
+      "editable": true,
+      "selection": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "css": "border-width:%dpx;",
+      "default": 1
     }
-  }
+  ]
 }
