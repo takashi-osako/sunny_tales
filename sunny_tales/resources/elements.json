@@ -3,7 +3,7 @@
     {
       "name": "Static Text",
       "type": "STATIC_TEXT",
-      "html": "<div class='ui-widget-content resizable draggable'></div>",
+      "html": "<div class='ui-widget-content resizable draggable'>This is static text and click me</div>",
       "resizable": true,
       "style": [
         {
@@ -74,7 +74,7 @@
     {
       "name": "Variable Text",
       "type": "VARIABLE_TEXT",
-      "html": "<div class='ui-widget-content resizable draggable'></div>",
+      "html": "<div class='ui-widget-content resizable draggable'>This is variable text and click me</div>",
       "resizable": true,
       "style": [
         {
@@ -179,7 +179,7 @@
     {
       "name": "image",
       "type": "IMAGE",
-      "html": "<div class='ui-widget-content resizable draggable'></div>",
+      "html": "<div class='ui-widget-content resizable draggable'>where is an image, eh?</div>",
       "resizable": true,
       "style": [
         {
