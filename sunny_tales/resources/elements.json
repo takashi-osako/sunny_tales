@@ -34,7 +34,8 @@
             14
           ],
           "css": "font-size: %dpt;",
-          "default": 12
+          "default": 12,
+          "html": "<input type='text'>"
         },
         {
           "name": "Italic",
@@ -69,6 +70,12 @@
           ],
           "css": "text-align:%s;",
           "default": "left"
+        },
+        {
+          "name": "text",
+          "input_type": "string",
+          "editable": true,
+          "html": "<textarea/>"
         }
       ]
     },
