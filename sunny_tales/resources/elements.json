@@ -1,4 +1,5 @@
 {
+  "name": "default",
   "elements": [
     {
       "name": "Static Text",
@@ -43,7 +44,7 @@
           "default": false
         },
         {
-          "name": "Bold,",
+          "name": "Bold",
           "intput_type": "bool",
           "editable": true,
           "css": "font-weight: bold;",
