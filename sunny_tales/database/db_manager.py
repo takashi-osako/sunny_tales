@@ -12,24 +12,24 @@ def create_db_client(host='localhost', port=27017):
 
 def insert(doc, col_name=None):
     client = component.queryUtility(IDbClient)
-    client.insert(doc, col_name=col_name)
+    return client.insert(doc, col_name=col_name)
 
 
 def remove(doc_id, col_name=None):
     client = component.queryUtility(IDbClient)
-    client.remove(doc_id, col_name=col_name)
+    return client.remove(doc_id, col_name=col_name)
 
 
 def update(doc_id, doc, col_name=None, upsert=False):
     client = component.queryUtility(IDbClient)
-    client.update(doc_id, doc, col_name=col_name, upsert=upsert)
+    return client.update(doc_id, doc, col_name=col_name, upsert=upsert)
 
 
 def find(doc_id=None, col_name=None):
     client = component.queryUtility(IDbClient)
-    client.find(doc_id=doc_id, col_name=col_name)
+    return client.find(doc_id=doc_id, col_name=col_name)
 
 
-def findOne(doc_id=None, col_name=None):
+def find_one(doc_id=None, col_name=None):
     client = component.queryUtility(IDbClient)
-    client.findOne(doc_id=doc_id, col_name=col_name)
+    return client.findOne(doc_id=doc_id, col_name=col_name)
