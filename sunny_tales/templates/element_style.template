@@ -1,4 +1,3 @@
-{{name}}
 <table>
 	<tr>
 		<td>Property</td>
@@ -7,7 +6,7 @@
 	{{#style}}
 	<tr>
 		<td>{{name}}</td>
-		<td>hello</td>
+		<td>{{{user_input}}}</td>
 	</tr>
 	{{/style}}
 </table>

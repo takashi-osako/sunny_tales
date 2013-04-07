@@ -17,7 +17,7 @@ $(function () {
 				element_id = my_selection_id;
 				//this is first time dragging.  
 				//make it unique and save original id to element_id
-				ui.draggable.attr('element_id',element_id)
+				//ui.draggable.attr('element_id',element_id)
 				my_selection_id = generate_selection_id(element_id);
 				value = ui.draggable.attr("value");
 				new_element = $(value);
@@ -28,7 +28,7 @@ $(function () {
 					populateStyleLayout($(this))
 				})
 				new_element.appendTo(this);
-				if(properties[element_id].resizable)
+				if(element_id !== undefined && properties[element_id].resizable)
 					$("#" + my_selection_id).resizable();
 				$("#" + my_selection_id).draggable();
 			}
@@ -40,8 +40,9 @@ $(function () {
 	
 });
 
+// move to another file
 function generate_selection_id(id) {
-	uid = selection_id[id];
+	var uid = selection_id[id];
 	if (uid === undefined) {
 		selection_id[id] = 0;
 		uid = 0;
@@ -50,38 +51,40 @@ function generate_selection_id(id) {
 	return id + "_" + uid;
 }
 
+// refactor this
 function load_document() {
 	$.ajax({
 		dataType: 'json',
 		url: '/api/v0/template/new',
 		success: function(data) {
-			id = data.id
-			elements = data.elements
-			template = get_template('elements.template')
-			output = Mustache.render(template, data)
+			var id = data.id
+			var elements = data.elements
+			var template = get_template('elements.template')
+			var output = Mustache.render(template, data)
 			$("#selections").append(output)
 			for(var i=0; i<data.elements.length; i++) {
-				id = "#" + data.elements[i].type
-				properties[data.elements[i].type]=data.elements[i]
-				make_draggable($(id))
+				var id = "#" + data.elements[i].type;
+				properties[data.elements[i].type] = convertStyleJSONToHTMLStyle(data.elements[i].style);
+				//properties[data.elements[i].type]=data.elements[i]
+				make_draggable($(id));
 			}
-		}, error: function() {
-			alart('error')
+		}, error: function(ts) {
+			alart(ts.responseText)
 		}
 	})
 }
 
 function get_template(template_name) {
 	var template;
-	target = '/templates/' + template_name
+	var target = '/templates/' + template_name
 	$.ajax({
 		dataType: 'html',
 		url: target,
 		async: false,
 		success: function(response) {
 			template=response;
-		}, error: function() {
-			alart('error')
+		}, error: function(ts) {
+			alert(ts.responseText)
 		}
 	});
 	return template;
@@ -94,10 +97,34 @@ function make_draggable(id) {
 	});
 }
 
+// display style property on style layout
 function populateStyleLayout(clicked_element) {
-	element_id = clicked_element.attr('element_id')
-	property = properties[element_id]
-	template = get_template('element_style.template')
-	output = Mustache.render(template, property)
+	var element_id = clicked_element.attr('element_id')
+	var property = properties[element_id]
+	var template = get_template('element_style.template')
+	var output = Mustache.render(template, property)
 	$("#style").html(output)
+}
+
+function convertStyleJSONToHTMLStyle(style_json) {
+	var i = 0;
+	var html_style = [];
+	while (i < style_json.length) {
+		var html = {};
+		var style = style_json[i];
+		var input_type = style.input_type;
+		var user_input;
+		html['name'] = style.name;
+		if (input_type === "string") {
+			user_input = "<textarea/>";
+		} else if(input_type === "bool") {
+			user_input =  "<input type='checkbox'>";
+		} else if(input_type === "int") {
+			user_input = "<textarea/>";
+		}
+		html['user_input'] = user_input;
+		html_style.push(html);
+		i++;
+	}
+	return {"style": html_style};
 }
