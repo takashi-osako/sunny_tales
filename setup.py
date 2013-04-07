@@ -11,7 +11,8 @@ requires = [
     'pyramid_debugtoolbar',
     'waitress',
     'pymongo',
-    'zope.component'
+    'zope.component',
+    'zope.interface'
     ]
 
 setup(name='sunny_tales',

@@ -1,5 +1,5 @@
-from database.db_manager import create_db_client, find_one, insert
-from utils.element_loader import get_element_json
+from sunny_tales.database.db_manager import create_db_client, find_one, insert
+from sunny_tales.utils.element_loader import get_element_json
 import uuid
 
 
