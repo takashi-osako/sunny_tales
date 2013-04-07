@@ -76,7 +76,7 @@ function load_document() {
 
 function get_template(template_name) {
 	var template;
-	var target = '/templates/' + template_name
+	var target = '/static/html/templates/' + template_name
 	$.ajax({
 		dataType: 'html',
 		url: target,
