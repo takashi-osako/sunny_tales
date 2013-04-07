@@ -1,6 +1,7 @@
-from sunny_tales.database.db_manager import create_db_client, find_one, insert
 from sunny_tales.utils.element_loader import get_element_json
 import uuid
+from sunny_tales.database.collections.elements import Elements
+from sunny_tales.database.client import create_db_client
 
 
 def includeme(config):
@@ -12,11 +13,11 @@ def includeme(config):
     config.scan()
 
     # Temp: On startup, insert document if none exists
-    if find_one() is None:
+    elements = Elements()
+    if elements.find_one() is None:
         document={}
         document['_id'] = str(uuid.uuid4())
         document['elements'] = get_element_json()['elements']
-        document['template'] = {}
         
         # Save new template to db
-        insert(document)
+        elements.insert(document)
