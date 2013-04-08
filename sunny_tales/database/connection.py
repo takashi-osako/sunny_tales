@@ -29,48 +29,42 @@ class DbConnection(object):
     def get_collection(self):
         return self.get_db()[self.__collection]
 
-    def insert(self, doc):
+    def insert(self, *args, **kwargs):
         '''
         Given a collection name, and a python dictionary, insert it
         '''
         col = self.get_collection()
-        _id = col.insert(doc)
+        _id = col.insert(*args, **kwargs)
         return _id
 
-    def find(self, doc_id=None):
+    def find(self, *args, **kwargs):
         '''
         Find based on _id
         Returns a list of json objects
         '''
         col = self.get_collection()
-        criteria = {}
-        if doc_id is not None:
-            criteria = {'_id': doc_id}
-        results = col.find(criteria)
+        results = col.find(*args, **kwargs)
         return list(results)
 
-    def find_one(self, doc_id=None):
+    def find_one(self, *args, **kwargs):
         '''
         Find_one in collection
         '''
         col = self.get_collection()
-        criteria = {}
-        if doc_id is not None:
-            criteria = {'_id': doc_id}
-        result = col.find_one(criteria)
+        result = col.find_one(*args, **kwargs)
         return result
 
-    def remove(self, doc_id):
+    def remove(self, *args, **kwargs):
         '''
         Remove document from mongo
         '''
         col = self.get_collection()
-        return col.remove(spec_or_id=doc_id)
+        return col.remove(*args, **kwargs)
 
-    def update(self, doc_id, doc, upsert=False):
+    def update(self, *args, **kwargs):
         '''
         Update a document with doc
         doc is a python dictionary
         '''
         col = self.get_collection()
-        return col.update({'_id': doc_id}, {'$set': doc}, upsert=upsert)
+        return col.update(*args, **kwargs)

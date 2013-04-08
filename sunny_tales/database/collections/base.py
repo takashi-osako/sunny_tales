@@ -18,18 +18,34 @@ class BaseCollection(object):
         with DbConnection(self.__name) as conn:
             return conn.insert(doc_id)
 
-    def remove(self, doc_id):
+    def remove_by_id(self, doc_id, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.remove(doc_id)
+            return conn.remove({'_id': doc_id}, *args, **kwargs)
 
-    def update(self, doc_id, doc, upsert=False):
+    def remove(self, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.update(doc_id, doc, upsert=upsert)
+            return conn.remove(*args, **kwargs)
 
-    def find(self, doc_id=None):
+    def update_by_id(self, doc_id, doc, upsert=True, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.find(doc_id=doc_id)
+            return conn.update({'_id': doc_id}, {'$set': doc}, upsert=upsert, *args, **kwargs)
 
-    def find_one(self, doc_id=None):
+    def update(self, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.find_one(doc_id=doc_id)
+            return conn.update(*args, **kwargs)
+
+    def find_by_id(self, doc_id, *args, **kwargs):
+        with DbConnection(self.__name) as conn:
+            return conn.find({'_id': doc_id}, *args, **kwargs)
+
+    def find(self, *args, **kwargs):
+        with DbConnection(self.__name) as conn:
+            return conn.find(*args, **kwargs)
+
+    def find_one_by_id(self, doc_id, *args, **kwargs):
+        with DbConnection(self.__name) as conn:
+            return conn.find_one({'_id': doc_id}, *args, **kwargs)
+
+    def find_one(self, *args, **kwargs):
+        with DbConnection(self.__name) as conn:
+            return conn.find_one(*args, **kwargs)

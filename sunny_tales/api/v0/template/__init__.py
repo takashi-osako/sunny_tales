@@ -5,7 +5,8 @@ from sunny_tales.database.client import create_db_client
 
 
 def includeme(config):
-    config.add_route('api.v0.template.new', '/api/v0/template/new')
+    config.add_route('get_put_template', '/template/{uuid}')
+    config.add_route('get_all_templates', '/template')
     
     # Create mongo client connection
     create_db_client()
