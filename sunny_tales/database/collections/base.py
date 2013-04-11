@@ -14,9 +14,9 @@ class BaseCollection(object):
     def __init__(self, name):
         self.__name = name
 
-    def insert(self, doc_id):
+    def insert(self, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.insert(doc_id)
+            return conn.insert(*args, **kwargs)
 
     def remove_by_id(self, doc_id, *args, **kwargs):
         with DbConnection(self.__name) as conn:
@@ -36,7 +36,7 @@ class BaseCollection(object):
 
     def find_by_id(self, doc_id, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.find({'_id': doc_id}, *args, **kwargs)
+            return conn.find_one({'_id': doc_id}, *args, **kwargs)
 
     def find(self, *args, **kwargs):
         with DbConnection(self.__name) as conn:

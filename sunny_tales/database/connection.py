@@ -5,6 +5,7 @@ Created on Apr 7, 2013
 '''
 from zope import component
 from sunny_tales.database.client import IDbClient
+from pymongo.mongo_client import MongoClient
 
 
 class DbConnection(object):
@@ -18,7 +19,9 @@ class DbConnection(object):
         return self
 
     def __exit__(self, type, value, traceback):
-        self.__client.close()
+        # In memory mongo connection doesn't support close()
+        if isinstance(self.__client, MongoClient):
+            self.__client.close()
 
     def get_client(self):
         return self.__client

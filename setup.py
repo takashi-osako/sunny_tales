@@ -12,7 +12,8 @@ requires = [
     'waitress',
     'pymongo',
     'zope.component',
-    'zope.interface'
+    'zope.interface',
+    'Ming' # For unit test
     ]
 
 setup(name='sunny_tales',
