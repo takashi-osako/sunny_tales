@@ -6,11 +6,11 @@ $(function() {
 	$('body').layout({
 		applyDefaultStyles : true
 	});
-	var elements = new Elements;
+	var tools = new Tools;
 	// render toolbox view
-	var toolboxView = new ToolBox(elements);
+	var toolboxView = new ToolBox(tools);
 	toolboxView.loadElementData(data);
-	var canvasView = new Canvas(elements);
+	var canvasView = new Canvas(tools);
 });
 
 //this is mock data

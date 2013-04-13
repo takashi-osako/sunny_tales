@@ -1,2 +1,0 @@
-Elements = Backbone.Collection.extend({
-});

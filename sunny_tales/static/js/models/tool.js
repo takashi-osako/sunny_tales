@@ -1,4 +1,4 @@
-Element = Backbone.Model.extend({
+Tool = Backbone.Model.extend({
 	defaults : {
 		name : 'element name',
 		type : 'element_type',

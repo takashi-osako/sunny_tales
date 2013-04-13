@@ -3,32 +3,32 @@
  */
 ToolBox = Backbone.View.extend({
 	el : $('#toolbox'),
-	initialize : function(collection_elements) {
+	initialize : function(collection_tools) {
 		//initialize with Elements Collections
 		//pass this toolbox referent to Elements Collection
 		//so, when new Element Model is added to the collection,
 		//the collection will call "addElement" to render new Element on the view.
-		this.elements = collection_elements;
-		this.elements.bind("add", this.addElement)
+		this.tools = collection_tools;
+		this.tools.bind("add", this.addTool)
 	},
 	loadElementData : function(data) {
 		// Element Data Loader
 		// Each Element is added to Elements Collection.
-		_.each(data, function(data_element) {
-			var element = new Element(data_element);
+		_.each(data, function(data_tool) {
+			var tool = new Tool(data_tool);
 			//this.add (aka elements.add) is binded to addElement
-			this.add(element);
-		}, this.elements);
+			this.add(tool);
+		}, this.tools);
 	},
-	addElement : function(model_element) {
-		var new_element = $("<div/>")
-		new_element.attr("id", model_element.get("type"));
-		new_element.html(model_element.get("name"));
-		$("#toolbox").append(new_element);
-		new_element.draggable({
+	addTool : function(model_tool) {
+		var new_tool = $("<div/>")
+		new_tool.attr("id", model_tool.get("type"));
+		new_tool.html(model_tool.get("name"));
+		$("#toolbox").append(new_tool);
+		new_tool.draggable({
 			appendTo : "body",
 			helper : "clone"
 		});
-		new_element.css('cursor', 'move');
+		new_tool.css('cursor', 'move');
 	}
 });
