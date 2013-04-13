@@ -6,5 +6,6 @@ Tool = Backbone.Model.extend({
 		resizable : false,
 		style : []
 	},
+	//use "type" as Tool's id
 	idAttribute: "type"
 });
