@@ -9,13 +9,23 @@ Canvas = Backbone.View.extend({
 			hoverClass : "ui-state-hover",
 			drop : function(event, ui) {
 				var component_id = ui.draggable.attr("id");
-				//get tool by id(type)
-				var tool = collection_tools.get(component_id);
-				var new_component = new ReportComponent(null, tool);
-				new_component.set("top", event.pageY - this.offsetTop);
-				new_component.set("left", event.pageX - this.offsetLeft);
+				//check if dragged component is already created and saved in collection of components
+				var existing_component = _components.get(component_id);
+				if (existing_component === undefined) {
+					//a user is dragged from tools layout.
+					//create new component for the canvas
+					//get tool by id(type)
+					var tool = collection_tools.get(component_id);
+					var new_component = new ReportComponent(null, tool);
+					new_component.set("top", event.pageY - this.offsetTop);
+					new_component.set("left", event.pageX - this.offsetLeft);
 
-				_components.add(new_component);
+					_components.add(new_component);
+				} else {
+					// this component has already created.
+					//make it draggable again
+					$(component_id).draggable();
+				}
 			}
 		});
 	},
