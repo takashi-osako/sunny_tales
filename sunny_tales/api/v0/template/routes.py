@@ -5,10 +5,20 @@ Created on Apr 2, 2013
 '''
 
 from pyramid.view import view_config
-from sunny_tales.database.collections.elements import Elements
+from sunny_tales.database.collections.toolbox import Toolbox
 from sunny_tales.database.collections.templates import Templates
 import uuid
 import datetime
+from bson import json_util
+import json
+
+
+@view_config(route_name='get_toolbox', request_method='GET', renderer='json')
+def get_toolbox(request):
+    toolbox = Toolbox()
+    results = toolbox.find_one()
+
+    return results
 
 
 @view_config(route_name='get_put_template', request_method='GET', renderer='json')
@@ -18,17 +28,19 @@ def get_template(request):
     Special case is when the id is 'new', that's when we read from elements collection to get default
     '''
     uuid = request.matchdict['uuid']
-    if uuid.lower() == 'new':
-        elements = Elements()
-        results = elements.find_one()
-        # append empty template to json
-        results['template'] = {}
-    else:
-        # TODO: static class instead of instance?
-        templates = Templates()
-        results = templates.find_one_by_id(uuid)
-    
-    return results
+
+    # TODO: static class instead of instance?
+    templates = Templates()
+    results = templates.find_one_by_id(uuid)
+    if results is None:
+        results = {'template': {}}
+
+    results['toolbox'] = get_toolbox(request)
+
+    # We need this because of date formmating in mongo is not in json
+    json_str = json.dumps(results, default=json_util.default)
+    return json.loads(json_str)
+
 
 @view_config(route_name='get_put_template', request_method='PUT', renderer='json')
 def save_custom_template(request):
@@ -36,21 +48,20 @@ def save_custom_template(request):
     Handles put requests to save new and overwrite existing custom template into template collection
     '''
     document = {}
-    # TODO: disallow uuid of 'new' or create a new endpoint for default element
     _id = request.matchdict['uuid']
-    
+
     try:
         # pyramid tests if the payload is json format, throws exception if it isn't
         body = request.json_body
     except ValueError:
         # TODO: raise some error exception
         return {'error': 'invalid json'}
-    
+
     document['template'] = body
     templates = Templates()
-    metadata = { 'parent_id': _id, 'timestamp': datetime.datetime.utcnow()}
+    metadata = {'parent_id': _id, 'timestamp': datetime.datetime.utcnow()}
     document['metadata'] = metadata
-    
+
     results = templates.find_one_by_id(_id)
     if results is None:
         return templates.update_by_id(_id, document, upsert=True)
@@ -75,5 +86,3 @@ def get_all_templates(request):
     for result in results:
         ids.append(result['_id'])
     return ids
-    
-    
