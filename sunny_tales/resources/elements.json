@@ -1,5 +1,5 @@
 {
-  "name": "default",
+  "name": "defaults",
   "elements": [
     {
       "name": "Static Text",
@@ -16,7 +16,7 @@
             "courier"
           ],
           "css": "font-family: %s;",
-          "default": "courier"
+          "defaultss": "courier"
         },
         {
           "name": "font size",
@@ -34,7 +34,7 @@
             14
           ],
           "css": "font-size: %dpt;",
-          "default": 12,
+          "defaults": 12,
           "html": "<input type='text'>"
         },
         {
@@ -42,21 +42,21 @@
           "input_type": "bool",
           "editable": true,
           "css": "font-style:italic;",
-          "default": false
+          "defaults": false
         },
         {
           "name": "Bold",
           "intput_type": "bool",
           "editable": true,
           "css": "font-weight: bold;",
-          "default": false
+          "defaults": false
         },
         {
           "name": "Underline",
           "input_type": "bool",
           "editable": true,
           "css": "text-decoration:underline;",
-          "default": false
+          "defaults": false
         },
         {
           "name": "text-align",
@@ -69,7 +69,7 @@
             "justify"
           ],
           "css": "text-align:%s;",
-          "default": "left"
+          "defaults": "left"
         },
         {
           "name": "text",
@@ -94,7 +94,7 @@
             "courier"
           ],
           "css": "font-family: %s;",
-          "default": "courier"
+          "defaults": "courier"
         },
         {
           "name": "font size",
@@ -112,28 +112,28 @@
             14
           ],
           "css": "font-size: %dpt;",
-          "default": 12
+          "defaults": 12
         },
         {
           "name": "Italic",
           "input_type": "bool",
           "editable": true,
           "css": "font-style:italic;",
-          "default": false
+          "defaults": false
         },
         {
           "name": "Bold,",
           "intput_type": "bool",
           "editable": true,
           "css": "font-weight: bold;",
-          "default": false
+          "defaults": false
         },
         {
           "name": "Underline",
           "input_type": "bool",
           "editable": true,
           "css": "text-decoration:underline;",
-          "default": false
+          "defaults": false
         },
         {
           "name": "text-align",
@@ -146,7 +146,7 @@
             "justify"
           ],
           "css": "text-align:%s;",
-          "default": "left"
+          "defaults": "left"
         }
       ]
     },
@@ -165,21 +165,21 @@
             "dotted",
             "dashed"
           ],
-          "default": "solid",
+          "defaults": "solid",
           "css": "border-bottom-style:%s;"
         },
         {
           "name": "height",
           "input_type": "int",
           "editable": true,
-          "default": 1,
+          "defaults": 1,
           "css": "border-bottom-width:%dpx;"
         },
         {
           "name": "color",
           "input_type": "string",
           "editable": true,
-          "default": "#000000",
+          "defaults": "#000000",
           "css": "border-bottom-color:%s;"
         }
       ]
@@ -194,7 +194,7 @@
           "name": "location",
           "input_type": "string",
           "editable": true,
-          "default": "../png/glyphicons_194_circle_question_mark.png",
+          "defaults": "../png/glyphicons_194_circle_question_mark.png",
           "css": "background-image:url(%s);background-repeat:no-repeat;"
         }
       ]
@@ -205,28 +205,28 @@
       "name": "X position",
       "input_type": "int",
       "editable": true,
-      "default": 0,
+      "defaults": 0,
       "css": "left:%dpx;"
     },
     {
       "name": " Y position",
       "input_type": "int",
       "editable": true,
-      "default": 0,
+      "defaults": 0,
       "css": "top:%dpx;"
     },
     {
       "name": "width",
       "input_type": "int",
       "editable": true,
-      "default": 150,
+      "defaults": 150,
       "css": "width:%dpx;"
     },
     {
       "name": "height",
       "input_type": "int",
       "editable": true,
-      "default": 100,
+      "defaults": 100,
       "css": "height:%dpx;"
     },
     {
@@ -238,7 +238,7 @@
         "solid"
       ],
       "css": "border-style:%s;",
-      "default": "none"
+      "defaults": "none"
     },
     {
       "name": "Border width",
@@ -252,7 +252,7 @@
         5
       ],
       "css": "border-width:%dpx;",
-      "default": 1
+      "defaults": 1
     }
   ]
 }
