@@ -6,11 +6,13 @@ $(function() {
 	$('body').layout({
 		applyDefaultStyles : true
 	});
-	var tools = new Tools;
+	var tools = new ToolsCollection;
+	var components = new ReportComponentsCollection;
 	// render toolbox view
-	var toolboxView = new ToolBox(tools);
+	var toolboxView = new ToolBoxView(tools);
 	toolboxView.loadElementData(data);
-	var canvasView = new Canvas(tools);
+	var canvasView = new CanvasView(tools, components);
+	var saveTemplateView = new SaveTemplateView(components)
 });
 
 //this is mock data

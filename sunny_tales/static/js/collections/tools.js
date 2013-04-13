@@ -1,2 +1,2 @@
-Tools = Backbone.Collection.extend({
+ToolsCollection = Backbone.Collection.extend({
 });

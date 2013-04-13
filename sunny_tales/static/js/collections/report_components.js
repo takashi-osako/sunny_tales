@@ -1,1 +1,1 @@
-ReportComponents = Backbone.Collection.extend();
+ReportComponentsCollection = Backbone.Collection.extend();

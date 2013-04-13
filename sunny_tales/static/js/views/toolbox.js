@@ -1,7 +1,7 @@
 /*
  * View for ToolBox Layout
  */
-ToolBox = Backbone.View.extend({
+ToolBoxView = Backbone.View.extend({
 	el : $('#toolbox'),
 	initialize : function(collection_tools) {
 		//initialize with Elements Collections
