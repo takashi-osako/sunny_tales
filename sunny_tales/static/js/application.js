@@ -1,13 +1,18 @@
+/*
+ * This is main function for template editor
+ */
 $(function() {
 	// display layouts
 	$('body').layout({
 		applyDefaultStyles : true
 	});
-	// toolbox view
+	// render toolbox view
 	var toolboxView = new ToolBox;
-	toolboxView.loadData(data);
+	toolboxView.loadElementData(data);
 });
 
+//this is mock data
+//TODO: refactor, read data from RESTful.
 var data = [{
 	"name" : "Static Text",
 	"type" : "STATIC_TEXT",
