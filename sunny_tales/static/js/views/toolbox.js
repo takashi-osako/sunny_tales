@@ -9,15 +9,15 @@ ToolBoxView = Backbone.View.extend({
 		//so, when new Element Model is added to the collection,
 		//the collection will call "addElement" to render new Element on the view.
 		this.tools = collection_tools;
+		this.tools.bind("add", this.addTool);
+		// read from API
+		this.tools.fetch({
+			success : function(model, response, options) {
+				console.log(response)
+			}
+		});
 
-        // Enable this to call API
-        // this.tools.fetch({
-            // success : function(model, response, options) {
-                // console.log(response)
-            // }
-        // }); 
-
-		this.tools.bind("add", this.addTool)
+		
 	},
 	loadElementData : function(data) {
 		// Element Data Loader

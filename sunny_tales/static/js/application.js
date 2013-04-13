@@ -10,13 +10,14 @@ $(function() {
 	var components = new ReportComponentsCollection;
 	// render toolbox view
 	var toolboxView = new ToolBoxView(tools);
-	toolboxView.loadElementData(data);
+	//toolboxView.loadElementData(data);
 	var canvasView = new CanvasView(tools, components);
 	var saveTemplateView = new SaveTemplateView(components)
 });
 
 //this is mock data
 //TODO: refactor, read data from RESTful.
+/*
 var data = [{
 	"name" : "Static Text",
 	"type" : "STATIC_TEXT",
@@ -151,3 +152,4 @@ var data = [{
 		"css" : "background-image:url(%s);background-repeat:no-repeat;"
 	}]
 }]
+*/
