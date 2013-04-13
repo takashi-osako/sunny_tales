@@ -1,2 +1,4 @@
-ToolsCollection = Backbone.Collection.extend({
+define(['backbone'], function(Backbone) {
+    ToolsCollection = Backbone.Collection.extend({
+    });
 });

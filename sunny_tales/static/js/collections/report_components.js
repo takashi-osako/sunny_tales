@@ -1,1 +1,3 @@
-ReportComponentsCollection = Backbone.Collection.extend();
+define(['backbone'], function(Backbone) {
+    ReportComponentsCollection = Backbone.Collection.extend();
+}); 
