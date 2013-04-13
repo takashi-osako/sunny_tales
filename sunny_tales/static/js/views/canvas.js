@@ -12,6 +12,9 @@ Canvas = Backbone.View.extend({
 				//get tool by id(type)
 				var tool = collection_tools.get(component_id);
 				var new_component = new ReportComponent(null, tool);
+				new_component.set("top", event.pageY - this.offsetTop);
+				new_component.set("left", event.pageX - this.offsetLeft);
+
 				_components.add(new_component);
 			}
 		});
@@ -20,6 +23,10 @@ Canvas = Backbone.View.extend({
 		//rerender canvas when new tool is dragged from toolbox layout
 		new_component = $(model_report_component.get("html"));
 		new_component.attr("id", model_report_component.cid);
+		new_component.css("top", (model_report_component.get("top") + "px"));
+		new_component.css("left", model_report_component.get("left") + "px");
+		new_component.css("position", "absolute");
+		new_component.draggable();
 		new_component.appendTo($("#canvas"));
 	}
 });
