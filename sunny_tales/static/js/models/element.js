@@ -5,5 +5,6 @@ Element = Backbone.Model.extend({
 		html : '<div/>',
 		resizable : false,
 		style : []
-	}
+	},
+	idAttribute: "type"
 });

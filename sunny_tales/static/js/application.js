@@ -6,9 +6,11 @@ $(function() {
 	$('body').layout({
 		applyDefaultStyles : true
 	});
+	var elements = new Elements;
 	// render toolbox view
-	var toolboxView = new ToolBox;
+	var toolboxView = new ToolBox(elements);
 	toolboxView.loadElementData(data);
+	var canvasView = new Canvas(elements);
 });
 
 //this is mock data
