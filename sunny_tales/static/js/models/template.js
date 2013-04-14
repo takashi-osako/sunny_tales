@@ -13,7 +13,7 @@ TemplateModel = Backbone.Model.extend({
 			if (this.isNew()) {
 				this.set("_id", response)
 			}
-			return response;
+			return {};
 		}
 	}
 })
