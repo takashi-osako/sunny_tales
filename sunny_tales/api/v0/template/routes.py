@@ -11,6 +11,7 @@ import uuid
 import datetime
 from bson import json_util
 import json
+from pyramid.httpexceptions import HTTPNotFound
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
@@ -24,8 +25,7 @@ def get_toolbox(request):
 @view_config(route_name='individual_template', request_method='GET', renderer='json')
 def get_template(request):
     '''
-    Handles get requests for a template
-    Special case is when the id is 'new', that's when we read from elements collection to get default
+    Handles GET requests for a template, /templates/{uuid}
     '''
     uuid = request.matchdict['uuid']
 
@@ -33,7 +33,7 @@ def get_template(request):
     templates = Templates()
     results = templates.find_one_by_id(uuid)
     if results is None:
-        results = {'template': {}}
+        return HTTPNotFound()
 
     # We need this because of date formmating in mongo is not in json
     json_str = json.dumps(results, default=json_util.default)
@@ -43,17 +43,17 @@ def get_template(request):
 @view_config(route_name='individual_template', request_method='PUT', renderer='json')
 def save_custom_template(request):
     '''
-    Handles put requests to save new and overwrite existing custom template into template collection
+    Handles PUT requests to save new and overwrite existing custom template into template collection
     '''
-    __id = request.matchdict['uuid']
+    doc_id = request.matchdict['uuid']
     document = {}
     document['template'] = __get_payload(request)
-    document['metadata'] = __generate_metadata(__id)
-    
+    document['metadata'] = __generate_metadata(doc_id)
+
     templates = Templates()
-    results = templates.find_one_by_id(__id)
+    results = templates.find_one_by_id(doc_id)
     if results is None:
-        return templates.update_by_id(__id, document, upsert=True)
+        results = templates.update_by_id(doc_id, document, upsert=True)
     else:
         # Need to archive if uuid exists in db
         # Current concept:  add metaData with timestamp and save 'parend_id'
@@ -61,7 +61,13 @@ def save_custom_template(request):
         # To revert, delete/pop the latest timestamp
         # Idea 2:  swap content, so document with _id is always the most uptodate
         new_id = str(uuid.uuid4())
-        return templates.update_by_id(new_id, document)
+        results = templates.update_by_id(new_id, document)
+        # TODO:  should doc_id = new_id
+
+    if results and results['ok']:
+        return {'_id': doc_id}
+    else:
+        return {'error': 'something went wrong'}
 
 
 @view_config(route_name='templates', request_method='GET', renderer='json')
@@ -79,13 +85,16 @@ def get_all_templates(request):
 
 @view_config(route_name='templates', request_method='POST', renderer='json')
 def create_new_template(request):
+    '''
+    Handles POST to /templates
+    '''
     document = {}
-    __id =  str(uuid.uuid4())
-    
-    document['_id'] = __id
+    doc_id = str(uuid.uuid4())
+
+    document['_id'] = doc_id
     document['template'] = __get_payload(request)
-    document['metadata'] = __generate_metadata(__id)
-    
+    document['metadata'] = __generate_metadata(doc_id)
+
     templates = Templates()
     return templates.insert(document)
 

@@ -16,7 +16,9 @@ class BaseCollection(object):
 
     def insert(self, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.insert(*args, **kwargs)
+            doc_id = conn.insert(*args, **kwargs)
+            # TODO: error check?
+            return {'_id': doc_id}
 
     def remove_by_id(self, doc_id, *args, **kwargs):
         with DbConnection(self.__name) as conn:
