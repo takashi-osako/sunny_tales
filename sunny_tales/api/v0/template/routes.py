@@ -11,6 +11,7 @@ import uuid
 import datetime
 from bson import json_util
 import json
+from pyramid.httpexceptions import HTTPNotFound
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
@@ -32,8 +33,7 @@ def get_template(request):
     templates = Templates()
     results = templates.find_one_by_id(uuid)
     if results is None:
-        # TODO: Remove this and return error code
-        results = {'template': {}}
+        return HTTPNotFound()
 
     # We need this because of date formmating in mongo is not in json
     json_str = json.dumps(results, default=json_util.default)
