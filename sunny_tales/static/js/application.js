@@ -7,12 +7,12 @@ $(function() {
 		applyDefaultStyles : true
 	});
 	var toolMenu = new ToolMenuModel;
-	var components = new ReportComponentsCollection;
+	var template = new TemplateModel;
 	// render toolbox view
 	var toolboxView = new ToolBoxView(toolMenu);
 	//toolboxView.loadElementData(data);
-	var canvasView = new CanvasView(toolMenu, components);
-	var saveTemplateView = new SaveTemplateView(components)
+	var canvasView = new CanvasView(toolMenu, template);
+	var saveTemplateView = new SaveTemplateView(template)
 });
 
 //this is mock data

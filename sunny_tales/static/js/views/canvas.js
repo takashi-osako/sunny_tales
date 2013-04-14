@@ -1,7 +1,8 @@
 CanvasView = Backbone.View.extend({
 	el : $("#canvas"),
-	initialize : function(model_toolMenu, collection_components) {
-		this.components = collection_components;
+	initialize : function(model_toolMenu, model_template) {
+		this.template = model_template;
+		this.components = this.template.get("components");
 		var _components = this.components;
 		this.components.bind("add", this.renderCanvas)
 		$("#canvas").droppable({
