@@ -12,7 +12,7 @@ import datetime
 from bson import json_util
 import json
 from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
-from sunny_tales.api.v0.template.exceptions import BadPayloadError
+from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
@@ -50,7 +50,7 @@ def save_custom_template(request):
     document = {}
     try:
         document['template'] = __get_payload(request)
-    except BadPayloadError:
+    except InvalidPayloadError:
         return HTTPBadRequest()
     document['metadata'] = __generate_metadata(doc_id)
 
@@ -98,7 +98,7 @@ def create_new_template(request):
 
     try:
         document['template'] = __get_payload(request)
-    except BadPayloadError:
+    except InvalidPayloadError:
         return HTTPBadRequest()
 
     document['metadata'] = __generate_metadata(doc_id)
@@ -115,7 +115,7 @@ def __get_payload(request):
         # pyramid tests if the payload is json format, throws exception if it isn't
         body = request.json_body
     except ValueError:
-        raise BadPayloadError
+        raise InvalidPayloadError
     return body
 
 

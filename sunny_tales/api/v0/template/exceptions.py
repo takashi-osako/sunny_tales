@@ -13,7 +13,7 @@ class ApiError(Exception):
         self.msg = msg
 
 
-class BadPayloadError(ApiError):
+class InvalidPayloadError(ApiError):
     '''
     Request payload is not json error
     '''
