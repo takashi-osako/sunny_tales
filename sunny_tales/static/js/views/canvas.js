@@ -1,6 +1,6 @@
 CanvasView = Backbone.View.extend({
 	el : $("#canvas"),
-	initialize : function(collection_tools, collection_components) {
+	initialize : function(model_toolMenu, collection_components) {
 		this.components = collection_components;
 		var _components = this.components;
 		this.components.bind("add", this.renderCanvas)
@@ -15,7 +15,7 @@ CanvasView = Backbone.View.extend({
 					//a user is dragged from tools layout.
 					//create new component for the canvas
 					//get tool by id(type)
-					var tool = collection_tools.get(component_id);
+					var tool = model_toolMenu.get("tools").get(component_id);
 					//set component position by mouse position
 					var new_component = new ReportComponent(null, tool);
 					new_component.set("top", event.pageY - this.offsetTop);

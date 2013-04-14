@@ -6,12 +6,12 @@ $(function() {
 	$('body').layout({
 		applyDefaultStyles : true
 	});
-	var tools = new ToolsCollection;
+	var toolMenu = new ToolMenuModel;
 	var components = new ReportComponentsCollection;
 	// render toolbox view
-	var toolboxView = new ToolBoxView(tools);
+	var toolboxView = new ToolBoxView(toolMenu);
 	//toolboxView.loadElementData(data);
-	var canvasView = new CanvasView(tools, components);
+	var canvasView = new CanvasView(toolMenu, components);
 	var saveTemplateView = new SaveTemplateView(components)
 });
 

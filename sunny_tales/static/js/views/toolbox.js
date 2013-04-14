@@ -3,15 +3,15 @@
  */
 ToolBoxView = Backbone.View.extend({
 	el : $('#toolbox'),
-	initialize : function(collection_tools) {
+	initialize : function(model_toolMenu) {
 		//initialize with Elements Collections
 		//pass this toolbox referent to Elements Collection
 		//so, when new Element Model is added to the collection,
 		//the collection will call "addElement" to render new Element on the view.
-		this.tools = collection_tools;
-		this.tools.bind("add", this.addTool);
+		this.toolMenuModel = model_toolMenu
+		this.toolMenuModel.get("tools").bind("add", this.addTool);
 		// read from API
-		this.tools.fetch({
+		this.toolMenuModel.fetch({
 			success : function(model, response, options) {
 				console.log(response)
 			}
@@ -26,7 +26,7 @@ ToolBoxView = Backbone.View.extend({
 			var tool = new Tool(data_tool);
 			//this.add (aka elements.add) is binded to addElement
 			this.add(tool);
-		}, this.tools);
+		}, this.toolMenuModel.get("tools"));
 	},
 	addTool : function(model_tool) {
 		var new_tool = $("<div/>")
