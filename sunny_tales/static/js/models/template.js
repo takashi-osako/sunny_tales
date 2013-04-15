@@ -10,10 +10,7 @@ TemplateModel = Backbone.Model.extend({
 	components : null,
 	parse : function(response, xhr) {
 		if (response) {
-			if (this.isNew()) {
-				this.set("_id", response)
-			}
-			return {};
+			return response;
 		}
 	}
 })

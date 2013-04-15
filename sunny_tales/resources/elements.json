@@ -173,7 +173,7 @@
           "input_type": "int",
           "editable": true,
           "defaults": 1,
-          "css": "border-bottom-width:%dpx;"
+          "css": "border-bottom-width:%dpt;"
         },
         {
           "name": "color",
@@ -206,28 +206,28 @@
       "input_type": "int",
       "editable": true,
       "defaults": 0,
-      "css": "left:%dpx;"
+      "css": "left:%dpt;"
     },
     {
       "name": " Y position",
       "input_type": "int",
       "editable": true,
       "defaults": 0,
-      "css": "top:%dpx;"
+      "css": "top:%dpt;"
     },
     {
       "name": "width",
       "input_type": "int",
       "editable": true,
       "defaults": 150,
-      "css": "width:%dpx;"
+      "css": "width:%dpt;"
     },
     {
       "name": "height",
       "input_type": "int",
       "editable": true,
       "defaults": 100,
-      "css": "height:%dpx;"
+      "css": "height:%dpt;"
     },
     {
       "name": "Border style",
@@ -251,7 +251,7 @@
         4,
         5
       ],
-      "css": "border-width:%dpx;",
+      "css": "border-width:%dpt;",
       "defaults": 1
     }
   ]
