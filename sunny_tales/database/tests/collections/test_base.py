@@ -28,7 +28,7 @@ class TestBaseCollection(unittest.TestCase):
 
     def test_insert(self):
         result = self.__col.insert({'_id': '123', 'value': '1'})
-        self.assertEquals(result, '123')
+        self.assertEquals(result, {'_id': '123'})
 
     def test_remove_by_id_with_invalid_id(self):
         results = self.__col.remove_by_id('123')

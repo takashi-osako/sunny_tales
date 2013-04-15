@@ -11,7 +11,8 @@ import uuid
 import datetime
 from bson import json_util
 import json
-from pyramid.httpexceptions import HTTPNotFound
+from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
+from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
@@ -47,7 +48,10 @@ def save_custom_template(request):
     '''
     doc_id = request.matchdict['uuid']
     document = {}
-    document['template'] = __get_payload(request)
+    try:
+        document['template'] = __get_payload(request)
+    except InvalidPayloadError:
+        return HTTPBadRequest()
     document['metadata'] = __generate_metadata(doc_id)
 
     templates = Templates()
@@ -67,7 +71,7 @@ def save_custom_template(request):
     if results and results['ok']:
         return {'_id': doc_id}
     else:
-        return {'error': 'something went wrong'}
+        raise HTTPBadRequest()
 
 
 @view_config(route_name='templates', request_method='GET', renderer='json')
@@ -90,9 +94,13 @@ def create_new_template(request):
     '''
     document = {}
     doc_id = str(uuid.uuid4())
-
     document['_id'] = doc_id
-    document['template'] = __get_payload(request)
+
+    try:
+        document['template'] = __get_payload(request)
+    except InvalidPayloadError:
+        return HTTPBadRequest()
+
     document['metadata'] = __generate_metadata(doc_id)
 
     templates = Templates()
@@ -107,8 +115,7 @@ def __get_payload(request):
         # pyramid tests if the payload is json format, throws exception if it isn't
         body = request.json_body
     except ValueError:
-        # TODO: raise some error exception
-        body = {'error': 'invalid json'}
+        raise InvalidPayloadError
     return body
 
 
