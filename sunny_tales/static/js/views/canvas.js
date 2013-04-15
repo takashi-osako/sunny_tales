@@ -4,7 +4,7 @@ CanvasView = Backbone.View.extend({
 		this.template = model_template;
 		this.components = this.template.get("components");
 		var _components = this.components;
-		this.components.bind("add", this.renderCanvas)
+		this.components.bind("add", this.renderCanvas, this)
 		$("#canvas").droppable({
 			activeClass : "ui-state-default",
 			hoverClass : "ui-state-hover",
@@ -21,6 +21,7 @@ CanvasView = Backbone.View.extend({
 					var new_component = new ReportComponent(null, tool);
 					new_component.set("top", event.pageY * 0.75 - this.offsetTop * 0.75);
 					new_component.set("left", event.pageX * 0.75 - this.offsetLeft * 0.75);
+					new_component.set("html", tool.get("html"));
 					//add to component collections.
 					//also renderCanvas will be called.
 					_components.add(new_component);
@@ -34,7 +35,7 @@ CanvasView = Backbone.View.extend({
 	},
 	renderCanvas : function(model_report_component) {
 		//rerender canvas when new tool is dragged from toolbox layout
-		new_component = $(model_report_component.get("tool").get("html"));
+		new_component = $(model_report_component.get("html"));
 		new_component.attr("id", model_report_component.cid);
 		new_component.css("top", model_report_component.get("top") + "pt");
 		new_component.css("left", model_report_component.get("left") + "pt");
