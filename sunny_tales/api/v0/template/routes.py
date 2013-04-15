@@ -68,10 +68,9 @@ def save_custom_template(request):
         results = templates.update_by_id(new_id, document)
         # TODO:  should doc_id = new_id
 
-    if results and results['ok']:
-        return {'_id': doc_id}
-    else:
+    if results is None:
         raise HTTPBadRequest()
+    return results
 
 
 @view_config(route_name='templates', request_method='GET', renderer='json')

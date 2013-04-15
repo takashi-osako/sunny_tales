@@ -30,7 +30,11 @@ class BaseCollection(object):
 
     def update_by_id(self, doc_id, doc, upsert=True, *args, **kwargs):
         with DbConnection(self.__name) as conn:
-            return conn.update({'_id': doc_id}, {'$set': doc}, upsert=upsert, *args, **kwargs)
+            result = conn.update({'_id': doc_id}, {'$set': doc}, upsert=upsert, *args, **kwargs)
+            if result and result['ok']:
+                return {'_id': doc_id}
+            else:
+                return None
 
     def update(self, *args, **kwargs):
         with DbConnection(self.__name) as conn:
