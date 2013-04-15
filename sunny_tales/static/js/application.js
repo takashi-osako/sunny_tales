@@ -1,18 +1,33 @@
-/*
- * This is main function for template editor
- */
-$(function() {
+define([
+	"jquery", 
+	"underscore", 
+	"backbone",
+	"jqueryUI", 
+	"jqueryLayout",
+	"models/tool",
+	"models/tool_menu",
+	"collections/tools",
+	"views/toolbox",
+
+], function($, _, Backbone, jqueryUI, jqueryLayout, ToolModel, ToolMenuModel, Tools, ToolBoxView) {
+  //var ToolsInstance = Tools.getInstance();
+  
+  function initialize() {
+    /*
+	 * This is main function for template editor
+	 */
 	// display layouts
 	$('body').layout({
 		applyDefaultStyles : true
 	});
-	var toolMenu = new ToolMenuModel;
-	var template = new TemplateModel;
-	// render toolbox view
-	var toolboxView = new ToolBoxView(toolMenu);
-	//toolboxView.loadElementData(data);
-	var canvasView = new CanvasView(toolMenu, template);
-	var saveTemplateView = new SaveTemplateView(template)
+
+	var toolboxView = new ToolBoxView();
+	toolboxView.render();
+	//var saveTemplateView = new SaveTemplateView(template)
+  };
+  return {
+    initialize: initialize
+  };
 });
 
 //this is mock data

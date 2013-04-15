@@ -1,42 +1,41 @@
-/*
- * View for ToolBox Layout
- */
-ToolBoxView = Backbone.View.extend({
-	el : $('#toolbox'),
-	initialize : function(model_toolMenu) {
-		//initialize with Elements Collections
-		//pass this toolbox referent to Elements Collection
-		//so, when new Element Model is added to the collection,
-		//the collection will call "addElement" to render new Element on the view.
-		this.toolMenuModel = model_toolMenu
-		this.toolMenuModel.get("tools").bind("add", this.addTool);
-		// read from API
-		this.toolMenuModel.fetch({
-			success : function(model, response, options) {
-				console.log(response)
-			}
-		});
+define([
+	"jquery", 
+	"underscore", 
+	"backbone",
+	"collections/tools",
+	"views/canvas",
+	"models/template"
+], function($, _, Backbone, Tools, CanvasView, template) {
+	/*
+	 * View for ToolBox Layout
+	 */
+	ToolBoxView = Backbone.View.extend({
+		el : $('#toolbox'),
 
-		
-	},
-	loadElementData : function(data) {
-		// Element Data Loader
-		// Each Element is added to Elements Collection.
-		_.each(data, function(data_tool) {
-			var tool = new Tool(data_tool);
-			//this.add (aka elements.add) is binded to addElement
-			this.add(tool);
-		}, this.toolMenuModel.get("tools"));
-	},
-	addTool : function(model_tool) {
-		var new_tool = $("<div/>")
-		new_tool.attr("id", model_tool.get("type"));
-		new_tool.html(model_tool.get("name"));
-		$("#toolbox").append(new_tool);
-		new_tool.draggable({
-			appendTo : "body",
-			helper : "clone"
-		});
-		new_tool.css('cursor', 'move');
-	}
+		render: function () {
+			var tools = new Tools();
+			var that = this;
+			tools.fetch({
+				success : function (data) {
+
+	                 $.each(data.toJSON(), function (i, model) {
+	                 	var new_tool = $("<div/>")
+						new_tool.attr("id", model.type);
+						new_tool.html(model.name);
+						$("#toolbox").append(new_tool);
+						new_tool.draggable({
+							appendTo : "body",
+							helper : "clone"
+						});
+						new_tool.css('cursor', 'move');
+	                 });
+
+
+					var canvasView = new CanvasView(tools, template);
+           		 }
+			})
+		}
+	});
+
+	return ToolBoxView;
 });

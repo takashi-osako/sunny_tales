@@ -1,0 +1,6 @@
+#canvas hr {
+	width: 200px;
+	color: #000;
+	border: none;
+	border-top: solid 1px #000;
+}
