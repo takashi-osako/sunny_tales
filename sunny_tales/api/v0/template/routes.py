@@ -49,7 +49,10 @@ def save_custom_template(request):
     doc_id = request.matchdict['uuid']
     document = {}
     try:
-        document['template'] = __get_payload(request)
+        document.update(__get_payload(request))
+        # BUG somewhere? we get _id in payload
+        if document.get('_id'):
+            document.pop('_id')
     except InvalidPayloadError:
         return HTTPBadRequest()
     document['metadata'] = __generate_metadata(doc_id)
@@ -96,7 +99,7 @@ def create_new_template(request):
     document['_id'] = doc_id
 
     try:
-        document['template'] = __get_payload(request)
+        document.update(__get_payload(request))
     except InvalidPayloadError:
         return HTTPBadRequest()
 
