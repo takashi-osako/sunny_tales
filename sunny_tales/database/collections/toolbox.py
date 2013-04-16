@@ -10,3 +10,9 @@ class Toolbox(BaseCollection):
 
     def __init__(self, name='toolbox'):
         super(Toolbox, self).__init__(name)
+
+    def find_one(self, *args, **kwargs):
+        results = super(Toolbox, self).find_one(*args, **kwargs)
+        if results is None:
+            results = {}
+        return results
