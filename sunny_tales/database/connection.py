@@ -67,7 +67,13 @@ class DbConnection(object):
     def update(self, *args, **kwargs):
         '''
         Update a document with doc
-        doc is a python dictionary
         '''
         col = self.get_collection()
         return col.update(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        '''
+        Saves a document (update and/or inserts)
+        '''
+        col = self.get_collection()
+        return col.save(*args, **kwargs)

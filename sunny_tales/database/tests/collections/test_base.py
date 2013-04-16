@@ -114,6 +114,15 @@ class TestBaseCollection(unittest.TestCase):
         doc = self.__col.find_one({'value': '3234'})
         self.assertIsNone(doc)
 
+    def test_save(self):
+        doc = self.__col.save({'_id': 1, 'key': 'value'})
+        self.assertEquals(doc['_id'], 1)
+
+    def test_save_with_no_id(self):
+        doc = self.__col.save({'key': 'value'})
+        self.assertIsNotNone(doc.get('_id'))
+
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

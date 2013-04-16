@@ -55,3 +55,7 @@ class BaseCollection(object):
     def find_one(self, *args, **kwargs):
         with DbConnection(self.__name) as conn:
             return conn.find_one(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        with DbConnection(self.__name) as conn:
+            return {'_id': conn.save(*args, **kwargs)}

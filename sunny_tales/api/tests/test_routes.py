@@ -61,15 +61,11 @@ class TestRoutes(unittest.TestCase):
         entry = {'_id': 123, 'components': {'line': 'value'}}
         self.__template.insert(entry)
 
-        self.__request.json_body = {'components': {'line': 'circle'}}
+        self.__request.json_body = {'_id': 123, 'components': {'line': 'circle'}}
 
         results = save_custom_template(self.__request)
-        self.assertNotEqual(results['_id'], 123)
+        self.assertEqual(results['_id'], 123)
         results = self.__template.find_one_by_id(results['_id'])
-        self.assertEquals(results['components']['line'], 'circle')
-        self.assertEquals(results['metadata']['parent_id'], 123)
-
-        results = self.__template.find_one_by_id(123)
         self.assertEquals(results['components']['line'], 'value')
 
     def test_save_custom_template_upsert(self):

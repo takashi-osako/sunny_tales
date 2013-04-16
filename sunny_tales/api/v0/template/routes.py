@@ -50,30 +50,27 @@ def save_custom_template(request):
     document = {}
     try:
         document.update(__get_payload(request))
-        # BUG somewhere? we get _id in payload
-        if document.get('_id'):
-            document.pop('_id')
     except InvalidPayloadError:
         return HTTPBadRequest()
     document['metadata'] = __generate_metadata(doc_id)
 
     templates = Templates()
     results = templates.find_one_by_id(doc_id)
-    if results is None:
-        results = templates.update_by_id(doc_id, document, upsert=True)
-    else:
+    if results is not None:
         # Need to archive if uuid exists in db
         # Current concept:  add metaData with timestamp and save 'parend_id'
         # To get current revision, look for parent_id = uuid with latest timestamp
         # To revert, delete/pop the latest timestamp
         # Idea 2:  swap content, so document with _id is always the most uptodate
         new_id = str(uuid.uuid4())
-        results = templates.update_by_id(new_id, document)
-        # TODO:  should doc_id = new_id
+        document['_id'] = new_id
+
+    # TODO: should I return the new_id or original id?
+    results = templates.save(document)
 
     if results is None:
         raise HTTPBadRequest()
-    return results
+    return {'_id': doc_id}
 
 
 @view_config(route_name='templates', request_method='GET', renderer='json')

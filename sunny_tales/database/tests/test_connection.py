@@ -108,6 +108,11 @@ class TestConnection(unittest.TestCase):
         result = self.__conn.find_one()
         self.assertEquals(result['value'], 1)
 
+    def test_save(self):
+        self.__conn.save({'_id': 1, 'key': 'value'})
+        result = self.__conn.find_one()
+        self.assertEquals(result['key'], 'value')
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
