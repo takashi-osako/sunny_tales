@@ -1,12 +1,34 @@
-<table class='table' data-target_id={{target_id}}>
-    <tr>
-        <td>Property</td>
-        <td>Value</td>
-    </tr>
-    {{#each styles}}
+<table class='table table-hover' data-target_id={{target_id}}>
+    <thead>
         <tr>
-            <td>{{name}}</td>
-            <td>{{{f_displayStyle input_type}}}</td>
+            <th>Property</th>
+            <th>Value</th>
         </tr>
-    {{/each}}
+    </thead>
+    <tbody>
+        {{#with component}}
+            <tr>
+                <td>Height</td>
+                <td>{{height}}</td>
+            </tr>
+            <tr>
+                <td>Width</td>
+                <td>{{width}}</td>
+            </tr>
+            <tr>
+                <td>Top</td>
+                <td>{{top}}</td>
+            </tr>
+            <tr>
+                <td>Left</td>
+                <td>{{left}}</td>
+            </tr>
+        {{/with}}
+        {{#each styles}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{{f_displayStyle input_type}}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
 </table>

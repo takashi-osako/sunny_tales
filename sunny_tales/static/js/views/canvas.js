@@ -41,8 +41,13 @@ CanvasView = Backbone.View.extend({
     updateStyleView : function(e) {
         var id = $(e.currentTarget);
         var styleView = new StyleView;
-        styleView.renderStyle(e.currentTarget.id, this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style"));
-        //(this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style"));
+        // Get the style of the tool
+        var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style")
+        
+        // Get the current component's attributes
+        var curComponentAttr = this.components.get(e.currentTarget.id).attributes
+         
+        styleView.renderStyle(e.currentTarget.id, styleOfTool, curComponentAttr);
     },
     renderCanvas : function(model_report_component) {
         //rerender canvas when new tool is dragged from toolbox layout
