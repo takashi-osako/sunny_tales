@@ -43,7 +43,7 @@ CanvasView = Backbone.View.extend({
         var styleView = new StyleView;
         // Get the style of the tool
         var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style")
-        var commonStyle = this.model_toolMenu.common_style
+        var commonStyle = this.model_toolMenu.get("common_style")
         
         // Get the current component's attributes
         // Not being used

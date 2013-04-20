@@ -8,7 +8,7 @@ ToolMenuModel = Backbone.Model.extend({
 	parse : function(response) {
 		if (response) {
 		    // Save the 'style' that is common for all elements
-		    this.common_style = response.style;
+		    this.set("common_style", response.style);
 			var listSource = this.get("tools");
 			_.each(response.elements, function(element, index, list) {
 				listSource.add(new Tool(element));
