@@ -41,7 +41,7 @@ CanvasView = Backbone.View.extend({
     updateStyleView : function(e) {
         var id = $(e.currentTarget);
         var styleView = new StyleView;
-        styleView.renderStyle(this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style"));
+        styleView.renderStyle(e.currentTarget.id, this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style"));
         //(this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style"));
     },
     renderCanvas : function(model_report_component) {
