@@ -7,9 +7,9 @@ StyleView = Backbone.View.extend({
             "target_id" : target_id
         }
         // Register all the supported styles
-        Handlebars.registerPartial('style.select.template', Handlebars.templates['style.select.template'])
-        Handlebars.registerPartial('style.checkbox.template', Handlebars.templates['style.checkbox.template'])
-        Handlebars.registerPartial('style.text.template', Handlebars.templates['style.text.template'])
+        Handlebars.registerPartial('style.select.template', Handlebars.templates['style.select.template']);
+        Handlebars.registerPartial('style.checkbox.template', Handlebars.templates['style.checkbox.template']);
+        Handlebars.registerPartial('style.text.template', Handlebars.templates['style.text.template']);
 
         $(this.el).html(template(data));
     }
