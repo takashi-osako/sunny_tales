@@ -6,7 +6,7 @@
     {{#each styles}}
         <tr>
             <td>{{name}}</td>
-            <td>{{{displayStyle input_type}}}</td>
+            <td>{{{f_displayStyle input_type}}}</td>
         </tr>
     {{/each}}
 </table>
