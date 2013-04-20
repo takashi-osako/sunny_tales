@@ -46,7 +46,7 @@
         },
         {
           "name": "Bold",
-          "intput_type": "checkbox",
+          "input_type": "checkbox",
           "editable": true,
           "css": "font-weight: bold;",
           "defaults": false
@@ -123,7 +123,7 @@
         },
         {
           "name": "Bold,",
-          "intput_type": "checkbox",
+          "input_type": "checkbox",
           "editable": true,
           "css": "font-weight: bold;",
           "defaults": false
