@@ -13,19 +13,19 @@ requires = [
     'pymongo',
     'zope.component',
     'zope.interface',
-    'Ming' # For unit test
-    ]
+    'Ming'  # For unit test
+]
 
 setup(name='sunny_tales',
       version='0.0',
       description='sunny_tales',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
-        "Programming Language :: Python",
-        "Framework :: Pyramid",
-        "Topic :: Internet :: WWW/HTTP",
-        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
-        ],
+          "Programming Language :: Python",
+          "Framework :: Pyramid",
+          "Topic :: Internet :: WWW/HTTP",
+          "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+      ],
       author='',
       author_email='',
       url='',

@@ -28,10 +28,8 @@ ToolBoxView = Backbone.View.extend({
         }, this.toolMenuModel.get("tools"));
     },
     addTool : function(model_tool) {
-        var source = $("#toolboxTemplate").html();
-        var template = Handlebars.compile(source);
-        var html = template(model_tool.attributes);
-        $(this.el).append(html);
+        var template = Handlebars.templates['toolbox.template'];
+        $(this.el).append(template(model_tool.attributes));
         $(".ui-draggable").draggable({
             appendTo : "body",
             helper : "clone"
