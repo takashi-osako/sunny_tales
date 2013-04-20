@@ -122,7 +122,7 @@
           "defaults": false
         },
         {
-          "name": "Bold,",
+          "name": "Bold",
           "input_type": "checkbox",
           "editable": true,
           "css": "font-weight: bold;",

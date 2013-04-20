@@ -1,0 +1,26 @@
+<table class='table' data-target_id={{target_id}}>
+    <tr>
+        <td>Property</td>
+        <td>Value</td>
+    </tr>
+    {{#each styles}}
+        <tr>
+            <td>{{name}}</td>
+            <td>
+            {{#ifCond input_type "select"}}
+                <select id="{{name}}" data-css="{{{css}}}">
+                    {{#each selection}}
+                        <option {{function_isSelected this ../defaults}} value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            {{else}}
+                {{#ifCond input_type "checkbox"}}
+                    <input type="checkbox" id="{{name}}" data-css="{{{css}}}"></input>
+                {{else}}
+                    <input type="text" id="{{name}}" data-css="{{{css}}}"></input>
+                {{/ifCond}}
+            {{/ifCond}}
+            </td>
+        </tr>
+    {{/each}}
+</table>
