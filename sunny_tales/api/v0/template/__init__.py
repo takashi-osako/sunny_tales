@@ -18,8 +18,8 @@ def includeme(config):
     toolbox = Toolbox()
     toolbox.remove()
     document = {}
+    document = get_element_json()
     document['_id'] = str(uuid.uuid4())
-    document['elements'] = get_element_json()['elements']
 
     # Save new template to db
     toolbox.insert(document)
