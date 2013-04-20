@@ -2,9 +2,11 @@ Handlebars.registerHelper('function_isSelected', function(currentValue, defaultV
     return currentValue === defaultValue ? "selected" : "";
 });
 
-Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-  if(v1 == v2) {
-    return options.fn(this);
-  }
-  return options.inverse(this);
+Handlebars.registerHelper('displayStyle', function(type) {
+    var template_name = "style." + type + ".template";
+    template = Handlebars.partials[template_name];
+    if (template)
+        return template(this);
+    else
+        return '';
 });
