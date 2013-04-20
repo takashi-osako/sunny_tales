@@ -1,4 +1,4 @@
-<table class='table table-hover' data-target_id={{target_id}}>
+<table class='table table-hover' data-target_id={{targetId}}>
     <thead>
         <tr>
             <th>Property</th>
@@ -6,24 +6,6 @@
         </tr>
     </thead>
     <tbody>
-        {{#with component}}
-            <tr>
-                <td>Height</td>
-                <td>{{height}}</td>
-            </tr>
-            <tr>
-                <td>Width</td>
-                <td>{{width}}</td>
-            </tr>
-            <tr>
-                <td>Top</td>
-                <td>{{top}}</td>
-            </tr>
-            <tr>
-                <td>Left</td>
-                <td>{{left}}</td>
-            </tr>
-        {{/with}}
         {{#each styles}}
             <tr>
                 <td>{{name}}</td>
