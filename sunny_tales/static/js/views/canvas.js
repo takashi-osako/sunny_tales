@@ -6,6 +6,8 @@ CanvasView = Backbone.View.extend({
         this.components = this.template.get("components");
         var _components = this.components;
         this.components.bind("add", this.renderCanvas, this)
+
+        this.listenTo(this.components, 'change', this.render);
         $("#canvas").droppable({
             activeClass : "ui-state-default",
             hoverClass : "ui-state-hover",
@@ -30,6 +32,11 @@ CanvasView = Backbone.View.extend({
                     // this component has already created.
                     //make it draggable again
                     $(component_id).draggable();
+
+                    // Update top and left based
+                    // BUG: it's dependent on cursor
+                    existing_component.set("top", event.pageY * 0.75 - this.offsetTop * 0.75);
+                    existing_component.set("left", event.pageX * 0.75 - this.offsetLeft * 0.75);
                 }
             }
         });
@@ -40,16 +47,11 @@ CanvasView = Backbone.View.extend({
     },
     updateStyleView : function(e) {
         var id = $(e.currentTarget);
-        var styleView = new StyleView;
         // Get the style of the tool
         var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style")
         var commonStyle = this.model_toolMenu.get("common_style")
-        
-        // Get the current component's attributes
-        // Not being used
-        var curComponentAttr = this.components.get(e.currentTarget.id).attributes;
-         
-        styleView.renderStyle(e.currentTarget.id, styleOfTool, commonStyle);
+
+        var styleView = new StyleView(this.components.get(e.currentTarget.id), styleOfTool, commonStyle, e.currentTarget.id)
     },
     renderCanvas : function(model_report_component) {
         //rerender canvas when new tool is dragged from toolbox layout
@@ -67,5 +69,10 @@ CanvasView = Backbone.View.extend({
         new_component.draggable();
         new_component.resizable();
         new_component.appendTo($("#canvas"));
+    },
+    render : function() {
+        // TODO: re-render the whole canvas
+        console.debug("need to re-render")
+        //return this;
     }
 });

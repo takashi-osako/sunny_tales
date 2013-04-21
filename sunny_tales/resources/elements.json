@@ -9,6 +9,7 @@
       "style": [
         {
           "name": "font face",
+          "id": "font_face",
           "input_type": "select",
           "editable": false,
           "selection": [
@@ -20,6 +21,7 @@
         },
         {
           "name": "font size",
+          "id": "font_size",
           "input_type": "select",
           "editable": true,
           "selection": [
@@ -39,6 +41,7 @@
         },
         {
           "name": "Italic",
+          "id": "italic",
           "input_type": "checkbox",
           "editable": true,
           "css": "font-style:italic;",
@@ -46,6 +49,7 @@
         },
         {
           "name": "Bold",
+          "id": "bold",
           "input_type": "checkbox",
           "editable": true,
           "css": "font-weight: bold;",
@@ -53,6 +57,7 @@
         },
         {
           "name": "Underline",
+          "id": "underline",
           "input_type": "checkbox",
           "editable": true,
           "css": "text-decoration:underline;",
@@ -60,6 +65,7 @@
         },
         {
           "name": "text-align",
+          "id": "text_align",
           "input_type": "select",
           "editable": false,
           "selection": [
@@ -73,6 +79,7 @@
         },
         {
           "name": "text",
+          "id": "text",
           "input_type": "text",
           "editable": true,
           "html": "<textarea/>"
@@ -87,6 +94,7 @@
       "style": [
         {
           "name": "font face",
+          "id": "font_face",
           "input_type": "select",
           "editable": false,
           "selection": [
@@ -98,6 +106,7 @@
         },
         {
           "name": "font size",
+          "id": "font_size",
           "input_type": "select",
           "editable": true,
           "selection": [
@@ -116,6 +125,7 @@
         },
         {
           "name": "Italic",
+          "id": "italic",
           "input_type": "checkbox",
           "editable": true,
           "css": "font-style:italic;",
@@ -123,6 +133,7 @@
         },
         {
           "name": "Bold",
+          "id": "bold",
           "input_type": "checkbox",
           "editable": true,
           "css": "font-weight: bold;",
@@ -130,6 +141,7 @@
         },
         {
           "name": "Underline",
+          "id": "underline",
           "input_type": "checkbox",
           "editable": true,
           "css": "text-decoration:underline;",
@@ -137,6 +149,7 @@
         },
         {
           "name": "text-align",
+          "id": "text_align",
           "input_type": "select",
           "editable": false,
           "selection": [
@@ -158,6 +171,7 @@
       "style": [
         {
           "name": "line style",
+          "id": "line_style",
           "input_type": "select",
           "editable": false,
           "selection": [
@@ -170,6 +184,7 @@
         },
         {
           "name": "height",
+          "id": "height",
           "input_type": "text",
           "editable": true,
           "defaults": 1,
@@ -177,6 +192,7 @@
         },
         {
           "name": "color",
+          "id": "color",
           "input_type": "text",
           "editable": true,
           "defaults": "#000000",
@@ -192,6 +208,7 @@
       "style": [
         {
           "name": "location",
+          "id": "location",
           "input_type": "text",
           "editable": true,
           "defaults": "../png/glyphicons_194_circle_question_mark.png",
@@ -202,6 +219,7 @@
   ],
   "style": [
     {
+      "id": "x_position",
       "name": "X position",
       "input_type": "text",
       "editable": true,
@@ -209,6 +227,7 @@
       "css": "left:%dpt;"
     },
     {
+      "id": "y_position",
       "name": " Y position",
       "input_type": "text",
       "editable": true,
@@ -216,6 +235,7 @@
       "css": "top:%dpt;"
     },
     {
+      "id": "width",
       "name": "width",
       "input_type": "text",
       "editable": true,
@@ -223,6 +243,7 @@
       "css": "width:%dpt;"
     },
     {
+      "id": "height",
       "name": "height",
       "input_type": "text",
       "editable": true,

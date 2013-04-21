@@ -1,1 +1,1 @@
-<input type="text" id="{{name}}" data-css="{{{css}}}"></input>
+<input type="text" id="{{id}}" value="{{value}}" data-css="{{{css}}}"></input>

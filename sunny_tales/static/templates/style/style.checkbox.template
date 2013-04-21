@@ -1,1 +1,1 @@
-<input type="checkbox" id="{{name}}" data-css="{{{css}}}"></input>
+<input type="checkbox" id="{{id}}" data-css="{{{css}}}"></input>

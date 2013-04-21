@@ -1,4 +1,4 @@
-<select id="{{name}}" data-css="{{{css}}}">
+<select id="{{id}}" data-css="{{{css}}}">
     {{#each selection}}
     <option {{f_isSelected this ../defaults}} value="{{this}}">{{this}}</option>
     {{/each}}
