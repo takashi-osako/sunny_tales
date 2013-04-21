@@ -17,9 +17,10 @@ def mkdir_p(path):
         else: 
             raise
 
-def export(data, tar_dir='/tmp/sunny'):
-    file_name = os.path.join(tar_dir, data['_id'] + '.json')
-    mkdir_p(tar_dir)
+def export(data, tar_dir='/tmp'):
+    file_name = os.path.join(tar_dir, 'template.json')
+    # mkdir_p(tar_dir)
     with open(file_name, 'w') as f:
-        content = json.dumps(data, default=json_util.default)
+        components = {"components": data['components']}
+        content = json.dumps(components, indent=4, default=json_util.default)
         f.write(content)
