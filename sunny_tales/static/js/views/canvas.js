@@ -1,8 +1,9 @@
 CanvasView = Backbone.View.extend({
     el : $("#canvas"),
-    initialize : function(model_toolMenu, model_template) {
+    initialize : function(model_toolMenu, model_template, styleCollection) {
         this.model_toolMenu = model_toolMenu;
         this.template = model_template;
+        this.styleCollection = styleCollection;
 
         this.components = this.template.get("components");
         var _components = this.components;
@@ -23,8 +24,8 @@ CanvasView = Backbone.View.extend({
                     var tool = model_toolMenu.get("tools").get(component_id);
                     //set component position by mouse position
                     var new_component = new ReportComponent(null, tool);
-                    new_component.set("top", 0.75*(ui.offset.top - this.offsetTop));
-                    new_component.set("left", 0.75*(ui.offset.left - this.offsetLeft));
+                    new_component.set("top", 0.75 * (ui.offset.top - this.offsetTop));
+                    new_component.set("left", 0.75 * (ui.offset.left - this.offsetLeft));
                     new_component.set("html", tool.get("html"));
                     //add to component collections.
                     //also renderCanvas will be called.
@@ -37,8 +38,8 @@ CanvasView = Backbone.View.extend({
                     // Update top and left based
                     // BUG: it's dependent on cursor
                     // TODO: fix this calculations
-                    existing_component.set("left", 0.75*(ui.offset.left - this.offsetLeft));
-                    existing_component.set("top", 0.75*(ui.offset.top - this.offsetTop));
+                    existing_component.set("left", 0.75 * (ui.offset.left - this.offsetLeft));
+                    existing_component.set("top", 0.75 * (ui.offset.top - this.offsetTop));
                 }
             }
         });
@@ -49,13 +50,31 @@ CanvasView = Backbone.View.extend({
     },
     updateStyleView : function(e) {
         // Get the style of the tool
-        var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
-        styleModel = new StyleModel(styleOfTool);
-        var commonStyle = this.model_toolMenu.get("common_style");
 
+        var commonStyle = this.model_toolMenu.get("common_style");
+        var commonStyleMode = new StyleModel({
+            "styles" : commonStyle
+        });
+        commonStyleMode.set("targetId", $(e.currentTarget).attr("id"));
+        commonStyleMode.set("elementId", "commonStyle");
+
+        this.styleCollection.reset();
+        this.styleCollection.add(commonStyleMode);
+
+
+
+        var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
+        var styleModel = new StyleModel({
+            "styles" : styleOfTool
+        });
+        styleModel.set("targetId", $(e.currentTarget).attr("id"));
+        styleModel.set("elementId", "styleOfTool");
+        this.styleCollection.add(styleModel);
         // TODO: BUG one view per model instance
-        var styleView = new StyleView(this.components.get(e.currentTarget.id), styleOfTool, commonStyle, e.currentTarget.id);
-        $("#style").html(styleView.render().el);
+        /*
+         var styleView = new StyleView(this.components.get(e.currentTarget.id), styleOfTool, commonStyle, e.currentTarget.id);
+         $("#style").html(styleView.render().el);
+         */
     },
     renderCanvas : function(model_report_component) {
         //rerender canvas when new tool is dragged from toolbox layout

@@ -1,2 +1,2 @@
-StylesCollection = Backbone.Collection.extends = ({
+StyleCollection = Backbone.Collection.extend({
 });

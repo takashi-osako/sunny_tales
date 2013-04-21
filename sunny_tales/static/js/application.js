@@ -12,13 +12,16 @@ $(function() {
     Handlebars.registerPartial('style.select.template', Handlebars.templates['style.select.template']);
     Handlebars.registerPartial('style.checkbox.template', Handlebars.templates['style.checkbox.template']);
     Handlebars.registerPartial('style.text.template', Handlebars.templates['style.text.template']);
+    
     var toolMenu = new ToolMenuModel;
     var templateModel = new TemplateModel;
+    var styleCollection =  new StyleCollection;
     // render toolbox view
     var toolboxView = new ToolBoxView(toolMenu);
     //toolboxView.loadElementData(data);
-    var canvasView = new CanvasView(toolMenu, templateModel);
+    var canvasView = new CanvasView(toolMenu, templateModel, styleCollection);
     var saveTemplateView = new SaveTemplateView(templateModel);
+    var styleView = new StyleView(styleCollection);
 
 });
 

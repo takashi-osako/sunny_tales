@@ -1,4 +1,4 @@
-<table class='table table-hover' data-target_id={{targetId}}>
+<table id={{elementId}} class='table table-hover' data-target_id={{targetId}}>
     <thead>
         <tr>
             <th>Property</th>
