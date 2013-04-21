@@ -8,7 +8,7 @@ CanvasView = Backbone.View.extend({
         var _components = this.components;
         this.components.bind("add", this.renderCanvas, this)
 
-        this.listenTo(this.components, 'change', this.render);
+        this.listenTo(this.components, 'change', this.render, this);
         $("#canvas").droppable({
             activeClass : "ui-state-default",
             hoverClass : "ui-state-hover",
@@ -23,8 +23,8 @@ CanvasView = Backbone.View.extend({
                     var tool = model_toolMenu.get("tools").get(component_id);
                     //set component position by mouse position
                     var new_component = new ReportComponent(null, tool);
-                    new_component.set("top", event.pageY * 0.75 - this.offsetTop * 0.75);
-                    new_component.set("left", event.pageX * 0.75 - this.offsetLeft * 0.75);
+                    new_component.set("top", 0.75*(ui.offset.top - this.offsetTop));
+                    new_component.set("left", 0.75*(ui.offset.left - this.offsetLeft));
                     new_component.set("html", tool.get("html"));
                     //add to component collections.
                     //also renderCanvas will be called.
@@ -36,8 +36,9 @@ CanvasView = Backbone.View.extend({
 
                     // Update top and left based
                     // BUG: it's dependent on cursor
-                    existing_component.set("top", event.pageY * 0.75 - this.offsetTop * 0.75);
-                    existing_component.set("left", event.pageX * 0.75 - this.offsetLeft * 0.75);
+                    // TODO: fix this calculations
+                    existing_component.set("left", 0.75*(ui.offset.left - this.offsetLeft));
+                    existing_component.set("top", 0.75*(ui.offset.top - this.offsetTop));
                 }
             }
         });
@@ -72,9 +73,14 @@ CanvasView = Backbone.View.extend({
         new_component.resizable();
         new_component.appendTo($("#canvas"));
     },
-    render : function() {
+    render : function(item) {
         // TODO: re-render the whole canvas
         console.debug("need to re-render")
+        item_html = $('#' + item.cid);
+        if (item.changed.top)
+            item_html.css("top", item.get("top") + "pt");
+        else if (item.changed.left)
+            item_html.css("left", item.get("left") + "pt");
         //return this;
     }
 });
