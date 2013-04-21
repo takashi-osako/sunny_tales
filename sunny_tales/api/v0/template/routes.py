@@ -13,6 +13,7 @@ from bson import json_util
 import json
 from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
+from sunny_tales.utils.exporter import export
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
@@ -101,10 +102,12 @@ def create_new_template(request):
         return HTTPBadRequest()
 
     document['metadata'] = __generate_metadata(doc_id)
+    # Temporary output to /tmp/sunny
+    export(document)
 
     templates = Templates()
     return templates.insert(document)
-
+    
 
 def __get_payload(request):
     '''
