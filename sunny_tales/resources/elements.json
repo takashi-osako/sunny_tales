@@ -219,7 +219,7 @@
   ],
   "style": [
     {
-      "id": "x_position",
+      "id": "style_left",
       "name": "X position",
       "input_type": "text",
       "editable": true,
@@ -227,7 +227,7 @@
       "css": "left:%dpt;"
     },
     {
-      "id": "y_position",
+      "id": "style_top",
       "name": " Y position",
       "input_type": "text",
       "editable": true,
@@ -235,7 +235,7 @@
       "css": "top:%dpt;"
     },
     {
-      "id": "width",
+      "id": "style_width",
       "name": "width",
       "input_type": "text",
       "editable": true,
@@ -243,7 +243,7 @@
       "css": "width:%dpt;"
     },
     {
-      "id": "height",
+      "id": "style_height",
       "name": "height",
       "input_type": "text",
       "editable": true,

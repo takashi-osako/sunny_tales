@@ -23,8 +23,8 @@ CanvasView = Backbone.View.extend({
                     var tool = model_toolMenu.get("tools").get(component_id);
                     //set component position by mouse position
                     var new_component = new ReportComponent(null, tool);
-                    new_component.set("top", 0.75*(ui.offset.top - this.offsetTop));
-                    new_component.set("left", 0.75*(ui.offset.left - this.offsetLeft));
+                    new_component.set("top", 0.75 * (ui.offset.top - this.offsetTop));
+                    new_component.set("left", 0.75 * (ui.offset.left - this.offsetLeft));
                     new_component.set("html", tool.get("html"));
                     //add to component collections.
                     //also renderCanvas will be called.
@@ -35,10 +35,8 @@ CanvasView = Backbone.View.extend({
                     $(component_id).draggable();
 
                     // Update top and left based
-                    // BUG: it's dependent on cursor
-                    // TODO: fix this calculations
-                    existing_component.set("left", 0.75*(ui.offset.left - this.offsetLeft));
-                    existing_component.set("top", 0.75*(ui.offset.top - this.offsetTop));
+                    existing_component.set("left", 0.75 * parseInt($('#' + component_id).css("left"), 10));
+                    existing_component.set("top", 0.75 * parseInt($('#' + component_id).css("top"), 10));
                 }
             }
         });
@@ -81,6 +79,10 @@ CanvasView = Backbone.View.extend({
             item_html.css("top", item.get("top") + "pt");
         else if (item.changed.left)
             item_html.css("left", item.get("left") + "pt");
+        else if (item.changed.height)
+            item_html.css("height", item.get("height") + "pt");
+        else if (item.changed.width)
+            item_html.css("width", item.get("width") + "pt");
         //return this;
     }
 });

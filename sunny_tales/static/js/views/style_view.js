@@ -38,13 +38,14 @@ StyleView = Backbone.View.extend({
         this.listenTo(this.model, 'change', this.render);
     },
     events : {
-        "change #x_position" : "setPosition",
-        "change #y_position" : "setPosition"
+        "change #style_top" : "setPosition",
+        "change #style_left" : "setPosition",
+        "change #style_width" : "setPosition",
+        "change #style_height" : "setPosition"
     },
     setPosition : function(e) {
-        if (e.target.id == "y_position")
-            this.model.set("top", parseInt($('#y_position').val()));
-        else if (e.target.id == "x_position")
-            this.model.set("left", parseInt($('#x_position').val()));
+        i = e.target.id.indexOf('_')
+        key = e.target.id.substring(i + 1, e.target.id.length)
+        this.model.set(key, parseFloat($('#' + e.target.id).val()));
     }
 });
