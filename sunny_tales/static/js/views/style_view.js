@@ -1,7 +1,10 @@
 StyleView = Backbone.View.extend({
-    el : $("#style"),
+    // cache template
+    template : Handlebars.templates['style.template'],
+    select_template : Handlebars.templates['style.select.template'],
+    checkbox_template : Handlebars.templates['style.checkbox.template'],
+    text_template : Handlebars.templates['style.text.template'],
     render : function() {
-        var template = Handlebars.templates['style.template'];
 
         // Set values for the textbox based on model's value
         this.commonStyle[0].value = this.model.get("left");
@@ -14,16 +17,16 @@ StyleView = Backbone.View.extend({
             "targetId" : this.targetId,
         }
         // Register all the supported styles
-        Handlebars.registerPartial('style.select.template', Handlebars.templates['style.select.template']);
-        Handlebars.registerPartial('style.checkbox.template', Handlebars.templates['style.checkbox.template']);
-        Handlebars.registerPartial('style.text.template', Handlebars.templates['style.text.template']);
+        Handlebars.registerPartial('style.select.template', this.select_template);
+        Handlebars.registerPartial('style.checkbox.template', this.checkbox_template);
+        Handlebars.registerPartial('style.text.template', this.text_template);
 
         // Template the common style table first
-        $(this.el).html(template(data));
+        $(this.el).html(this.template(data));
 
         // Template for style specific to the tool
         data['styles'] = this.styles
-        $(this.el).append(template(data));
+        $(this.el).append(this.template(data));
 
         return this;
     },
@@ -33,12 +36,10 @@ StyleView = Backbone.View.extend({
         this.commonStyle = commonStyle
         this.targetId = targetId
         this.listenTo(this.model, 'change', this.render);
-
-        this.render();
     },
     events : {
-        "change #x_position": "setPosition",
-        "change #y_position": "setPosition"
+        "change #x_position" : "setPosition",
+        "change #y_position" : "setPosition"
     },
     setPosition : function(e) {
         if (e.target.id == "y_position")
