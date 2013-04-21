@@ -49,11 +49,12 @@ CanvasView = Backbone.View.extend({
     },
     updateStyleView : function(e) {
         // Get the style of the tool
-        var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style")
-        var commonStyle = this.model_toolMenu.get("common_style")
+        var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
+        styleModel = new StyleModel(styleOfTool);
+        var commonStyle = this.model_toolMenu.get("common_style");
 
         // TODO: BUG one view per model instance
-        var styleView = new StyleView(this.components.get(e.currentTarget.id), styleOfTool, commonStyle, e.currentTarget.id)
+        var styleView = new StyleView(this.components.get(e.currentTarget.id), styleOfTool, commonStyle, e.currentTarget.id);
         $("#style").html(styleView.render().el);
     },
     renderCanvas : function(model_report_component) {

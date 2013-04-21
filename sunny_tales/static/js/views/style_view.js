@@ -1,9 +1,6 @@
 StyleView = Backbone.View.extend({
-    // cache template
+
     template : Handlebars.templates['style.template'],
-    select_template : Handlebars.templates['style.select.template'],
-    checkbox_template : Handlebars.templates['style.checkbox.template'],
-    text_template : Handlebars.templates['style.text.template'],
     render : function() {
 
         // Set values for the textbox based on model's value
@@ -16,10 +13,6 @@ StyleView = Backbone.View.extend({
             "styles" : this.commonStyle,
             "targetId" : this.targetId,
         }
-        // Register all the supported styles
-        Handlebars.registerPartial('style.select.template', this.select_template);
-        Handlebars.registerPartial('style.checkbox.template', this.checkbox_template);
-        Handlebars.registerPartial('style.text.template', this.text_template);
 
         // Template the common style table first
         $(this.el).html(this.template(data));
