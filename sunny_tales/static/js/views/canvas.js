@@ -35,7 +35,7 @@ CanvasView = Backbone.View.extend({
                     //make it draggable again
                     $(component_id).draggable();
 
-                    // Update top and left based
+                    // Update top and left
                     existing_component.set("left", 0.75 * parseInt($('#' + component_id).css("left"), 10));
                     existing_component.set("top", 0.75 * parseInt($('#' + component_id).css("top"), 10));
                 }
@@ -43,8 +43,8 @@ CanvasView = Backbone.View.extend({
         });
     },
     events : {
-        // add event. listen click on styleRender class.
-        "click .styleRender" : "updateStyleView",
+        "mouseup .styleRender" : "updateStyleView",
+        "resize .styleRender" : "resize",
         "click .close" : "close"
     },
     updateStyleView : function(e) {
@@ -82,28 +82,36 @@ CanvasView = Backbone.View.extend({
         new_component.resizable();
         new_component.appendTo($("#canvas"));
     },
-    render : function(item) {
+    render : function(model, options) {
         // TODO: Can we just re-render everything?
-        console.debug("need to re-render")
-        item_html = $('#' + item.cid);
-        if (item.changed.top)
-            item_html.css("top", item.get("top") + "pt");
-        else if (item.changed.left)
-            item_html.css("left", item.get("left") + "pt");
-        else if (item.changed.height)
-            item_html.css("height", item.get("height") + "pt");
-        else if (item.changed.width)
-            item_html.css("width", item.get("width") + "pt");
-        else if (item.changed['border-width'])
-            item_html.css("border-width", item.get("border-width") + "pt ");
-        else if (item.changed['border-style'])
-            item_html.css("border-style", item.get("border-style"));
+        model_html = $('#' + model.cid);
+        if (model.changed.top)
+            model_html.css("top", model.get("top") + "pt");
+        else if (model.changed.left)
+            model_html.css("left", model.get("left") + "pt");
+        else if (model.changed.height)
+            model_html.css("height", model.get("height") + "pt");
+        else if (model.changed.width)
+            model_html.css("width", model.get("width") + "pt");
+        else if (model.changed['border-width'])
+            model_html.css("border-width", model.get("border-width") + "pt ");
+        else if (model.changed['border-style'])
+            model_html.css("border-style", model.get("border-style"));
         //return this;
+
     },
-    close : function(item){
+    close : function(event) {
         // Delete the item from components
-        this.template.get("components").remove(item.target.parentNode.id)
-        $("#" + item.target.parentNode.id + ".alert").alert('close');
+        this.template.get("components").remove(event.target.parentNode.id)
+        this.styleCollection.reset();
+        $("#" + event.target.parentNode.id + ".alert").alert('close');
         // TODO: Is there more cleanup?
+    },
+    resize : function(event) {
+        var width = 0.75 * parseInt($(event.currentTarget).css("width"), 10);
+        var height = 0.75 * parseInt($(event.currentTarget).css("height"), 10);
+        var myModel = this.components.get(event.currentTarget.id);
+        myModel.set("width", width);
+        myModel.set("height", height);
     }
 });
