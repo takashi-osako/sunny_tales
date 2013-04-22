@@ -100,8 +100,10 @@ CanvasView = Backbone.View.extend({
             item_html.css("border-style", item.get("border-style"));
         //return this;
     },
-    close : function(item) {
-        // TODO: Must delete component from components
+    close : function(item){
+        // Delete the item from components
+        this.template.get("components").remove(item.target.parentNode.id)
         $("#" + item.target.parentNode.id + ".alert").alert('close');
+        // TODO: Is there more cleanup?
     }
 });
