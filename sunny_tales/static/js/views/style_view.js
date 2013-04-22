@@ -38,22 +38,25 @@ StyleView = Backbone.View.extend({
     initialize : function(styleCollection) {
         this.styleCollection = styleCollection;
         this.styleCollection.bind("add", this.render);
-        this.styleCollection.bind("reset", $(this.el).remove);
+        this.styleCollection.bind("reset", this.clear);
+    },
+    clear : function() {
+        $("#style").empty()
     },
     events : {
         "change #style_top" : "setStyleFloat",
         "change #style_left" : "setStyleFloat",
         "change #style_width" : "setStyleFloat",
         "change #style_height" : "setStyleFloat",
-        "change #style_border-width": "setStyleFloat",
-        "change #style_border-style": "setStyleText"
+        "change #style_border-width" : "setStyleFloat",
+        "change #style_border-style" : "setStyleText"
     },
     setStyleFloat : function(e) {
         i = e.target.id.indexOf('_')
         key = e.target.id.substring(i + 1, e.target.id.length)
         this.model.set(key, parseFloat($('#' + e.target.id).val()));
     },
-    setStyleText : function(e){
+    setStyleText : function(e) {
         i = e.target.id.indexOf('_')
         key = e.target.id.substring(i + 1, e.target.id.length)
         this.model.set(key, $('#' + e.target.id).val());
