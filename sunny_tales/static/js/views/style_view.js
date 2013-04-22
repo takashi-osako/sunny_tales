@@ -3,25 +3,31 @@ StyleView = Backbone.View.extend({
     el : $("#style"),
     render : function(styleModel) {
 
-        /*
-        // Set values for the textbox based on model's value
-        this.commonStyle[0].value = this.model.get("left");
-        this.commonStyle[1].value = this.model.get("top");
-        this.commonStyle[2].value = this.model.get("width");
-        this.commonStyle[3].value = this.model.get("height");
-        this.commonStyle[4].value = this.model.get("border-style");
-        this.commonStyle[5].value = this.model.get("border-width");
-        
-
-        var data = {
-        "styles" : styleModel.toJSON(),
-        "targetId" : this.targetId,
-        "id" : "commonStyle"
-        }
-        */
         // Template the common style table first
         var template_html = Handlebars.templates['style.template'](styleModel.toJSON());
+        var style = $("#style");
         $("#style").append(template_html);
+        var styles = styleModel.get("styles");
+        _.each(styles, function(style) {
+
+            var targetCSS = style.css;
+            if (targetCSS !== undefined) {
+                var styleName = targetCSS.split(":")[0];
+                var targetId = this.styleModel.get("targetId");
+                var cssUnit = $("#" + targetId).cssUnit(styleName);
+                var elementId = this.styleModel.get("elementId");
+                var updatingId = style.id;
+                if (cssUnit && cssUnit.length > 0) {
+                    var cssValue = cssUnit[0];
+                    if (cssUnit[1] === "px") {
+                        cssValue = cssValue * 0.75;
+                    }
+                    $("#style #" + elementId + " #" + updatingId).val(cssValue);
+                }
+            }
+        }, {
+            "styleModel" : styleModel
+        });
 
         // Template for style specific to the tool
         //data['styles'] = this.styles
@@ -33,14 +39,7 @@ StyleView = Backbone.View.extend({
         this.styleCollection = styleCollection;
         this.styleCollection.bind("add", this.render);
         this.styleCollection.bind("reset", $(this.el).remove);
-    }, /*
-     initialize : function(myModel, styles, commonStyle, targetId) {
-     this.model = myModel
-     this.styles = styles
-     this.commonStyle = commonStyle
-     this.targetId = targetId
-     this.listenTo(this.model, 'change', this.render);
-     },*/
+    },
     events : {
         "change #style_top" : "setStyleFloat",
         "change #style_left" : "setStyleFloat",

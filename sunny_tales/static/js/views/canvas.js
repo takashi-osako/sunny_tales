@@ -47,32 +47,20 @@ CanvasView = Backbone.View.extend({
         "click .styleRender" : "updateStyleView"
     },
     updateStyleView : function(e) {
+        this.styleCollection.reset();
         // Get the style of the tool
-
+        var myModel = this.components.get(e.currentTarget.id);
         var commonStyle = this.model_toolMenu.get("common_style");
-        var commonStyleMode = new StyleModel({
-            "styles" : commonStyle
-        });
+        var commonStyleMode = new StyleModel(myModel, commonStyle);
         commonStyleMode.set("targetId", $(e.currentTarget).attr("id"));
         commonStyleMode.set("elementId", "commonStyle");
-
-        this.styleCollection.reset();
         this.styleCollection.add(commonStyleMode);
 
-
-
         var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
-        var styleModel = new StyleModel({
-            "styles" : styleOfTool
-        });
+        var styleModel = new StyleModel(myModel, styleOfTool);
         styleModel.set("targetId", $(e.currentTarget).attr("id"));
         styleModel.set("elementId", "styleOfTool");
         this.styleCollection.add(styleModel);
-        // TODO: BUG one view per model instance
-        /*
-         var styleView = new StyleView(this.components.get(e.currentTarget.id), styleOfTool, commonStyle, e.currentTarget.id);
-         $("#style").html(styleView.render().el);
-         */
     },
     renderCanvas : function(model_report_component) {
         //rerender canvas when new tool is dragged from toolbox layout
