@@ -1,10 +1,12 @@
 StyleView = Backbone.View.extend({
-
     el : $("#style"),
+    template : Handlebars.templates['style.template'],
+    select_template : Handlebars.templates['style.select.template'],
+    checkbox_template : Handlebars.templates['style.checkbox.template'],
+    text_template : Handlebars.templates['style.text.template'],
     render : function(styleModel) {
-
         // Template the common style table first
-        var template_html = Handlebars.templates['style.template'](styleModel.toJSON());
+        var template_html = this.template(styleModel.toJSON());
         var style = $("#style");
         $("#style").append(template_html);
         var styles = styleModel.get("styles");
@@ -37,8 +39,12 @@ StyleView = Backbone.View.extend({
     },
     initialize : function(styleCollection) {
         this.styleCollection = styleCollection;
-        this.styleCollection.bind("add", this.render);
-        this.styleCollection.bind("reset", this.clear);
+        this.styleCollection.bind("add", this.render, this);
+        this.styleCollection.bind("reset", this.clear, this);
+        // Register all the supported styles
+        Handlebars.registerPartial('style.select.template', this.select_template); 
+        Handlebars.registerPartial('style.checkbox.template', this.checkbox_template); 
+        Handlebars.registerPartial('style.text.template', this.text_template);
     },
     clear : function() {
         $("#style").empty()

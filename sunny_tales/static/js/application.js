@@ -6,12 +6,6 @@ $(function() {
     $('body').layout({
         applyDefaultStyles : true
     });
-    // cache template
-
-    // Register all the supported styles
-    Handlebars.registerPartial('style.select.template', Handlebars.templates['style.select.template']);
-    Handlebars.registerPartial('style.checkbox.template', Handlebars.templates['style.checkbox.template']);
-    Handlebars.registerPartial('style.text.template', Handlebars.templates['style.text.template']);
     
     var toolMenu = new ToolMenuModel;
     var templateModel = new TemplateModel;

@@ -7,7 +7,7 @@ CanvasView = Backbone.View.extend({
 
         this.components = this.template.get("components");
         var _components = this.components;
-        this.components.bind("add", this.renderCanvas, this)
+        this.components.bind("add", this.renderCanvas, this);
 
         this.listenTo(this.components, 'change', this.render, this);
         $("#canvas").droppable({
@@ -44,7 +44,8 @@ CanvasView = Backbone.View.extend({
     },
     events : {
         // add event. listen click on styleRender class.
-        "click .styleRender" : "updateStyleView"
+        "click .styleRender" : "updateStyleView",
+        "click .close": "close"
     },
     updateStyleView : function(e) {
         this.styleCollection.reset();
@@ -98,5 +99,9 @@ CanvasView = Backbone.View.extend({
         else if (item.changed['border-style'])
             item_html.css("border-style", item.get("border-style"));
         //return this;
+    },
+    close : function(item){
+        // TODO: Must delete component from components
+        $("#" + item.target.parentNode.id + ".alert").alert('close');
     }
-});
+}); 

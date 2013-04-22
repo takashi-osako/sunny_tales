@@ -4,7 +4,8 @@
     {
       "name": "Static Text",
       "type": "STATIC_TEXT",
-      "html": "<div class='ui-widget-content resizable draggable'>This is static text and click me</div>",
+      "value": "This is static text and click me",
+      "html": "<div class='ui-widget-content resizable draggable alert'><a class='close'>×</a>{{value}}</div>",
       "resizable": true,
       "style": [
         {
@@ -89,7 +90,8 @@
     {
       "name": "Variable Text",
       "type": "VARIABLE_TEXT",
-      "html": "<div class='ui-widget-content resizable draggable'>This is variable text and click me</div>",
+      "value": "This is variable text and click me",
+      "html": "<div class='ui-widget-content resizable draggable alert alert-info'><a class='close'>×</a>{{value}}</div>",
       "resizable": true,
       "style": [
         {
@@ -203,7 +205,8 @@
     {
       "name": "image",
       "type": "IMAGE",
-      "html": "<div class='ui-widget-content resizable draggable'>where is an image, eh?</div>",
+      "value": "where is an image, eh?",
+      "html": "<div class='ui-widget-content resizable draggable alert alert-error'><a class='close'>×</a>{{value}}</div>",
       "resizable": true,
       "style": [
         {
