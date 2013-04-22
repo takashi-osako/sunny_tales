@@ -56,26 +56,18 @@ StyleView = Backbone.View.extend({
         $("#style").empty()
     },
     events : {
-        "change #style_top" : "setStyleFloat",
-        "change #style_left" : "setStyleFloat",
-        "change #style_width" : "setStyleFloat",
-        "change #style_height" : "setStyleFloat",
-        "change #style_border-width" : "setStyleFloat",
-        "change #style_border-style" : "setStyleText"
+        "change #style_top" : "setStyle",
+        "change #style_left" : "setStyle",
+        "change #style_width" : "setStyle",
+        "change #style_height" : "setStyle",
+        "change #style_border-width" : "setStyle",
+        "change #style_border-style" : "setStyle"
     },
-    setStyleFloat : function(e) {
+    setStyle : function(e) {
         var myModel = this.styleCollection.at(0).myModel;
         var target_id = $(e.currentTarget).closest("table").data("target_id");
         var css_name = $(e.currentTarget).data('css-name');
         var value = $(e.currentTarget).val();
         myModel.set(css_name, value);
-        //i = e.target.id.indexOf('_')
-        //key = e.target.id.substring(i + 1, e.target.id.length)
-        //this.model.set(key, parseFloat($('#' + e.target.id).val()));
-    },
-    setStyleText : function(e) {
-        i = e.target.id.indexOf('_')
-        key = e.target.id.substring(i + 1, e.target.id.length)
-        this.model.set(key, $('#' + e.target.id).val());
     }
 });
