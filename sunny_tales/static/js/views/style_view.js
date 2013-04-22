@@ -15,18 +15,18 @@ StyleView = Backbone.View.extend({
             var targetCSS = style.css;
             if (targetCSS !== undefined && targetCSS.length > 0) {
                 _.each(targetCSS, function(css) {
-                    var key = css.key;
+                    var css_name = css.key;
                     var defaults = css.defaults;
-                    var value = this.styleModel.myModel.get(key);
+                    var value = this.styleModel.myModel.get(css_name);
                     var elementId = this.styleModel.get("elementId");
                     var updatingId = this.style.id;
                     if (value) {
                         $("#style #" + elementId + " #" + updatingId).val(value);
                         //firebox bug? I could not use method data()
-                        $("#style #" + elementId + " #" + updatingId).attr("data-css", key);
+                        $("#style #" + elementId + " #" + updatingId).attr("data-css-name", css_name);
                     } else if (defaults) {
                         $("#style #" + elementId + " #" + updatingId).val(defaults);
-                        $("#style #" + elementId + " #" + updatingId).attr("data-css", key);
+                        $("#style #" + elementId + " #" + updatingId).attr("data-css-name", css_name);
                     }
                 }, {
                     "styleModel" : this.styleModel,
@@ -66,9 +66,9 @@ StyleView = Backbone.View.extend({
     setStyleFloat : function(e) {
         var myModel = this.styleCollection.at(0).myModel;
         var target_id = $(e.currentTarget).closest("table").data("target_id");
-        var css = $(e.currentTarget).data('css');
+        var css_name = $(e.currentTarget).data('css-name');
         var value = $(e.currentTarget).val();
-        myModel.set(css, value);
+        myModel.set(css_name, value);
         //i = e.target.id.indexOf('_')
         //key = e.target.id.substring(i + 1, e.target.id.length)
         //this.model.set(key, parseFloat($('#' + e.target.id).val()));
