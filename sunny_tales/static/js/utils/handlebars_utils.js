@@ -1,4 +1,6 @@
-Handlebars.registerHelper('f_isSelected', function(currentValue, defaultValue) {
+Handlebars.registerHelper('f_isSelected', function(currentValue, defaultValue, modelValue) {
+    if (currentValue === modelValue)
+        return "selected";
     return currentValue === defaultValue ? "selected" : "";
 });
 
