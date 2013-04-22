@@ -5,7 +5,7 @@ StyleView = Backbone.View.extend({
     checkbox_template : Handlebars.templates['style.checkbox.template'],
     text_template : Handlebars.templates['style.text.template'],
     render : function(styleModel) {
-        // Template the common style table first
+        // Template
         var template_html = this.template(styleModel.toJSON());
         var style = $("#style");
         style.append(template_html);
@@ -36,10 +36,6 @@ StyleView = Backbone.View.extend({
         }, {
             "styleModel" : styleModel
         });
-
-        // Template for style specific to the tool
-        //data['styles'] = this.styles
-        //$(this.el).append(this.template(data));
 
         return this;
     },

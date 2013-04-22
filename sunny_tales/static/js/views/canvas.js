@@ -43,7 +43,7 @@ CanvasView = Backbone.View.extend({
         });
     },
     events : {
-        "mouseup .styleRender" : "updateStyleView",
+        "click .styleRender" : "updateStyleView",
         "resize .styleRender" : "resize",
         "click .close" : "close"
     },
