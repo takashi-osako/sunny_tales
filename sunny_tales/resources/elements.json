@@ -251,17 +251,22 @@
       "css": "height:%dpt;"
     },
     {
+      "id": "style_border-style",
       "name": "Border style",
       "input_type": "select",
       "editable": false,
       "selection": [
         "none",
-        "solid"
+        "solid",
+        "dotted",
+        "dashed",
+        "double"
       ],
       "css": "border-style:%s;",
       "defaults": "none"
     },
     {
+      "id": "style_border-width",
       "name": "Border width",
       "input_type": "select",
       "editable": true,

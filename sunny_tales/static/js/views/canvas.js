@@ -63,6 +63,8 @@ CanvasView = Backbone.View.extend({
         new_component.css("left", model_report_component.get("left") + "pt");
         new_component.css("height", model_report_component.get("height") + "pt");
         new_component.css("width", model_report_component.get("width") + "pt");
+        new_component.css("border-style", model_report_component.get("border_style"));
+        new_component.css("border-width", model_report_component.get("border-width") + "pt");
         new_component.css("position", "absolute");
         new_component.css("overflow", "hidden");
         new_component.css("text-overflow", "ellipsis");
@@ -72,7 +74,7 @@ CanvasView = Backbone.View.extend({
         new_component.appendTo($("#canvas"));
     },
     render : function(item) {
-        // TODO: re-render the whole canvas
+        // TODO: Can we just re-render everything?
         console.debug("need to re-render")
         item_html = $('#' + item.cid);
         if (item.changed.top)
@@ -83,6 +85,10 @@ CanvasView = Backbone.View.extend({
             item_html.css("height", item.get("height") + "pt");
         else if (item.changed.width)
             item_html.css("width", item.get("width") + "pt");
+        else if (item.changed['border-width'])
+            item_html.css("border-width", item.get("border-width") + "pt ");
+        else if (item.changed['border-style'])
+            item_html.css("border-style", item.get("border-style"));
         //return this;
     }
 });

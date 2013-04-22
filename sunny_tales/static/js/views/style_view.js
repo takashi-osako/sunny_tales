@@ -11,6 +11,9 @@ StyleView = Backbone.View.extend({
         this.commonStyle[1].value = this.model.get("top");
         this.commonStyle[2].value = this.model.get("width");
         this.commonStyle[3].value = this.model.get("height");
+        this.commonStyle[4].value = this.model.get("border-style");
+        this.commonStyle[5].value = this.model.get("border-width");
+        
 
         data = {
             "styles" : this.commonStyle,
@@ -38,14 +41,21 @@ StyleView = Backbone.View.extend({
         this.listenTo(this.model, 'change', this.render);
     },
     events : {
-        "change #style_top" : "setPosition",
-        "change #style_left" : "setPosition",
-        "change #style_width" : "setPosition",
-        "change #style_height" : "setPosition"
+        "change #style_top" : "setStyleFloat",
+        "change #style_left" : "setStyleFloat",
+        "change #style_width" : "setStyleFloat",
+        "change #style_height" : "setStyleFloat",
+        "change #style_border-width": "setStyleFloat",
+        "change #style_border-style": "setStyleText"
     },
-    setPosition : function(e) {
+    setStyleFloat : function(e) {
         i = e.target.id.indexOf('_')
         key = e.target.id.substring(i + 1, e.target.id.length)
         this.model.set(key, parseFloat($('#' + e.target.id).val()));
+    },
+    setStyleText : function(e){
+        i = e.target.id.indexOf('_')
+        key = e.target.id.substring(i + 1, e.target.id.length)
+        this.model.set(key, $('#' + e.target.id).val());
     }
 });
