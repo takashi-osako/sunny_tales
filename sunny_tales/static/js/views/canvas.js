@@ -101,7 +101,9 @@ CanvasView = Backbone.View.extend({
         //return this;
     },
     close : function(item){
-        // TODO: Must delete component from components
+        // Delete the item from components
+        this.template.get("components").remove(item.target.parentNode.id)
         $("#" + item.target.parentNode.id + ".alert").alert('close');
+        // TODO: Is there more cleanup?
     }
 }); 
