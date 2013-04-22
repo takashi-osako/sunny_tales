@@ -45,17 +45,17 @@ CanvasView = Backbone.View.extend({
     events : {
         // add event. listen click on styleRender class.
         "click .styleRender" : "updateStyleView",
-        "click .close": "close"
+        "click .close" : "close"
     },
     updateStyleView : function(e) {
         this.styleCollection.reset();
         // Get the style of the tool
         var myModel = this.components.get(e.currentTarget.id);
         var commonStyle = this.model_toolMenu.get("common_style");
-        var commonStyleMode = new StyleModel(myModel, commonStyle);
-        commonStyleMode.set("targetId", $(e.currentTarget).attr("id"));
-        commonStyleMode.set("elementId", "commonStyle");
-        this.styleCollection.add(commonStyleMode);
+        var commonStyleModel = new StyleModel(myModel, commonStyle);
+        commonStyleModel.set("targetId", $(e.currentTarget).attr("id"));
+        commonStyleModel.set("elementId", "commonStyle");
+        this.styleCollection.add(commonStyleModel);
 
         var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
         var styleModel = new StyleModel(myModel, styleOfTool);
@@ -100,8 +100,8 @@ CanvasView = Backbone.View.extend({
             item_html.css("border-style", item.get("border-style"));
         //return this;
     },
-    close : function(item){
+    close : function(item) {
         // TODO: Must delete component from components
         $("#" + item.target.parentNode.id + ".alert").alert('close');
     }
-}); 
+});

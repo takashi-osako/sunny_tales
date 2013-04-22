@@ -1,5 +1,6 @@
 ReportComponent = Backbone.Model.extend({
     initialize : function(mode, tool) {
+        //TODO: refactor this. read from css array and populate dynamically
         this.set("value", tool.get("value"));
         this.set("height", 50);
         this.set("width", 150);

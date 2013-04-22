@@ -1,287 +1,355 @@
 {
-  "name": "defaults",
-  "elements": [
-    {
-      "name": "Static Text",
-      "type": "STATIC_TEXT",
-      "value": "This is static text and click me",
-      "html": "<div class='ui-widget-content resizable draggable alert'><a class='close'>×</a>{{value}}</div>",
-      "resizable": true,
-      "style": [
-        {
-          "name": "font face",
-          "id": "font_face",
-          "input_type": "select",
-          "editable": false,
-          "selection": [
-            "arial",
-            "courier"
-          ],
-          "css": "font-family: %s;",
-          "defaults": "courier"
-        },
-        {
-          "name": "font size",
-          "id": "font_size",
-          "input_type": "select",
-          "editable": true,
-          "selection": [
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14
-          ],
-          "css": "font-size: %dpt;",
-          "defaults": 12,
-          "html": "<input type='text'>"
-        },
-        {
-          "name": "Italic",
-          "id": "italic",
-          "input_type": "checkbox",
-          "editable": true,
-          "css": "font-style:italic;",
-          "defaults": false
-        },
-        {
-          "name": "Bold",
-          "id": "bold",
-          "input_type": "checkbox",
-          "editable": true,
-          "css": "font-weight: bold;",
-          "defaults": false
-        },
-        {
-          "name": "Underline",
-          "id": "underline",
-          "input_type": "checkbox",
-          "editable": true,
-          "css": "text-decoration:underline;",
-          "defaults": false
-        },
-        {
-          "name": "text-align",
-          "id": "text_align",
-          "input_type": "select",
-          "editable": false,
-          "selection": [
-            "right",
-            "center",
-            "left",
-            "justify"
-          ],
-          "css": "text-align:%s;",
-          "defaults": "left"
-        },
-        {
-          "name": "text",
-          "id": "text",
-          "input_type": "text",
-          "editable": true,
-          "html": "<textarea/>"
-        }
-      ]
-    },
-    {
-      "name": "Variable Text",
-      "type": "VARIABLE_TEXT",
-      "value": "This is variable text and click me",
-      "html": "<div class='ui-widget-content resizable draggable alert alert-info'><a class='close'>×</a>{{value}}</div>",
-      "resizable": true,
-      "style": [
-        {
-          "name": "font face",
-          "id": "font_face",
-          "input_type": "select",
-          "editable": false,
-          "selection": [
-            "arial",
-            "courier"
-          ],
-          "css": "font-family: %s;",
-          "defaults": "courier"
-        },
-        {
-          "name": "font size",
-          "id": "font_size",
-          "input_type": "select",
-          "editable": true,
-          "selection": [
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14
-          ],
-          "css": "font-size: %dpt;",
-          "defaults": 12
-        },
-        {
-          "name": "Italic",
-          "id": "italic",
-          "input_type": "checkbox",
-          "editable": true,
-          "css": "font-style:italic;",
-          "defaults": false
-        },
-        {
-          "name": "Bold",
-          "id": "bold",
-          "input_type": "checkbox",
-          "editable": true,
-          "css": "font-weight: bold;",
-          "defaults": false
-        },
-        {
-          "name": "Underline",
-          "id": "underline",
-          "input_type": "checkbox",
-          "editable": true,
-          "css": "text-decoration:underline;",
-          "defaults": false
-        },
-        {
-          "name": "text-align",
-          "id": "text_align",
-          "input_type": "select",
-          "editable": false,
-          "selection": [
-            "right",
-            "center",
-            "left",
-            "justify"
-          ],
-          "css": "text-align:%s;",
-          "defaults": "left"
-        }
-      ]
-    },
-    {
-      "name": "line",
-      "type": "LINE",
-      "html": "<div><hr/></div>",
-      "resizable": false,
-      "style": [
-        {
-          "name": "line style",
-          "id": "line_style",
-          "input_type": "select",
-          "editable": false,
-          "selection": [
-            "solid",
-            "dotted",
-            "dashed"
-          ],
-          "defaults": "solid",
-          "css": "border-bottom-style:%s;"
-        },
-        {
-          "name": "height",
-          "id": "height",
-          "input_type": "text",
-          "editable": true,
-          "defaults": 1,
-          "css": "border-bottom-width:%dpt;"
-        },
-        {
-          "name": "color",
-          "id": "color",
-          "input_type": "text",
-          "editable": true,
-          "defaults": "#000000",
-          "css": "border-bottom-color:%s;"
-        }
-      ]
-    },
-    {
-      "name": "image",
-      "type": "IMAGE",
-      "value": "where is an image, eh?",
-      "html": "<div class='ui-widget-content resizable draggable alert alert-error'><a class='close'>×</a>{{value}}</div>",
-      "resizable": true,
-      "style": [
-        {
-          "name": "location",
-          "id": "location",
-          "input_type": "text",
-          "editable": true,
-          "defaults": "../png/glyphicons_194_circle_question_mark.png",
-          "css": "background-image:url(%s);background-repeat:no-repeat;"
-        }
-      ]
-    }
-  ],
-  "style": [
-    {
-      "id": "style_left",
-      "name": "X position",
-      "input_type": "text",
-      "editable": true,
-      "defaults": 0,
-      "css": "left:%dpt;"
-    },
-    {
-      "id": "style_top",
-      "name": " Y position",
-      "input_type": "text",
-      "editable": true,
-      "defaults": 0,
-      "css": "top:%dpt;"
-    },
-    {
-      "id": "style_width",
-      "name": "width",
-      "input_type": "text",
-      "editable": true,
-      "defaults": 150,
-      "css": "width:%dpt;"
-    },
-    {
-      "id": "style_height",
-      "name": "height",
-      "input_type": "text",
-      "editable": true,
-      "defaults": 100,
-      "css": "height:%dpt;"
-    },
-    {
-      "id": "style_border-style",
-      "name": "Border style",
-      "input_type": "select",
-      "editable": false,
-      "selection": [
-        "none",
-        "solid",
-        "dotted",
-        "dashed",
-        "double"
-      ],
-      "css": "border-style:%s;",
-      "defaults": "none"
-    },
-    {
-      "id": "style_border-width",
-      "name": "Border width",
-      "input_type": "select",
-      "editable": true,
-      "selection": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "css": "border-width:%dpt;",
-      "defaults": 1
-    }
-  ]
+	"name": "defaults",
+	"elements": [
+		{
+			"name": "Static Text",
+			"type": "STATIC_TEXT",
+			"value": "This is static text and click me",
+			"html": "<div class='ui-widget-content resizable draggable alert'><a class='close'>×</a>{{value}}</div>",
+			"resizable": true,
+			"style": [
+				{
+					"name": "font face",
+					"id": "font_face",
+					"input_type": "select",
+					"editable": false,
+					"selection": ["arial", "courier"],
+					"css": [
+						{
+							"key": "font-family",
+							"value": "%s",
+							"defaults": "courier",
+							"data_type": "string"
+						}
+					]
+				}, {
+					"name": "font size",
+					"id": "font_size",
+					"input_type": "select",
+					"editable": true,
+					"selection": [6, 7, 8, 9, 10, 11, 12, 13, 14],
+					"css": [
+						{
+							"key": "font-size",
+							"value": "%dpt",
+							"defaults": 12,
+							"data_type": "int"
+						}
+					],
+					"html": "<input type='text'>"
+				}, {
+					"name": "Italic",
+					"id": "italic",
+					"input_type": "checkbox",
+					"editable": true,
+					"css": [
+						{
+							"key": "font-style",
+							"value": "italic",
+							"defaults": false,
+							"data_type": "bool"
+						}
+					]
+				}, {
+					"name": "Bold",
+					"id": "bold",
+					"input_type": "checkbox",
+					"editable": true,
+					"css": [
+						{
+							"key": "font-weight",
+							"value": "bold",
+							"defaults": false,
+							"data_type": "bool"
+						}
+					]
+				}, {
+					"name": "Underline",
+					"id": "underline",
+					"input_type": "checkbox",
+					"editable": true,
+					"css": [
+						{
+							"key": "text-decoration",
+							"value": "underline",
+							"defaults": false,
+							"data_type": "bool"
+						}
+					]
+				}, {
+					"name": "text-align",
+					"id": "text_align",
+					"input_type": "select",
+					"editable": false,
+					"selection": ["right", "center", "left", "justify"],
+					"css": [
+						{
+							"key": "text-align",
+							"value": "%s",
+							"defaults": "left",
+							"data_type": "string"
+						}
+					]
+				}, {
+					"name": "text",
+					"id": "text",
+					"input_type": "text",
+					"editable": true,
+					"html": "<textarea/>",
+					"data_type": "string"
+				}
+			]
+		}, {
+			"name": "Variable Text",
+			"type": "VARIABLE_TEXT",
+			"value": "This is variable text and click me",
+			"html": "<div class='ui-widget-content resizable draggable alert alert-info'><a class='close'>×</a>{{value}}</div>",
+			"resizable": true,
+			"style": [
+				{
+					"name": "font face",
+					"id": "font_face",
+					"input_type": "select",
+					"editable": false,
+					"selection": ["arial", "courier"],
+					"css": [
+						{
+							"key": "font-family",
+							"value": "%s",
+							"defaults": "courier",
+							"data_type": "string"
+						}
+					]
+				}, {
+					"name": "font size",
+					"id": "font_size",
+					"input_type": "select",
+					"editable": true,
+					"selection": [6, 7, 8, 9, 10, 11, 12, 13, 14],
+					"css": [
+						{
+							"key": "font-size",
+							"value": "%dpt",
+							"defaults": 12,
+							"data_type": "int"
+						}
+					]
+				}, {
+					"name": "Italic",
+					"id": "italic",
+					"input_type": "checkbox",
+					"editable": true,
+					"css": [
+						{
+							"key": "font-style",
+							"value": "italic",
+							"defaults": false,
+							"data_type": "int"
+						}
+					]
+				}, {
+					"name": "Bold",
+					"id": "bold",
+					"input_type": "checkbox",
+					"editable": true,
+					"css": [
+						{
+							"key": "font-weight",
+							"value": "bold",
+							"defaults": false,
+							"data_type": "int"
+						}
+					]
+				}, {
+					"name": "Underline",
+					"id": "underline",
+					"input_type": "checkbox",
+					"editable": true,
+					"css": [
+						{
+							"key": "text-decoration",
+							"value": "underline",
+							"defaults": false,
+							"data_type": "bool"
+						}
+					]
+				}, {
+					"name": "text-align",
+					"id": "text_align",
+					"input_type": "select",
+					"editable": false,
+					"selection": ["right", "center", "left", "justify"],
+					"css": [
+						{
+							"key": "text-align",
+							"value": "%s",
+							"defaults": "left",
+							"data_type": "int"
+						}
+					]
+				}
+			]
+		}, {
+			"name": "line",
+			"type": "LINE",
+			"html": "<div><hr/></div>",
+			"resizable": false,
+			"style": [
+				{
+					"name": "line style",
+					"id": "line_style",
+					"input_type": "select",
+					"editable": false,
+					"selection": ["solid", "dotted", "dashed"],
+
+					"css": [
+						{
+							"key": "border-bottom-style",
+							"value": "%s",
+							"defaults": "solid",
+							"data_type": "string"
+						}
+					]
+				}, {
+					"name": "height",
+					"id": "height",
+					"input_type": "text",
+					"editable": true,
+
+					"css": [
+						{
+							"key": "border-bottom-width",
+							"value": "%dpt",
+							"defaults": 1,
+							"data_type": "int"
+						}
+					]
+				}, {
+					"name": "color",
+					"id": "color",
+					"input_type": "text",
+					"editable": true,
+					"css": [
+						{
+							"key": "border-bottom-color",
+							"value": "%s",
+							"defaults": "#000000",
+							"data_type": "string"
+						}
+					]
+				}
+			]
+		}, {
+			"name": "image",
+			"type": "IMAGE",
+			"value": "where is an image, eh?",
+			"html": "<div class='ui-widget-content resizable draggable alert alert-error'><a class='close'>×</a>{{value}}</div>",
+			"resizable": true,
+			"style": [
+				{
+					"name": "location",
+					"id": "location",
+					"input_type": "text",
+					"editable": true,
+
+					"css": [
+						{
+							"key": "background-image",
+							"value": "url(%s)",
+							"defaults": "../png/glyphicons_194_circle_question_mark.png",
+							"data_type": "string"
+						}, {
+							"key": "background-repeat",
+							"value": "no-repeat"
+						}
+					]
+				}
+			]
+		}
+	],
+	"style": [
+		{
+			"id": "style_left",
+			"name": "X position",
+			"input_type": "text",
+			"editable": true,
+			"css": [
+				{
+					"key": "left",
+					"value": "%dpt",
+					"defaults": 0,
+					"data_type": "int"
+				}
+			]
+		}, {
+			"id": "style_top",
+			"name": " Y position",
+			"input_type": "text",
+			"editable": true,
+
+			"css": [
+				{
+					"key": "top",
+					"value": "%dpt",
+					"defaults": 0,
+					"data_type": "int"
+				}
+			]
+		}, {
+			"id": "style_width",
+			"name": "width",
+			"input_type": "text",
+			"editable": true,
+
+			"css": [
+				{
+					"key": "width",
+					"value": "%dpt",
+					"defaults": 150,
+					"data_type": "int"
+				}
+			]
+		}, {
+			"id": "style_height",
+			"name": "height",
+			"input_type": "text",
+			"editable": true,
+			"css": [
+				{
+					"key": "height",
+					"value": "%dpt",
+					"defaults": 100,
+					"data_type": "int"
+				}
+			]
+		}, {
+			"id": "style_border-style",
+			"name": "Border style",
+			"input_type": "select",
+			"editable": false,
+			"selection": ["none", "solid", "dotted", "dashed", "double"],
+			"css": [
+				{
+					"key": "border-style",
+					"value": "%s",
+					"defaults": "none",
+					"data_type": "string"
+				}
+			]
+		}, {
+			"id": "style_border-width",
+			"name": "Border width",
+			"input_type": "select",
+			"editable": true,
+			"selection": [1, 2, 3, 4, 5],
+			"css": [
+				{
+					"key": "border-width",
+					"value": "%dpt",
+					"defaults": 1,
+					"data_type": "int"
+				}
+			]
+		}
+	]
 }
