@@ -86,28 +86,19 @@ CanvasView = Backbone.View.extend({
         new_component.appendTo($("#canvas"));
     },
     render : function(model, options) {
-        // TODO: Can we just re-render everything?
         model_html = $('#' + model.cid);
-        if (model.changed.top)
-            model_html.css("top", model.get("top") + "pt");
-        else if (model.changed.left)
-            model_html.css("left", model.get("left") + "pt");
-        else if (model.changed.height)
-            model_html.css("height", model.get("height") + "pt");
-        else if (model.changed.width)
-            model_html.css("width", model.get("width") + "pt");
-        else if (model.changed['border-width'])
-            model_html.css("border-width", model.get("border-width") + "pt ");
-        else if (model.changed['border-style'])
-            model_html.css("border-style", model.get("border-style"));
-        //return this;
-
+        // We know that one thing changed, so get the first element from the array
+        attributeName = _.keys(model.changedAttributes())[0];
+        attributeValue = _.values(model.changedAttributes())[0];
+        // TODO: it'll be nice if we can get format of the value
+        if (attributeName != "border-style")
+            attributeValue = attributeValue + "pt";
+        model_html.css(attributeName, attributeValue);
     },
     close : function(event) {
         // Delete the item from components
         this.template.get("components").remove(event.target.parentNode.id)
         $("#" + event.target.parentNode.id + ".alert").alert('close');
-        //this.styleCollection.reset();
         // TODO: Is there more cleanup?
     },
     resize : function(event) {
