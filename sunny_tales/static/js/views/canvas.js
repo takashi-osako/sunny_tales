@@ -51,17 +51,20 @@ CanvasView = Backbone.View.extend({
         this.styleCollection.reset();
         // Get the style of the tool
         var myModel = this.components.get(e.currentTarget.id);
-        var commonStyle = this.model_toolMenu.get("common_style");
-        var commonStyleModel = new StyleModel(myModel, commonStyle);
-        commonStyleModel.set("targetId", $(e.currentTarget).attr("id"));
-        commonStyleModel.set("elementId", "commonStyle");
-        this.styleCollection.add(commonStyleModel);
+        // For the case of deletes
+        if (myModel) {
+            var commonStyle = this.model_toolMenu.get("common_style");
+            var commonStyleModel = new StyleModel(myModel, commonStyle);
+            commonStyleModel.set("targetId", $(e.currentTarget).attr("id"));
+            commonStyleModel.set("elementId", "commonStyle");
+            this.styleCollection.add(commonStyleModel);
 
-        var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
-        var styleModel = new StyleModel(myModel, styleOfTool);
-        styleModel.set("targetId", $(e.currentTarget).attr("id"));
-        styleModel.set("elementId", "styleOfTool");
-        this.styleCollection.add(styleModel);
+            var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
+            var styleModel = new StyleModel(myModel, styleOfTool);
+            styleModel.set("targetId", $(e.currentTarget).attr("id"));
+            styleModel.set("elementId", "styleOfTool");
+            this.styleCollection.add(styleModel);
+        }
     },
     renderCanvas : function(model_report_component) {
         //rerender canvas when new tool is dragged from toolbox layout
@@ -103,8 +106,8 @@ CanvasView = Backbone.View.extend({
     close : function(event) {
         // Delete the item from components
         this.template.get("components").remove(event.target.parentNode.id)
-        this.styleCollection.reset();
         $("#" + event.target.parentNode.id + ".alert").alert('close');
+        //this.styleCollection.reset();
         // TODO: Is there more cleanup?
     },
     resize : function(event) {
