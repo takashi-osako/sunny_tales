@@ -49,10 +49,10 @@ CanvasView = Backbone.View.extend({
     },
     updateStyleView : function(e) {
         this.styleCollection.reset();
-        // Get the style of the tool
         var myModel = this.components.get(e.currentTarget.id);
         // For the case of deletes
         if (myModel) {
+            // Get the style of the tool
             var commonStyle = this.model_toolMenu.get("common_style");
             var commonStyleModel = new StyleModel(myModel, commonStyle);
             commonStyleModel.set("targetId", $(e.currentTarget).attr("id"));
@@ -90,8 +90,8 @@ CanvasView = Backbone.View.extend({
         // We know that one thing changed, so get the first element from the array
         attributeName = _.keys(model.changedAttributes())[0];
         attributeValue = _.values(model.changedAttributes())[0];
-        // TODO: it'll be nice if we can get format of the value
-        if (attributeName != "border-style")
+        // TODO: We need to know the format of each css
+        if (attributeName != "border-style" && attributeName != "font-family")
             attributeValue = attributeValue + "pt";
         model_html.css(attributeName, attributeValue);
     },
@@ -102,6 +102,7 @@ CanvasView = Backbone.View.extend({
         // TODO: Is there more cleanup?
     },
     resize : function(event) {
+        // A report component was resized
         var width = 0.75 * parseInt($(event.currentTarget).css("width"), 10);
         var height = 0.75 * parseInt($(event.currentTarget).css("height"), 10);
         var myModel = this.components.get(event.currentTarget.id);

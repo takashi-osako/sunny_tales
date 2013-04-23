@@ -57,7 +57,11 @@ StyleView = Backbone.View.extend({
         "change #style_width" : "setStyle",
         "change #style_height" : "setStyle",
         "change #style_border-width" : "setStyle",
-        "change #style_border-style" : "setStyle"
+        "change #style_border-style" : "setStyle",
+        "change #font_family" : "setStyle",
+        "change #font_size" : "setStyle",
+        "change #text_align": "setStyle",
+        "change #text": "setStyle"
     },
     setStyle : function(e) {
         var myModel = this.styleCollection.at(0).myModel;

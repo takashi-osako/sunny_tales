@@ -9,16 +9,16 @@
 			"resizable": true,
 			"style": [
 				{
-					"name": "font face",
-					"id": "font_face",
+					"name": "Font Family",
+					"id": "font_family",
 					"input_type": "select",
 					"editable": false,
-					"selection": ["arial", "courier"],
+					"selection": ["Arial", "Courier", "Times New Roman", "Verdana", "Lucida Console"],
 					"css": [
 						{
 							"key": "font-family",
 							"value": "%s",
-							"defaults": "courier",
+							"defaults": "Courier",
 							"data_type": "string"
 						}
 					]
@@ -107,16 +107,16 @@
 			"resizable": true,
 			"style": [
 				{
-					"name": "font face",
-					"id": "font_face",
+					"name": "Font Family",
+					"id": "font_family",
 					"input_type": "select",
 					"editable": false,
-					"selection": ["arial", "courier"],
+					"selection": ["Arial", "Courier", "Times New Roman", "Verdana", "Lucida Console"],
 					"css": [
 						{
 							"key": "font-family",
 							"value": "%s",
-							"defaults": "courier",
+							"defaults": "Courier",
 							"data_type": "string"
 						}
 					]
