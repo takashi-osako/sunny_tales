@@ -22,8 +22,16 @@ CanvasView = Backbone.View.extend({
                     //create new component for the canvas
                     //get tool by id(type)
                     var tool = model_toolMenu.get("tools").get(component_id);
+                    var value = tool.get("value");
+                    var styleOfTool = tool.get("style");
+                    var commonStyle = model_toolMenu.get("common_style");
                     //set component position by mouse position
-                    var new_component = new ReportComponent(null, tool);
+                    var new_component = new ReportComponent(null, {
+                        "commonStyle" : commonStyle,
+                        "styleOfTool" : styleOfTool
+                    });
+                    new_component.set("type",tool.get("type"));
+                    new_component.set("value", value);
                     new_component.set("top", 0.75 * (ui.offset.top - this.offsetTop));
                     new_component.set("left", 0.75 * (ui.offset.left - this.offsetLeft));
                     new_component.set("html", tool.get("html"));
