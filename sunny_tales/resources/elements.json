@@ -5,7 +5,7 @@
 			"name": "Static Text",
 			"type": "STATIC_TEXT",
 			"value": "This is static text and click me",
-			"html": "<div class='ui-widget-content resizable draggable alert'><a class='close'>×</a>{{value}}</div>",
+			"html": "<div class='ui-widget-content resizable draggable alert'><a class='close'>×</a><div id='value'>{{value}}</div></div>",
 			"resizable": true,
 			"style": [
 				{

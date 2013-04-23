@@ -60,8 +60,8 @@ StyleView = Backbone.View.extend({
         "change #style_border-style" : "setStyle",
         "change #font_family" : "setStyle",
         "change #font_size" : "setStyle",
-        "change #text_align": "setStyle",
-        "change #text": "setStyle"
+        "change #text_align" : "setStyle",
+        "change #text" : "setTextValue"
     },
     setStyle : function(e) {
         var myModel = this.styleCollection.at(0).myModel;
@@ -69,5 +69,15 @@ StyleView = Backbone.View.extend({
         var css_name = $(e.currentTarget).data('css-name');
         var value = $(e.currentTarget).val();
         myModel.set(css_name, value);
+    },
+    setTextValue : function(e) {
+        // TODO: refactor html in element.json
+        //
+        var myModel = this.styleCollection.at(0).myModel;
+        var newValue = $(e.currentTarget).val();
+        $('#' + myModel.cid + ' #value').text(newValue);
+        myModel.set("value", $(e.currentTarget).val());
+        // html = myModel.get("html").html();
+        // $(html).text(newValue);
     }
 });
