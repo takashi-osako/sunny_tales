@@ -16,8 +16,8 @@
 					"selection": ["Arial", "Courier", "Times New Roman", "Verdana", "Lucida Console"],
 					"css": [
 						{
-							"key": "font-family",
-							"value": "%s",
+							"name": "font-family",
+							"format": "%s",
 							"defaults": "Courier",
 							"data_type": "string"
 						}
@@ -30,10 +30,11 @@
 					"selection": [6, 7, 8, 9, 10, 11, 12, 13, 14],
 					"css": [
 						{
-							"key": "font-size",
-							"value": "%dpt",
+							"name": "font-size",
+							"format": "%d",
 							"defaults": 12,
-							"data_type": "int"
+							"data_type": "int",
+							"unit": "pt"
 						}
 					],
 					"html": "<input type='text'>"
@@ -44,7 +45,7 @@
 					"editable": true,
 					"css": [
 						{
-							"key": "font-style",
+							"name": "font-style",
 							"value": "italic",
 							"defaults": false,
 							"data_type": "bool"
@@ -57,7 +58,7 @@
 					"editable": true,
 					"css": [
 						{
-							"key": "font-weight",
+							"name": "font-weight",
 							"value": "bold",
 							"defaults": false,
 							"data_type": "bool"
@@ -70,7 +71,7 @@
 					"editable": true,
 					"css": [
 						{
-							"key": "text-decoration",
+							"name": "text-decoration",
 							"value": "underline",
 							"defaults": false,
 							"data_type": "bool"
@@ -84,8 +85,8 @@
 					"selection": ["right", "center", "left", "justify"],
 					"css": [
 						{
-							"key": "text-align",
-							"value": "%s",
+							"name": "text-align",
+							"format": "%s",
 							"defaults": "left",
 							"data_type": "string"
 						}
@@ -114,8 +115,8 @@
 					"selection": ["Arial", "Courier", "Times New Roman", "Verdana", "Lucida Console"],
 					"css": [
 						{
-							"key": "font-family",
-							"value": "%s",
+							"name": "font-family",
+							"format": "%s",
 							"defaults": "Courier",
 							"data_type": "string"
 						}
@@ -128,10 +129,11 @@
 					"selection": [6, 7, 8, 9, 10, 11, 12, 13, 14],
 					"css": [
 						{
-							"key": "font-size",
-							"value": "%dpt",
+							"name": "font-size",
+							"format": "%d",
 							"defaults": 12,
-							"data_type": "int"
+							"data_type": "int",
+							"unit": "pt"
 						}
 					]
 				}, {
@@ -141,7 +143,7 @@
 					"editable": true,
 					"css": [
 						{
-							"key": "font-style",
+							"name": "font-style",
 							"value": "italic",
 							"defaults": false,
 							"data_type": "int"
@@ -154,7 +156,7 @@
 					"editable": true,
 					"css": [
 						{
-							"key": "font-weight",
+							"name": "font-weight",
 							"value": "bold",
 							"defaults": false,
 							"data_type": "int"
@@ -167,7 +169,7 @@
 					"editable": true,
 					"css": [
 						{
-							"key": "text-decoration",
+							"name": "text-decoration",
 							"value": "underline",
 							"defaults": false,
 							"data_type": "bool"
@@ -181,8 +183,8 @@
 					"selection": ["right", "center", "left", "justify"],
 					"css": [
 						{
-							"key": "text-align",
-							"value": "%s",
+							"name": "text-align",
+							"format": "%s",
 							"defaults": "left",
 							"data_type": "int"
 						}
@@ -204,8 +206,8 @@
 
 					"css": [
 						{
-							"key": "border-bottom-style",
-							"value": "%s",
+							"name": "border-bottom-style",
+							"format": "%s",
 							"defaults": "solid",
 							"data_type": "string"
 						}
@@ -218,10 +220,11 @@
 
 					"css": [
 						{
-							"key": "border-bottom-width",
-							"value": "%dpt",
+							"name": "border-bottom-width",
+							"format": "%d",
 							"defaults": 1,
-							"data_type": "int"
+							"data_type": "int",
+							"unit": "pt"
 						}
 					]
 				}, {
@@ -231,8 +234,8 @@
 					"editable": true,
 					"css": [
 						{
-							"key": "border-bottom-color",
-							"value": "%s",
+							"name": "border-bottom-color",
+							"format": "%s",
 							"defaults": "#000000",
 							"data_type": "string"
 						}
@@ -254,12 +257,12 @@
 
 					"css": [
 						{
-							"key": "background-image",
-							"value": "url(%s)",
+							"name": "background-image",
+							"format": "url(%s)",
 							"defaults": "../png/glyphicons_194_circle_question_mark.png",
 							"data_type": "string"
 						}, {
-							"key": "background-repeat",
+							"name": "background-repeat",
 							"value": "no-repeat"
 						}
 					]
@@ -275,10 +278,11 @@
 			"editable": true,
 			"css": [
 				{
-					"key": "left",
-					"value": "%dpt",
+					"name": "left",
+					"format": "%d",
 					"defaults": 0,
-					"data_type": "int"
+					"data_type": "int",
+					"unit": "pt"
 				}
 			]
 		}, {
@@ -289,10 +293,11 @@
 
 			"css": [
 				{
-					"key": "top",
-					"value": "%dpt",
+					"name": "top",
+					"format": "%d",
 					"defaults": 0,
-					"data_type": "int"
+					"data_type": "int",
+					"unit": "pt"
 				}
 			]
 		}, {
@@ -303,10 +308,11 @@
 
 			"css": [
 				{
-					"key": "width",
-					"value": "%dpt",
+					"name": "width",
+					"format": "%d",
 					"defaults": 150,
-					"data_type": "int"
+					"data_type": "int",
+					"unit": "pt"
 				}
 			]
 		}, {
@@ -316,10 +322,11 @@
 			"editable": true,
 			"css": [
 				{
-					"key": "height",
-					"value": "%dpt",
+					"name": "height",
+					"format": "%d",
 					"defaults": 100,
-					"data_type": "int"
+					"data_type": "int",
+					"unit": "pt"
 				}
 			]
 		}, {
@@ -330,8 +337,8 @@
 			"selection": ["none", "solid", "dotted", "dashed", "double"],
 			"css": [
 				{
-					"key": "border-style",
-					"value": "%s",
+					"name": "border-style",
+					"format": "%s",
 					"defaults": "none",
 					"data_type": "string"
 				}
@@ -344,10 +351,11 @@
 			"selection": [1, 2, 3, 4, 5],
 			"css": [
 				{
-					"key": "border-width",
-					"value": "%dpt",
+					"name": "border-width",
+					"format": "%dpt",
 					"defaults": 1,
-					"data_type": "int"
+					"data_type": "int",
+					"unit": "pt"
 				}
 			]
 		}

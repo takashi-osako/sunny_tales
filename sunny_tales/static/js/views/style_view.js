@@ -15,9 +15,9 @@ StyleView = Backbone.View.extend({
             var targetCSS = style.css;
             if (targetCSS !== undefined && targetCSS.length > 0) {
                 _.each(targetCSS, function(css) {
-                    var css_name = css.key;
+                    var css_name = css.name;
                     var defaults = css.defaults;
-                    var value = this.styleModel.myModel.get(css_name);
+                    var value = this.styleModel.myModel.css(css_name);
                     var elementId = this.styleModel.get("elementId");
                     var updatingId = this.style.id;
                     if (value) {

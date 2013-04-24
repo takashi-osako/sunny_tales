@@ -30,11 +30,12 @@ CanvasView = Backbone.View.extend({
                         "commonStyle" : commonStyle,
                         "styleOfTool" : styleOfTool
                     });
-                    new_component.set("type",tool.get("type"));
+                    new_component.set("type", tool.get("type"));
                     new_component.set("value", value);
-                    new_component.set("top", 0.75 * (ui.offset.top - this.offsetTop));
-                    new_component.set("left", 0.75 * (ui.offset.left - this.offsetLeft));
                     new_component.set("html", tool.get("html"));
+
+                    new_component.css("top", 0.75 * (ui.offset.top - this.offsetTop));
+                    new_component.css("left", 0.75 * (ui.offset.left - this.offsetLeft));
                     //add to component collections.
                     //also renderCanvas will be called.
                     _components.add(new_component);
@@ -44,8 +45,8 @@ CanvasView = Backbone.View.extend({
                     $(component_id).draggable();
 
                     // Update top and left
-                    existing_component.set("left", 0.75 * parseInt($('#' + component_id).css("left"), 10));
-                    existing_component.set("top", 0.75 * parseInt($('#' + component_id).css("top"), 10));
+                    existing_component.css("left", (0.75 * parseInt($('#' + component_id).css("left"), 10)));
+                    existing_component.css("top", (0.75 * parseInt($('#' + component_id).css("top"), 10)));
                 }
             }
         });
@@ -79,12 +80,14 @@ CanvasView = Backbone.View.extend({
         new_component = $(model_report_component.get("html"));
         new_component.attr("id", model_report_component.cid);
         new_component.data("id", model_report_component.get("type"));
-        new_component.css("top", model_report_component.get("top") + "pt");
-        new_component.css("left", model_report_component.get("left") + "pt");
-        new_component.css("height", model_report_component.get("height") + "pt");
-        new_component.css("width", model_report_component.get("width") + "pt");
-        new_component.css("border-style", model_report_component.get("border_style"));
-        new_component.css("border-width", model_report_component.get("border-width") + "pt");
+        _.map(model_report_component.css, function(val, key) {
+        }, new_component);
+        new_component.css("top", model_report_component.cssWithUnit("top"));
+        new_component.css("left", model_report_component.cssWithUnit("left"));
+        new_component.css("height", model_report_component.cssWithUnit("height"));
+        new_component.css("width", model_report_component.cssWithUnit("width"));
+        new_component.css("border-style", model_report_component.cssWithUnit("border-style"));
+        new_component.css("border-width", model_report_component.cssWithUnit("border-width"));
         new_component.css("position", "absolute");
         new_component.css("overflow", "hidden");
         new_component.css("text-overflow", "ellipsis");
@@ -114,7 +117,7 @@ CanvasView = Backbone.View.extend({
         var width = 0.75 * parseInt($(event.currentTarget).css("width"), 10);
         var height = 0.75 * parseInt($(event.currentTarget).css("height"), 10);
         var myModel = this.components.get(event.currentTarget.id);
-        myModel.set("width", width);
-        myModel.set("height", height);
+        myModel.css("width", width);
+        myModel.css("height", height);
     }
 });
