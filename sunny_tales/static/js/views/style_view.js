@@ -71,13 +71,18 @@ StyleView = Backbone.View.extend({
         myModel.set(css_name, value);
     },
     setTextValue : function(e) {
-        // TODO: refactor html in element.json
-        //
         var myModel = this.styleCollection.at(0).myModel;
         var newValue = $(e.currentTarget).val();
-        $('#' + myModel.cid + ' #value').text(newValue);
         myModel.set("value", $(e.currentTarget).val());
-        // html = myModel.get("html").html();
-        // $(html).text(newValue);
+        
+        // Do we even care what is the value of html 
+        // This is not necessary but it's good to see the value is consistent
+        html = $(myModel.get("html"));
+        $(html).find('#value').text(newValue);
+        modifiedHtml= $('<div>').append($(html).clone()).html();
+        myModel.set("html", modifiedHtml);
+        
+        // Sets the new text
+        $('#' + myModel.cid + ' #value').text(newValue);
     }
 });

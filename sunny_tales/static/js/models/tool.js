@@ -9,9 +9,20 @@ Tool = Backbone.Model.extend({
     //use "type" as Tool's id
     idAttribute : "type",
     initialize : function() {
-        // Mustache is easier than handlebar for simple tasks
-        var data = {value : this.get("value")};
-        var html = Mustache.render(this.get("html"), data);
-        this.set("html", html);
+        if (this.get("type") !== "LINE") {
+            html = this.get("html")
+            htmlObject = $(html)
+            // Add id to identify where we should replace the text
+            htmlObject.attr("id", "value")
+            // Set the text
+            htmlObject.text(this.get("value"))
+
+            // Add relevant classes
+            wrapper = $("<div class='ui-widget-content resizable draggable alert'><a class='close'>×</a></div>")
+            // Wrap around the html from config and convert to html string
+            $(htmlObject).appendTo(wrapper)
+            modifiedHtml = $('<div>').append($(wrapper).clone()).html();
+            this.set("html", modifiedHtml);
+        }
     }
 });
