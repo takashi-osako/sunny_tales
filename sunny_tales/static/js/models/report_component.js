@@ -21,6 +21,11 @@ ReportComponent = Backbone.Model.extend({
         });
     },
     css : function(name, value) {
+        // if name is undefined,
+        // return list of css
+        if (name === undefined) {
+            return this._css_data_store;
+        }
         var mycss = this._css_data_store[name];
         if (mycss) {
             // if value is undefined, return css value

@@ -80,14 +80,20 @@ CanvasView = Backbone.View.extend({
         new_component = $(model_report_component.get("html"));
         new_component.attr("id", model_report_component.cid);
         new_component.data("id", model_report_component.get("type"));
-        _.map(model_report_component.css, function(val, key) {
-        }, new_component);
-        new_component.css("top", model_report_component.cssWithUnit("top"));
-        new_component.css("left", model_report_component.cssWithUnit("left"));
-        new_component.css("height", model_report_component.cssWithUnit("height"));
-        new_component.css("width", model_report_component.cssWithUnit("width"));
-        new_component.css("border-style", model_report_component.cssWithUnit("border-style"));
-        new_component.css("border-width", model_report_component.cssWithUnit("border-width"));
+        _.map(model_report_component.css(), function(val, key) {
+            this.new_component.css(key, this.model_report_component.cssWithUnit(key));
+        }, {
+            "new_component" : new_component,
+            "model_report_component" : model_report_component
+        });
+        /*
+         new_component.css("top", model_report_component.cssWithUnit("top"));
+         new_component.css("left", model_report_component.cssWithUnit("left"));
+         new_component.css("height", model_report_component.cssWithUnit("height"));
+         new_component.css("width", model_report_component.cssWithUnit("width"));
+         new_component.css("border-style", model_report_component.cssWithUnit("border-style"));
+         new_component.css("border-width", model_report_component.cssWithUnit("border-width"));
+         */
         new_component.css("position", "absolute");
         new_component.css("overflow", "hidden");
         new_component.css("text-overflow", "ellipsis");
