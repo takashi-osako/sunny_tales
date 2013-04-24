@@ -108,7 +108,9 @@ CanvasView = Backbone.View.extend({
         attributeName = _.keys(model.changedAttributes())[0];
         attributeValue = _.values(model.changedAttributes())[0];
         // TODO: We need to know the format of each css
-        if (attributeName != "border-style" && attributeName != "font-family")
+        non_pt_list = ['border-style', 'font-family', 'underline', 'bold', 'italic', 'text-align', 'html', 'value']
+        // TODO what if it's a text box
+        if (!_.contains(non_pt_list, attributeName))
             attributeValue = attributeValue + "pt";
         model_html.css(attributeName, attributeValue);
     },

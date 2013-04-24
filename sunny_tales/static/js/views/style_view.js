@@ -56,6 +56,7 @@ StyleView = Backbone.View.extend({
         $("#style").empty()
     },
     events : {
+        "change #text" : "setTextValue",
         "change #style_top" : "setStyle",
         "change #style_left" : "setStyle",
         "change #style_width" : "setStyle",
@@ -65,7 +66,10 @@ StyleView = Backbone.View.extend({
         "change #font_family" : "setStyle",
         "change #font_size" : "setStyle",
         "change #text_align" : "setStyle",
-        "change #text" : "setTextValue"
+        "change #underline": "setStyle",
+        "change #bold": "setStyle",
+        "change #italic": "setStyle",
+        "change #text_align": "setStyle"
     },
     setStyle : function(e) {
         var myModel = this.styleCollection.at(0).myModel;
