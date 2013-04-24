@@ -37,6 +37,10 @@ StyleView = Backbone.View.extend({
             "styleModel" : styleModel
         });
 
+        // Set the textbox value if we have a textbox
+        if ($(this.el).find("#text").length) {
+            $(this.el).find("#text").val(styleModel.myModel.get("value"));
+        }
         return this;
     },
     initialize : function(styleCollection) {
@@ -74,14 +78,14 @@ StyleView = Backbone.View.extend({
         var myModel = this.styleCollection.at(0).myModel;
         var newValue = $(e.currentTarget).val();
         myModel.set("value", $(e.currentTarget).val());
-        
-        // Do we even care what is the value of html 
+
+        // Do we even care what is the value of html
         // This is not necessary but it's good to see the value is consistent
         html = $(myModel.get("html"));
         $(html).find('#value').text(newValue);
-        modifiedHtml= $('<div>').append($(html).clone()).html();
+        modifiedHtml = $('<div>').append($(html).clone()).html();
         myModel.set("html", modifiedHtml);
-        
+
         // Sets the new text
         $('#' + myModel.cid + ' #value').text(newValue);
     }
