@@ -9,7 +9,7 @@ ReportComponent = Backbone.Model.extend({
                 _.each(list_css, function(css) {
                     var css_name = css.name;
                     var css_defaults = css.defaults;
-                    this._css_data_store[css_name] = css;
+                    this._css_data_store[css_name] = $.extend(true, {}, css);
                     //initialize css value
                     this.css(css_name, null);
                 }, this);
