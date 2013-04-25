@@ -85,14 +85,8 @@ CanvasView = Backbone.View.extend({
             "j_new_component" : j_new_component,
             "b_model_report_component" : b_model_report_component
         });
-        /*
-         new_component.css("top", model_report_component.cssWithUnit("top"));
-         new_component.css("left", model_report_component.cssWithUnit("left"));
-         new_component.css("height", model_report_component.cssWithUnit("height"));
-         new_component.css("width", model_report_component.cssWithUnit("width"));
-         new_component.css("border-style", model_report_component.cssWithUnit("border-style"));
-         new_component.css("border-width", model_report_component.cssWithUnit("border-width"));
-         */
+        // Chrome issue, we must set position, else it sets it to relative
+        j_new_component.css("position", "absolute")
         j_new_component.addClass("report-component");
         j_new_component.draggable();
         j_new_component.resizable();

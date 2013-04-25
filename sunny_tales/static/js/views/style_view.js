@@ -85,9 +85,9 @@ StyleView = Backbone.View.extend({
 
         // Do we even care what is the value of html
         // This is not necessary but it's good to see the value is consistent
-        html = $(myModel.get("html"));
-        $(html).find('#value').text(newValue);
-        modifiedHtml = $('<div>').append($(html).clone()).html();
+        j_html = $(b_myModel.get("html"));
+        $(j_html).find('#value').text(newValue);
+        modifiedHtml = $('<div>').append($(j_html).clone()).html();
         b_myModel.set("html", modifiedHtml);
 
         // Sets the new text
