@@ -52,8 +52,8 @@ CanvasView = Backbone.View.extend({
         });
     },
     events : {
-        "click .styleRender" : "updateStyleView",
-        "resize .styleRender" : "resize"
+        "click .report-component" : "updateStyleView",
+        "resize .report-component" : "resize"
     },
     updateStyleView : function(e) {
         this.styleCollection.reset();
@@ -93,10 +93,7 @@ CanvasView = Backbone.View.extend({
          new_component.css("border-style", model_report_component.cssWithUnit("border-style"));
          new_component.css("border-width", model_report_component.cssWithUnit("border-width"));
          */
-        new_component.css("position", "absolute");
-        new_component.css("overflow", "hidden");
-        new_component.css("text-overflow", "ellipsis");
-        new_component.addClass("styleRender");
+        new_component.addClass("report-component");
         new_component.draggable();
         new_component.resizable();
         new_component.appendTo($("#canvas"));

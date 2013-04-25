@@ -34,6 +34,5 @@ ToolBoxView = Backbone.View.extend({
             appendTo : "body",
             helper : "clone"
         });
-        // TODO: move css part into .css (look at toolbox.template)
     }
 });

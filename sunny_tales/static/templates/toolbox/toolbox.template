@@ -1,3 +1,3 @@
-<div id={{type}} class="ui-draggable" style="cursor: move;">
+<div id={{type}} class="ui-draggable toolbox">
     {{name}}
 </div>
