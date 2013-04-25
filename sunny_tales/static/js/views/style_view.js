@@ -73,7 +73,6 @@ StyleView = Backbone.View.extend({
     },
     setStyle : function(e) {
         var myModel = this.styleCollection.at(0).myModel;
-        var target_id = $(e.currentTarget).closest("table").data("target_id");
         var css_name = $(e.currentTarget).data('css-name');
         var value = $(e.currentTarget).val();
         myModel.set(css_name, value);
