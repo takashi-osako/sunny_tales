@@ -1,7 +1,7 @@
 StyleModel = Backbone.Model.extend({
-    initialize : function(myModel, styles) {
+    initialize : function(b_myModel, styles) {
         this.set("styles", styles);
-        this.myModel = myModel;
+        this.b_myModel = b_myModel;
     },
     styles : null,
     targetId: null,

@@ -1,52 +1,52 @@
 CanvasView = Backbone.View.extend({
     el : $("#canvas"),
-    initialize : function(model_toolMenu, model_template, styleCollection) {
-        this.model_toolMenu = model_toolMenu;
-        this.template = model_template;
-        this.styleCollection = styleCollection;
+    initialize : function(b_model_toolMenu, b_model_template, b_styleCollection) {
+        this.b_model_toolMenu = b_model_toolMenu;
+        this.b_template = b_model_template;
+        this.b_styleCollection = b_styleCollection;
 
-        this.components = this.template.get("components");
-        var _components = this.components;
-        this.components.bind("add", this.renderCanvas, this);
+        this.b_components = this.b_template.get("components");
+        var b_components = this.b_components;
+        this.b_components.bind("add", this.renderCanvas, this);
 
-        this.listenTo(this.components, 'change', this.render, this);
+        this.listenTo(this.b_components, 'change', this.render, this);
         $("#canvas").droppable({
             activeClass : "ui-state-default",
             hoverClass : "ui-state-hover",
             drop : function(event, ui) {
                 var component_id = ui.draggable.attr("id");
                 //check if dragged component is already created and saved in collection of components
-                var existing_component = _components.get(component_id);
-                if (existing_component === undefined) {
+                var j_existing_component = b_components.get(component_id);
+                if (j_existing_component === undefined) {
                     //a user is dragged from tools layout.
                     //create new component for the canvas
-                    //get tool by id(type)
-                    var tool = model_toolMenu.get("tools").get(component_id);
-                    var value = tool.get("value");
-                    var styleOfTool = tool.get("style");
-                    var commonStyle = model_toolMenu.get("common_style");
+                    //get b_tool by id(type)
+                    var b_tool = b_model_toolMenu.get("tools").get(component_id);
+                    var value = b_tool.get("value");
+                    var b_styleOfTool = b_tool.get("style");
+                    var b_commonStyle = b_model_toolMenu.get("common_style");
                     //set component position by mouse position
-                    var new_component = new ReportComponent(null, {
-                        "commonStyle" : commonStyle,
-                        "styleOfTool" : styleOfTool
+                    var b_new_component = new ReportComponent(null, {
+                        "b_commonStyle" : b_commonStyle,
+                        "b_styleOfTool" : b_styleOfTool
                     });
-                    new_component.set("type", tool.get("type"));
-                    new_component.set("value", value);
-                    new_component.set("html", tool.get("html"));
+                    b_new_component.set("type", b_tool.get("type"));
+                    b_new_component.set("value", value);
+                    b_new_component.set("html", b_tool.get("html"));
 
-                    new_component.css("top", 0.75 * (ui.offset.top - this.offsetTop));
-                    new_component.css("left", 0.75 * (ui.offset.left - this.offsetLeft));
+                    b_new_component.css("top", 0.75 * (ui.offset.top - this.offsetTop));
+                    b_new_component.css("left", 0.75 * (ui.offset.left - this.offsetLeft));
                     //add to component collections.
                     //also renderCanvas will be called.
-                    _components.add(new_component);
+                    b_components.add(b_new_component);
                 } else {
                     // this component has already created.
                     //make it draggable again
                     $(component_id).draggable();
 
                     // Update top and left
-                    existing_component.css("left", (0.75 * parseInt($('#' + component_id).css("left"), 10)));
-                    existing_component.css("top", (0.75 * parseInt($('#' + component_id).css("top"), 10)));
+                    j_existing_component.css("left", (0.75 * parseInt($('#' + component_id).css("left"), 10)));
+                    j_existing_component.css("top", (0.75 * parseInt($('#' + component_id).css("top"), 10)));
                 }
             }
         });
@@ -56,34 +56,34 @@ CanvasView = Backbone.View.extend({
         "resize .report-component" : "resize"
     },
     updateStyleView : function(e) {
-        this.styleCollection.reset();
-        var myModel = this.components.get(e.currentTarget.id);
+        this.b_styleCollection.reset();
+        var b_myModel = this.b_components.get(e.currentTarget.id);
         // For the case of deletes
-        if (myModel) {
+        if (b_myModel) {
             // Get the style of the tool
-            var commonStyle = this.model_toolMenu.get("common_style");
-            var commonStyleModel = new StyleModel(myModel, commonStyle);
-            commonStyleModel.set("targetId", $(e.currentTarget).attr("id"));
-            commonStyleModel.set("elementId", "commonStyle");
-            this.styleCollection.add(commonStyleModel);
+            var b_commonStyle = this.b_model_toolMenu.get("common_style");
+            var b_commonStyleModel = new StyleModel(b_myModel, b_commonStyle);
+            b_commonStyleModel.set("targetId", $(e.currentTarget).attr("id"));
+            b_commonStyleModel.set("elementId", "commonStyle");
+            this.b_styleCollection.add(b_commonStyleModel);
 
-            var styleOfTool = this.model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
-            var styleModel = new StyleModel(myModel, styleOfTool);
-            styleModel.set("targetId", $(e.currentTarget).attr("id"));
-            styleModel.set("elementId", "styleOfTool");
-            this.styleCollection.add(styleModel);
+            var b_styleOfTool = this.b_model_toolMenu.get("tools").get($(e.currentTarget).data("id")).get("style");
+            var b_styleModel = new StyleModel(b_myModel, b_styleOfTool);
+            b_styleModel.set("targetId", $(e.currentTarget).attr("id"));
+            b_styleModel.set("elementId", "styleOfTool");
+            this.b_styleCollection.add(b_styleModel);
         }
     },
-    renderCanvas : function(model_report_component) {
+    renderCanvas : function(b_model_report_component) {
         //rerender canvas when new tool is dragged from toolbox layout
-        new_component = $(model_report_component.get("html"));
-        new_component.attr("id", model_report_component.cid);
-        new_component.data("id", model_report_component.get("type"));
-        _.map(model_report_component.css(), function(val, key) {
-            this.new_component.css(key, this.model_report_component.cssWithUnit(key));
+        j_new_component = $(b_model_report_component.get("html"));
+        j_new_component.attr("id", b_model_report_component.cid);
+        j_new_component.data("id", b_model_report_component.get("type"));
+        _.map(b_model_report_component.css(), function(val, key) {
+            this.j_new_component.css(key, this.b_model_report_component.cssWithUnit(key));
         }, {
-            "new_component" : new_component,
-            "model_report_component" : model_report_component
+            "j_new_component" : j_new_component,
+            "b_model_report_component" : b_model_report_component
         });
         /*
          new_component.css("top", model_report_component.cssWithUnit("top"));
@@ -93,27 +93,27 @@ CanvasView = Backbone.View.extend({
          new_component.css("border-style", model_report_component.cssWithUnit("border-style"));
          new_component.css("border-width", model_report_component.cssWithUnit("border-width"));
          */
-        new_component.addClass("report-component");
-        new_component.draggable();
-        new_component.resizable();
-        new_component.appendTo($("#canvas"));
+        j_new_component.addClass("report-component");
+        j_new_component.draggable();
+        j_new_component.resizable();
+        j_new_component.appendTo($("#canvas"));
     },
-    render : function(model, options) {
-        model_html = $('#' + model.cid);
+    render : function(b_model, options) {
+        var j_model_html = $('#' + b_model.cid);
         // We know that one thing changed, so get the first element from the array
-        attributeName = _.keys(model.changedAttributes())[0];
-        attributeValue = _.values(model.changedAttributes())[0];
+        attributeName = _.keys(b_model.changedAttributes())[0];
+        attributeValue = _.values(b_model.changedAttributes())[0];
         // TODO: We need to know the format of each css
         non_pt_list = ['border-style', 'font-family', 'underline', 'bold', 'italic', 'text-align', 'html', 'value']
         // TODO what if it's a text box
         if (!_.contains(non_pt_list, attributeName))
             attributeValue = attributeValue + "pt";
-        model_html.css(attributeName, attributeValue);
+        j_model_html.css(attributeName, attributeValue);
     },
     close : function(event) {
         // Currently not used
         // Delete the item from components
-        this.template.get("components").remove(event.target.parentNode.id)
+        this.b_template.get("components").remove(event.target.parentNode.id)
         $("#" + event.target.parentNode.id + ".alert").alert('close');
         // TODO: Is there more cleanup?
     },
@@ -121,8 +121,8 @@ CanvasView = Backbone.View.extend({
         // A report component was resized
         var width = 0.75 * parseInt($(event.currentTarget).css("width"), 10);
         var height = 0.75 * parseInt($(event.currentTarget).css("height"), 10);
-        var myModel = this.components.get(event.currentTarget.id);
-        myModel.css("width", width);
-        myModel.css("height", height);
+        var b_myModel = this.b_components.get(event.currentTarget.id);
+        b_myModel.css("width", width);
+        b_myModel.css("height", height);
     }
 });

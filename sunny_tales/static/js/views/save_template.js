@@ -1,13 +1,13 @@
 SaveTemplateView = Backbone.View.extend({
     el : $('#menu'),
-    initialize : function(model_template) {
-        this.template = model_template
+    initialize : function(b_model_template) {
+        this.b_template = b_model_template
     },
     events : {
         "click #save-template" : "saveTemplate",
     },
     saveTemplate : function() {
         //call RESTFul to store jsonTemplate
-        this.template.save();
+        this.b_template.save();
     }
 });

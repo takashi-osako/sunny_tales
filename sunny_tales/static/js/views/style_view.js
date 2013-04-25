@@ -4,22 +4,22 @@ StyleView = Backbone.View.extend({
     select_template : Handlebars.templates['style.select.template'],
     checkbox_template : Handlebars.templates['style.checkbox.template'],
     text_template : Handlebars.templates['style.text.template'],
-    render : function(styleModel) {
+    render : function(b_styleModel) {
         // Template
-        var template_html = this.template(styleModel.toJSON());
-        var style = $("#style");
-        style.append(template_html);
-        var styles = styleModel.get("styles");
-        _.each(styles, function(style) {
+        var template_html = this.template(b_styleModel.toJSON());
+        var j_style = $("#style");
+        j_style.append(template_html);
+        var b_styles = b_styleModel.get("styles");
+        _.each(b_styles, function(b_style) {
 
-            var targetCSS = style.css;
+            var targetCSS = b_style.css;
             if (targetCSS !== undefined && targetCSS.length > 0) {
                 _.each(targetCSS, function(css) {
                     var css_name = css.name;
                     var defaults = css.defaults;
-                    var value = this.styleModel.myModel.css(css_name);
-                    var elementId = this.styleModel.get("elementId");
-                    var updatingId = this.style.id;
+                    var value = this.b_styleModel.b_myModel.css(css_name);
+                    var elementId = this.b_styleModel.get("elementId");
+                    var updatingId = this.b_style.id;
                     if (value) {
                         $("#style #" + elementId + " #" + updatingId).val(value);
                         //firebox bug? I could not use method data()
@@ -29,24 +29,24 @@ StyleView = Backbone.View.extend({
                         $("#style #" + elementId + " #" + updatingId).attr("data-css-name", css_name);
                     }
                 }, {
-                    "styleModel" : this.styleModel,
-                    "style" : style
+                    "b_styleModel" : this.b_styleModel,
+                    "b_style" : b_style
                 });
             }
         }, {
-            "styleModel" : styleModel
+            "b_styleModel" : b_styleModel
         });
 
         // Set the textbox value if we have a textbox
         if ($(this.el).find("#text").length) {
-            $(this.el).find("#text").val(styleModel.myModel.get("value"));
+            $(this.el).find("#text").val(b_styleModel.b_myModel.get("value"));
         }
         return this;
     },
-    initialize : function(styleCollection) {
-        this.styleCollection = styleCollection;
-        this.styleCollection.bind("add", this.render, this);
-        this.styleCollection.bind("reset", this.clear, this);
+    initialize : function(b_styleCollection) {
+        this.b_styleCollection = b_styleCollection;
+        this.b_styleCollection.bind("add", this.render, this);
+        this.b_styleCollection.bind("reset", this.clear, this);
         // Register all the supported styles
         Handlebars.registerPartial('style.select.template', this.select_template);
         Handlebars.registerPartial('style.checkbox.template', this.checkbox_template);
@@ -66,30 +66,31 @@ StyleView = Backbone.View.extend({
         "change #font_family" : "setStyle",
         "change #font_size" : "setStyle",
         "change #text_align" : "setStyle",
-        "change #underline": "setStyle",
-        "change #bold": "setStyle",
-        "change #italic": "setStyle",
-        "change #text_align": "setStyle"
+        "change #underline" : "setStyle",
+        "change #bold" : "setStyle",
+        "change #italic" : "setStyle",
+        "change #text_align" : "setStyle"
     },
     setStyle : function(e) {
-        var myModel = this.styleCollection.at(0).myModel;
+        var b_myModel = this.b_styleCollection.at(0).b_myModel;
+        var target_id = $(e.currentTarget).closest("table").data("target_id");
         var css_name = $(e.currentTarget).data('css-name');
         var value = $(e.currentTarget).val();
-        myModel.set(css_name, value);
+        b_myModel.set(css_name, value);
     },
     setTextValue : function(e) {
-        var myModel = this.styleCollection.at(0).myModel;
+        var b_myModel = this.b_styleCollection.at(0).b_myModel;
         var newValue = $(e.currentTarget).val();
-        myModel.set("value", $(e.currentTarget).val());
+        b_myModel.set("value", $(e.currentTarget).val());
 
         // Do we even care what is the value of html
         // This is not necessary but it's good to see the value is consistent
         html = $(myModel.get("html"));
         $(html).find('#value').text(newValue);
         modifiedHtml = $('<div>').append($(html).clone()).html();
-        myModel.set("html", modifiedHtml);
+        b_myModel.set("html", modifiedHtml);
 
         // Sets the new text
-        $('#' + myModel.cid + ' #value').text(newValue);
+        $('#' + b_myModel.cid + ' #value').text(newValue);
     }
 });
