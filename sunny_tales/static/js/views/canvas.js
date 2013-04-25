@@ -53,8 +53,7 @@ CanvasView = Backbone.View.extend({
     },
     events : {
         "click .styleRender" : "updateStyleView",
-        "resize .styleRender" : "resize",
-        "click .close" : "close"
+        "resize .styleRender" : "resize"
     },
     updateStyleView : function(e) {
         this.styleCollection.reset();
@@ -115,6 +114,7 @@ CanvasView = Backbone.View.extend({
         model_html.css(attributeName, attributeValue);
     },
     close : function(event) {
+        // Currently not used
         // Delete the item from components
         this.template.get("components").remove(event.target.parentNode.id)
         $("#" + event.target.parentNode.id + ".alert").alert('close');
