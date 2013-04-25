@@ -37,4 +37,4 @@ nosetests.xml
 # static resources
 node_modules/
 templates_js/
-
+sunny_tales/static/css/style.css

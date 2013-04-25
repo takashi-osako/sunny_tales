@@ -17,7 +17,7 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.include('sunny_tales.api.v0.template', route_prefix='/api/v0')
     config.scan()
-    #precompile()
+    precompile()
     return config.make_wsgi_app()
 
 
