@@ -116,7 +116,7 @@ CanvasView = Backbone.View.extend({
         var width = 0.75 * parseInt($(event.currentTarget).css("width"), 10);
         var height = 0.75 * parseInt($(event.currentTarget).css("height"), 10);
         var b_myModel = this.b_components.get(event.currentTarget.id);
-        b_myModel.css("width", width);
-        b_myModel.css("height", height);
+        b_myModel.css_set("width", width);
+        b_myModel.css_set("height", height);
     }
 });
