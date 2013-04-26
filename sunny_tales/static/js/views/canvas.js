@@ -34,8 +34,8 @@ CanvasView = Backbone.View.extend({
                     b_new_component.set("value", value);
                     b_new_component.set("html", b_tool.get("html"));
 
-                    b_new_component.css("top", 0.75 * (ui.offset.top - this.offsetTop));
-                    b_new_component.css("left", 0.75 * (ui.offset.left - this.offsetLeft));
+                    b_new_component.css_set("top", 0.75 * (ui.offset.top - this.offsetTop));
+                    b_new_component.css_set("left", 0.75 * (ui.offset.left - this.offsetLeft));
                     //add to component collections.
                     //also renderCanvas will be called.
                     b_components.add(b_new_component);
@@ -45,8 +45,8 @@ CanvasView = Backbone.View.extend({
                     $(component_id).draggable();
 
                     // Update top and left
-                    j_existing_component.css("left", (0.75 * parseInt($('#' + component_id).css("left"), 10)));
-                    j_existing_component.css("top", (0.75 * parseInt($('#' + component_id).css("top"), 10)));
+                    j_existing_component.css_set("left", (0.75 * parseInt($('#' + component_id).css("left"), 10)));
+                    j_existing_component.css_set("top", (0.75 * parseInt($('#' + component_id).css("top"), 10)));
                 }
             }
         });
@@ -79,8 +79,8 @@ CanvasView = Backbone.View.extend({
         j_new_component = $(b_model_report_component.get("html"));
         j_new_component.attr("id", b_model_report_component.cid);
         j_new_component.data("id", b_model_report_component.get("type"));
-        _.map(b_model_report_component.css(), function(val, key) {
-            this.j_new_component.css(key, this.b_model_report_component.cssWithUnit(key));
+        _.map(b_model_report_component.css_all(), function(val, key) {
+            this.j_new_component.css(key, this.b_model_report_component.css_unit(key));
         }, {
             "j_new_component" : j_new_component,
             "b_model_report_component" : b_model_report_component

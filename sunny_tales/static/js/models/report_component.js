@@ -3,6 +3,11 @@ ReportComponent = Backbone.Model.extend({
         var commonStyle = styles.commonStyle;
         var styleOfTool = styles.styleOfTool;
         this._css_data_store = {};
+
+        this.bind("change", function(event) {
+            console.debug(event.changed);
+        });
+
         _.map(styles, function(val, key) {
             _.each(val, function(style) {
                 var list_css = style.css;
@@ -11,58 +16,49 @@ ReportComponent = Backbone.Model.extend({
                     var css_defaults = css.defaults;
                     this._css_data_store[css_name] = $.extend(true, {}, css);
                     //initialize css value
-                    this.css(css_name, null);
+                    this.css_set(css_name);
                 }, this);
             }, this);
         }, this);
-
-        this.bind("change", function(event) {
-            console.debug(event.changed);
-        });
     },
-    css : function(name, value) {
-        // if name is undefined,
-        // return list of css
-        if (name === undefined) {
-            return this._css_data_store;
-        }
+    css_set : function(name, value) {
+        // if value is null or undefined,
+        // then set defaults
         var mycss = this._css_data_store[name];
         if (mycss) {
-            // if value is undefined, return css value
-            if (value === undefined) {
-                return mycss["value"];
-            }
-
-            //if value is null, set default value
-            if (mycss) {
-                var format = mycss.format;
-                if (value === null) {
-                    value = mycss.defaults;
-                    if (value === undefined) {
-                        value = "";
-                    }
-                }
-                if (format) {
-                    mycss["value"] = sprintf(format, value);
-                } else {
-                    mycss["value"] = value;
+            if (value === null || value === undefined) {
+                value = mycss.defaults;
+                if (value === undefined) {
+                    value = ""
                 }
             }
+            var format = mycss.format;
+            if (format) {
+                mycss["value"] = sprintf(format, value);
+            } else {
+                mycss["value"] = value;
+            }
+        }
+    },
+    css_get : function(name) {
+        var mycss = this._css_data_store[name];
+        if (mycss) {
+            return mycss["value"];
         }
         return;
     },
-    cssWithUnit : function(name) {
-        var mycss = this._css_data_store[name];
-        if (mycss) {
-            var value = this.css(name);
-            if (value) {
-                var unit = mycss.unit;
-                if (unit) {
-                    value = value + unit;
-                }
-                return value;
+    css_all : function() {
+        return $.extend(true, {}, this._css_data_store)
+    },
+    css_unit : function(name) {
+        var value = this.css_get(name);
+        if (value !== undefined) {
+            var mycss = this._css_data_store[name];
+            var unit = mycss.unit;
+            if (unit) {
+                value = value + unit;
             }
         }
-        return;
+        return value;
     }
 });
