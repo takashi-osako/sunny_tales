@@ -97,11 +97,6 @@ CanvasView = Backbone.View.extend({
         // We know that one thing changed, so get the first element from the array
         attributeName = _.keys(b_model.changedAttributes())[0];
         attributeValue = _.values(b_model.changedAttributes())[0];
-        // TODO: We need to know the format of each css
-        non_pt_list = ['border-style', 'font-family', 'underline', 'bold', 'italic', 'text-align', 'html', 'value']
-        // TODO what if it's a text box
-        if (!_.contains(non_pt_list, attributeName))
-            attributeValue = attributeValue + "pt";
         j_model_html.css(attributeName, attributeValue);
     },
     close : function(event) {

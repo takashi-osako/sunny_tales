@@ -34,10 +34,17 @@ ReportComponent = Backbone.Model.extend({
             }
             var format = mycss.format;
             if (format) {
-                mycss["value"] = sprintf(format, value);
-            } else {
-                mycss["value"] = value;
+                if (mycss.data_type == "int") 
+                    value = parseInt(value)
+                value = sprintf(format, value);
             }
+            var unit = mycss.unit;
+            var with_unit = value;
+            if (unit) {
+                with_unit = with_unit + unit;
+            }
+            mycss["value"] = value
+            this.set(name, with_unit)
         }
     },
     css_get : function(name) {
