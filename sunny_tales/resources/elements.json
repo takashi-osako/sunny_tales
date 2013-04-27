@@ -350,7 +350,7 @@
 			"css": [
 				{
 					"name": "border-width",
-					"format": "%dpt",
+					"format": "%d",
 					"defaults": 1,
 					"data_type": "number",
 					"unit": "pt"
