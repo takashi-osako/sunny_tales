@@ -6,8 +6,11 @@ CanvasView = Backbone.View.extend({
         this.b_styleCollection = b_styleCollection;
 
         this.b_components = this.b_template.get("components");
-        var b_components = this.b_components;
         this.b_components.bind("add", this.renderCanvas, this);
+        
+        // Create references to be called inside canvas.droppable
+        var b_components = this.b_components;
+        var f_cssConvertToPoint = this.cssConvertToPoint
 
         this.listenTo(this.b_components, 'change', this.render, this);
         $("#canvas").droppable({
@@ -46,8 +49,8 @@ CanvasView = Backbone.View.extend({
                     $(component_id).draggable();
 
                     // Update top and left
-                    j_existing_component.css_set("left", (0.75 * parseInt($('#' + component_id).css("left"), 10)));
-                    j_existing_component.css_set("top", (0.75 * parseInt($('#' + component_id).css("top"), 10)));
+                    j_existing_component.css_set("left", f_cssConvertToPoint($('#' + component_id), "left"));
+                    j_existing_component.css_set("top", f_cssConvertToPoint($('#' + component_id), "top"));
                 }
             }
         });
@@ -111,10 +114,18 @@ CanvasView = Backbone.View.extend({
     },
     resize : function(event) {
         // A report component was resized
-        var width = 0.75 * parseInt($(event.currentTarget).css("width"), 10);
-        var height = 0.75 * parseInt($(event.currentTarget).css("height"), 10);
+        var width = this.cssConvertToPoint($(event.currentTarget), "width");
+        var height = this.cssConvertToPoint($(event.currentTarget), "height");
         var b_myModel = this.b_components.get(event.currentTarget.id);
         b_myModel.css_set("width", width);
         b_myModel.css_set("height", height);
+    },
+    cssConvertToPoint : function(j_object, key) {
+        values = j_object.cssUnit(key)
+        if (values[1] !== undefined && values[1] === 'px') {
+            values[0] = values[0] * 0.75
+        }
+        return values[0]
     }
 });
+
