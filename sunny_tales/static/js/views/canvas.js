@@ -95,8 +95,6 @@ CanvasView = Backbone.View.extend({
         j_new_component.draggable();
         j_new_component.resizable();
         j_new_component.appendTo(this.$el);
-        //add event listenr
-        this.listenTo(b_model_report_component, "change", this.render, this)
     },
     render : function(b_model, options) {
         var j_model_html = $('#' + b_model.cid);
