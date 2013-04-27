@@ -46,7 +46,8 @@
 					"css": [
 						{
 							"name": "font-style",
-							"value": "italic",
+							"true": "italic",
+							"false": "normal",
 							"defaults": false,
 							"data_type": "boolean"
 						}
@@ -59,7 +60,8 @@
 					"css": [
 						{
 							"name": "font-weight",
-							"value": "bold",
+							"true": "bold",
+							"false": "normal",
 							"defaults": false,
 							"data_type": "boolean"
 						}
@@ -72,7 +74,8 @@
 					"css": [
 						{
 							"name": "text-decoration",
-							"value": "underline",
+							"true": "underline",
+							"false": "none",
 							"defaults": false,
 							"data_type": "boolean"
 						}
@@ -144,9 +147,10 @@
 					"css": [
 						{
 							"name": "font-style",
-							"value": "italic",
+							"true": "italic",
+							"false": "normal",
 							"defaults": false,
-							"data_type": "number"
+							"data_type": "boolean"
 						}
 					]
 				}, {
@@ -157,9 +161,10 @@
 					"css": [
 						{
 							"name": "font-weight",
-							"value": "bold",
+							"true": "bold",
+							"false": "normal",
 							"defaults": false,
-							"data_type": "number"
+							"data_type": "boolean"
 						}
 					]
 				}, {
@@ -170,7 +175,8 @@
 					"css": [
 						{
 							"name": "text-decoration",
-							"value": "underline",
+							"true": "underline",
+							"false": "none",
 							"defaults": false,
 							"data_type": "boolean"
 						}

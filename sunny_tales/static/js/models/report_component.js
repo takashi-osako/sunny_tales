@@ -33,21 +33,26 @@ ReportComponent = Backbone.Model.extend({
                     value = ""
                 }
             }
-            var format = mycss.format;
-            if (format) {
-                var data_type = mycss.data_type;
-                if (data_type !== typeof (value)) {
-                    if (data_type === "number") {
-                        value = Number(value);
-                    } else if (data_type === "string") {
-                        value = String(value);
-                    } else if (data_type === "boolean") {
-                        value = Boolean(value);
-                    }
-                }
-                mycss["value"] = sprintf(format, value);
+            if ( typeof (value) === "boolean") {
+                value = String(value);
+                mycss["value"] = mycss[value];
             } else {
-                mycss["value"] = value;
+                var format = mycss.format;
+                if (format) {
+                    var data_type = mycss.data_type;
+                    if (data_type !== typeof (value)) {
+                        if (data_type === "number") {
+                            value = Number(value);
+                        } else if (data_type === "string") {
+                            value = String(value);
+                        } else if (data_type === "boolean") {
+                            value = Boolean(value);
+                        }
+                    }
+                    mycss["value"] = sprintf(format, value);
+                } else {
+                    mycss["value"] = value;
+                }
             }
             this.set(name, mycss);
         }

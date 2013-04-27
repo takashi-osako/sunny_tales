@@ -69,13 +69,18 @@ StyleView = Backbone.View.extend({
         "change #underline" : "setStyle",
         "change #bold" : "setStyle",
         "change #italic" : "setStyle",
-        "change #text_align" : "setStyle"
+        "change #text-align" : "setStyle"
     },
     setStyle : function(e) {
         var b_myModel = this.b_styleCollection.at(0).b_myModel;
         var target_id = $(e.currentTarget).closest("table").data("target_id");
         var css_name = $(e.currentTarget).data('css-name');
-        var value = $(e.currentTarget).val();
+        var value;
+        if ($(e.currentTarget).is(":checkbox")) {
+            value = $(e.currentTarget).prop("checked");
+        } else {
+            value = $(e.currentTarget).val();
+        }
         b_myModel.css_set(css_name, value);
     },
     setTextValue : function(e) {
