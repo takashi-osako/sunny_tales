@@ -203,7 +203,6 @@
 					"input_type": "select",
 					"editable": false,
 					"selection": ["solid", "dotted", "dashed"],
-
 					"css": [
 						{
 							"name": "border-bottom-style",
@@ -217,7 +216,6 @@
 					"id": "height",
 					"input_type": "text",
 					"editable": true,
-
 					"css": [
 						{
 							"name": "border-bottom-width",
