@@ -74,7 +74,6 @@ StyleView = Backbone.View.extend({
     },
     setStyle : function(e) {
         var b_myModel = this.b_styleCollection.at(0).b_myModel;
-        var target_id = $(e.currentTarget).closest("table").data("target_id");
         var css_name = $(e.currentTarget).data('css-name');
         var value;
         if ($(e.currentTarget).is(":checkbox")) {
