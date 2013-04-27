@@ -36,6 +36,7 @@ CanvasView = Backbone.View.extend({
 
                     b_new_component.css_set("top", 0.75 * (ui.offset.top - this.offsetTop));
                     b_new_component.css_set("left", 0.75 * (ui.offset.left - this.offsetLeft));
+
                     //add to component collections.
                     //also renderCanvas will be called.
                     b_components.add(b_new_component);
@@ -76,11 +77,11 @@ CanvasView = Backbone.View.extend({
     },
     renderCanvas : function(b_model_report_component) {
         //rerender canvas when new tool is dragged from toolbox layout
-        j_new_component = $(b_model_report_component.get("html"));
+        var j_new_component = $(b_model_report_component.get("html"));
         j_new_component.attr("id", b_model_report_component.cid);
         j_new_component.data("id", b_model_report_component.get("type"));
-        _.map(b_model_report_component.css_all(), function(val, key) {
-            this.j_new_component.css(key, this.b_model_report_component.css_unit(key));
+        _.each(b_model_report_component.css_all(), function(css_name) {
+            this.j_new_component.css(css_name, this.b_model_report_component.css_unit(css_name));
         }, {
             "j_new_component" : j_new_component,
             "b_model_report_component" : b_model_report_component
@@ -91,17 +92,14 @@ CanvasView = Backbone.View.extend({
         j_new_component.draggable();
         j_new_component.resizable();
         j_new_component.appendTo($("#canvas"));
+        //add event listenr
+        this.listenTo(b_model_report_component, "change", this.render, this)
     },
     render : function(b_model, options) {
         var j_model_html = $('#' + b_model.cid);
         // We know that one thing changed, so get the first element from the array
         attributeName = _.keys(b_model.changedAttributes())[0];
-        attributeValue = _.values(b_model.changedAttributes())[0];
-        // TODO: We need to know the format of each css
-        non_pt_list = ['border-style', 'font-family', 'underline', 'bold', 'italic', 'text-align', 'html', 'value']
-        // TODO what if it's a text box
-        if (!_.contains(non_pt_list, attributeName))
-            attributeValue = attributeValue + "pt";
+        attributeValue = b_model.css_unit(attributeName);
         j_model_html.css(attributeName, attributeValue);
     },
     close : function(event) {

@@ -33,7 +33,7 @@
 							"name": "font-size",
 							"format": "%d",
 							"defaults": 12,
-							"data_type": "int",
+							"data_type": "number",
 							"unit": "pt"
 						}
 					],
@@ -48,7 +48,7 @@
 							"name": "font-style",
 							"value": "italic",
 							"defaults": false,
-							"data_type": "bool"
+							"data_type": "boolean"
 						}
 					]
 				}, {
@@ -61,7 +61,7 @@
 							"name": "font-weight",
 							"value": "bold",
 							"defaults": false,
-							"data_type": "bool"
+							"data_type": "boolean"
 						}
 					]
 				}, {
@@ -74,7 +74,7 @@
 							"name": "text-decoration",
 							"value": "underline",
 							"defaults": false,
-							"data_type": "bool"
+							"data_type": "boolean"
 						}
 					]
 				}, {
@@ -132,7 +132,7 @@
 							"name": "font-size",
 							"format": "%d",
 							"defaults": 12,
-							"data_type": "int",
+							"data_type": "number",
 							"unit": "pt"
 						}
 					]
@@ -146,7 +146,7 @@
 							"name": "font-style",
 							"value": "italic",
 							"defaults": false,
-							"data_type": "int"
+							"data_type": "number"
 						}
 					]
 				}, {
@@ -159,7 +159,7 @@
 							"name": "font-weight",
 							"value": "bold",
 							"defaults": false,
-							"data_type": "int"
+							"data_type": "number"
 						}
 					]
 				}, {
@@ -172,7 +172,7 @@
 							"name": "text-decoration",
 							"value": "underline",
 							"defaults": false,
-							"data_type": "bool"
+							"data_type": "boolean"
 						}
 					]
 				}, {
@@ -186,7 +186,7 @@
 							"name": "text-align",
 							"format": "%s",
 							"defaults": "left",
-							"data_type": "int"
+							"data_type": "number"
 						}
 					]
 				}
@@ -223,7 +223,7 @@
 							"name": "border-bottom-width",
 							"format": "%d",
 							"defaults": 1,
-							"data_type": "int",
+							"data_type": "number",
 							"unit": "pt"
 						}
 					]
@@ -281,7 +281,7 @@
 					"name": "left",
 					"format": "%d",
 					"defaults": 0,
-					"data_type": "int",
+					"data_type": "number",
 					"unit": "pt"
 				}
 			]
@@ -296,7 +296,7 @@
 					"name": "top",
 					"format": "%d",
 					"defaults": 0,
-					"data_type": "int",
+					"data_type": "number",
 					"unit": "pt"
 				}
 			]
@@ -311,7 +311,7 @@
 					"name": "width",
 					"format": "%d",
 					"defaults": 150,
-					"data_type": "int",
+					"data_type": "number",
 					"unit": "pt"
 				}
 			]
@@ -325,7 +325,7 @@
 					"name": "height",
 					"format": "%d",
 					"defaults": 100,
-					"data_type": "int",
+					"data_type": "number",
 					"unit": "pt"
 				}
 			]
@@ -354,7 +354,7 @@
 					"name": "border-width",
 					"format": "%dpt",
 					"defaults": 1,
-					"data_type": "int",
+					"data_type": "number",
 					"unit": "pt"
 				}
 			]
