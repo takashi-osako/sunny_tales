@@ -283,7 +283,7 @@
 			"css": [
 				{
 					"name": "left",
-					"format": "%d",
+					"format": "%f",
 					"defaults": 0,
 					"data_type": "number",
 					"unit": "pt"
@@ -298,7 +298,7 @@
 			"css": [
 				{
 					"name": "top",
-					"format": "%d",
+					"format": "%f",
 					"defaults": 0,
 					"data_type": "number",
 					"unit": "pt"
@@ -313,7 +313,7 @@
 			"css": [
 				{
 					"name": "width",
-					"format": "%d",
+					"format": "%f",
 					"defaults": 150,
 					"data_type": "number",
 					"unit": "pt"
@@ -327,7 +327,7 @@
 			"css": [
 				{
 					"name": "height",
-					"format": "%d",
+					"format": "%f",
 					"defaults": 100,
 					"data_type": "number",
 					"unit": "pt"
