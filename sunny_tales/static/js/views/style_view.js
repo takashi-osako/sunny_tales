@@ -17,15 +17,16 @@ StyleView = Backbone.View.extend({
                 _.each(targetCSS, function(css) {
                     var css_name = css.name;
                     var defaults = css.defaults;
-                    var value = this.b_styleModel.b_myModel.css_get(css_name);
+                    var value = this.b_styleModel.b_myModel.value(css_name);
                     var elementId = this.b_styleModel.get("elementId");
                     var updatingId = this.b_style.id;
-                    if (value) {
-                        $("#style #" + elementId + " #" + updatingId).val(value);
+                    if (value !== undefined && value !== null) {
+                        if (css.data_type === "boolean") {
+                            $("#style #" + elementId + " #" + updatingId).prop("checked", value);
+                        } else {
+                            $("#style #" + elementId + " #" + updatingId).val(value);
+                        }
                         //firebox bug? I could not use method data()
-                        $("#style #" + elementId + " #" + updatingId).attr("data-css-name", css_name);
-                    } else if (defaults) {
-                        $("#style #" + elementId + " #" + updatingId).val(defaults);
                         $("#style #" + elementId + " #" + updatingId).attr("data-css-name", css_name);
                     }
                 }, {

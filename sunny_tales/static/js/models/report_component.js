@@ -34,8 +34,7 @@ ReportComponent = Backbone.Model.extend({
                 }
             }
             if ( typeof (value) === "boolean") {
-                value = String(value);
-                mycss["value"] = mycss[value];
+                mycss["value"] = value;
             } else {
                 var format = mycss.format;
                 if (format) {
@@ -58,11 +57,22 @@ ReportComponent = Backbone.Model.extend({
         }
     },
     css_get : function(name) {
+        //return value for css
+        var value = this.value(name);
+        if ("boolean" === typeof (value)) {
+            var mycss = this.get(name);
+            value = mycss[String(value)];
+        }
+        return value;
+    },
+    value : function(name) {
+        //return just return value.
+        var value;
         var mycss = this.get(name);
         if (mycss) {
-            return mycss["value"];
+            value = mycss["value"];
         }
-        return;
+        return value;
     },
     css_all : function() {
         var attributes = [];
