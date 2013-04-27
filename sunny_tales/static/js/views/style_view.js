@@ -7,7 +7,7 @@ StyleView = Backbone.View.extend({
     render : function(b_styleModel) {
         // Template
         var template_html = this.template(b_styleModel.toJSON());
-        var j_style = $("#style");
+        var j_style = this.$el;
         j_style.append(template_html);
         var b_styles = b_styleModel.get("styles");
         _.each(b_styles, function(b_style) {
@@ -39,8 +39,8 @@ StyleView = Backbone.View.extend({
         });
 
         // Set the textbox value if we have a textbox
-        if ($(this.el).find("#text").length) {
-            $(this.el).find("#text").val(b_styleModel.b_myModel.get("value"));
+        if (this.$el.find("#text").length) {
+            this.$el.find("#text").val(b_styleModel.b_myModel.get("value"));
         }
         return this;
     },
@@ -54,7 +54,7 @@ StyleView = Backbone.View.extend({
         Handlebars.registerPartial('style.text.template', this.text_template);
     },
     clear : function() {
-        $("#style").empty()
+        this.$el.empty()
     },
     events : {
         "change #text" : "setTextValue",

@@ -13,7 +13,7 @@ CanvasView = Backbone.View.extend({
         var f_cssConvertToPoint = this.cssConvertToPoint
 
         this.listenTo(this.b_components, 'change', this.render, this);
-        $("#canvas").droppable({
+        this.$el.droppable({
             activeClass : "ui-state-default",
             hoverClass : "ui-state-hover",
             drop : function(event, ui) {
@@ -94,7 +94,7 @@ CanvasView = Backbone.View.extend({
         j_new_component.addClass("report-component");
         j_new_component.draggable();
         j_new_component.resizable();
-        j_new_component.appendTo($("#canvas"));
+        j_new_component.appendTo(this.$el);
         //add event listenr
         this.listenTo(b_model_report_component, "change", this.render, this)
     },
