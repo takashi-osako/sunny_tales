@@ -14,7 +14,7 @@ ReportComponent = Backbone.Model.extend({
                     var css_name = css.name;
                     var css_defaults = css.defaults;
                     var css_data_store = $.extend(true, {}, css);
-                    css_data_store["css_attribute"] = true;
+                    css_data_store["attribute"] = "css";
                     this.set(css_name, css_data_store);
                     //initialize css value
                     this.css_set(css_name);
@@ -26,7 +26,7 @@ ReportComponent = Backbone.Model.extend({
         // if value is null or undefined,
         // then set defaults
         var mycss = $.extend(true, {}, this.get(name));
-        if (mycss && mycss.css_attribute) {
+        if (mycss && mycss.attribute === "css") {
             if (value === null || value === undefined) {
                 value = mycss.defaults;
                 if (value === undefined) {
@@ -77,7 +77,7 @@ ReportComponent = Backbone.Model.extend({
     css_all : function() {
         var attributes = [];
         _.map(this.attributes, function(value, key) {
-            if (value.css_attribute) {
+            if (value.attribute === "css") {
                 this.push(key);
             }
         }, attributes)
