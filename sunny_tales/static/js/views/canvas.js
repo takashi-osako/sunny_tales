@@ -12,7 +12,7 @@ CanvasView = Backbone.View.extend({
         var b_components = this.b_components;
         var f_cssConvertToPoint = this.cssConvertToPoint
 
-        this.listenTo(this.b_components, 'change', this.render, this);
+        this.listenTo(this.b_components, 'change', this.renderCssStyle, this);
         this.$el.droppable({
             activeClass : "ui-state-default",
             hoverClass : "ui-state-hover",
@@ -96,13 +96,12 @@ CanvasView = Backbone.View.extend({
         j_new_component.resizable();
         j_new_component.appendTo(this.$el);
     },
-    render : function(b_model, options) {
+    renderCssStyle : function(b_model, options) {
         var j_model_html = $('#' + b_model.cid);
         // We know that one thing changed, so get the first element from the array
         var attributeName = _.keys(b_model.changedAttributes())[0];
         var attributeValue = b_model.css_unit(attributeName);
         // Some attributes are not css, like "value" or "html"
-        // TODO: maybe refactor the get method
         if (attributeValue !== undefined)
             j_model_html.css(attributeName, attributeValue);
 
@@ -123,7 +122,7 @@ CanvasView = Backbone.View.extend({
         var b_myModel = this.b_components.get(event.currentTarget.id);
         b_myModel.css_set("width", width);
         b_myModel.css_set("height", height);
-        
+
         // We should only call this for tools that have text
         this.setVerticalAlignment(b_myModel);
     },
