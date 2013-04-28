@@ -3,10 +3,6 @@ ReportComponent = Backbone.Model.extend({
         var commonStyle = styles.commonStyle;
         var styleOfTool = styles.styleOfTool;
 
-        this.bind("change", function(event) {
-            console.debug(event.changed);
-        });
-
         _.map(styles, function(val, key) {
             _.each(val, function(style) {
                 var list_css = style.css;

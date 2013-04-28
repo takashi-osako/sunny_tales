@@ -7,7 +7,7 @@ CanvasView = Backbone.View.extend({
 
         this.b_components = this.b_template.get("components");
         this.b_components.bind("add", this.renderCanvas, this);
-        
+
         // Create references to be called inside canvas.droppable
         var b_components = this.b_components;
         var f_cssConvertToPoint = this.cssConvertToPoint
@@ -119,11 +119,11 @@ CanvasView = Backbone.View.extend({
         b_myModel.css_set("height", height);
     },
     cssConvertToPoint : function(j_object, key) {
-        values = j_object.cssUnit(key)
+        values = j_object.cssUnit(key);
         if (values[1] !== undefined && values[1] === 'px') {
-            values[0] = values[0] * 0.75
+            values[0] = values[0] * 0.75;
         }
-        return values[0]
+        return values[0];
     }
 });
 

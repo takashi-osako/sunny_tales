@@ -70,7 +70,8 @@ StyleView = Backbone.View.extend({
         "change #underline" : "setStyle",
         "change #bold" : "setStyle",
         "change #italic" : "setStyle",
-        "change #text-align" : "setStyle"
+        "change #color": "setStyle",
+        "change #background_color": "setStyle"
     },
     setStyle : function(e) {
         var b_myModel = this.b_styleCollection.at(0).b_myModel;
