@@ -20,6 +20,18 @@ ReportComponent = Backbone.Model.extend({
             }, this);
         }, this);
     },
+    toJSON : function(options) {
+        var data = {}
+        _.each(this.attributes, function(value, key) {
+            if (value.attribute === "css") {
+                // keep only "name", "value", and "unit"
+                this[key] = _.pick(value, ["name", "value", "unit"]);
+            } else {
+                this[key] = value;
+            }
+        }, data);
+        return data;
+    },
     css_set : function(name, value) {
         // if value is null or undefined,
         // then set defaults
