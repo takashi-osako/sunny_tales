@@ -49,8 +49,8 @@ CanvasView = Backbone.View.extend({
                     $(component_id).draggable();
 
                     // Update top and left
-                    j_existing_component.css_set("left", f_cssConvertToPoint($('#' + component_id), "left"));
-                    j_existing_component.css_set("top", f_cssConvertToPoint($('#' + component_id), "top"));
+                    j_existing_component.css_set("left", f_cssConvertToPoint($('#' + component_id), "left")[0]);
+                    j_existing_component.css_set("top", f_cssConvertToPoint($('#' + component_id), "top")[0]);
                 }
             }
         });
@@ -99,9 +99,15 @@ CanvasView = Backbone.View.extend({
     render : function(b_model, options) {
         var j_model_html = $('#' + b_model.cid);
         // We know that one thing changed, so get the first element from the array
-        attributeName = _.keys(b_model.changedAttributes())[0];
-        attributeValue = b_model.css_unit(attributeName);
-        j_model_html.css(attributeName, attributeValue);
+        var attributeName = _.keys(b_model.changedAttributes())[0];
+        var attributeValue = b_model.css_unit(attributeName);
+        // Some attributes are not css, like "value" or "html"
+        // TODO: maybe refactor the get method
+        if (attributeValue !== undefined)
+            j_model_html.css(attributeName, attributeValue);
+
+        // We should only call this for tools that have text
+        this.setVerticalAlignment(b_model);
     },
     close : function(event) {
         // Currently not used
@@ -112,18 +118,45 @@ CanvasView = Backbone.View.extend({
     },
     resize : function(event) {
         // A report component was resized
-        var width = this.cssConvertToPoint($(event.currentTarget), "width");
-        var height = this.cssConvertToPoint($(event.currentTarget), "height");
+        var width = this.cssConvertToPoint($(event.currentTarget), "width")[0];
+        var height = this.cssConvertToPoint($(event.currentTarget), "height")[0];
         var b_myModel = this.b_components.get(event.currentTarget.id);
         b_myModel.css_set("width", width);
         b_myModel.css_set("height", height);
+        
+        // We should only call this for tools that have text
+        this.setVerticalAlignment(b_myModel);
     },
     cssConvertToPoint : function(j_object, key) {
+        // converts px to pt and return a list of [value, unit]
         values = j_object.cssUnit(key);
         if (values[1] !== undefined && values[1] === 'px') {
             values[0] = values[0] * 0.75;
+            values[1] = 'pt';
         }
-        return values[0];
+        return values;
+    },
+    setVerticalAlignment : function(b_model) {
+        // Sets the vertical alignment of the text
+        var j_object = $('#' + b_model.cid + ' #value');
+        var verticalValue = b_model.css_get("vertical-align");
+        var inner_height = this.cssConvertToPoint(j_object, "height");
+        var margin_top = "";
+        var top = "";
+        var bottom = "";
+
+        if (verticalValue.toLowerCase() === 'middle') {
+            margin_top = inner_height[0] / -2;
+            // append units
+            margin_top = margin_top + inner_height[1];
+            top = "50%";
+        } else if (verticalValue.toLowerCase() === 'bottom') {
+            bottom = (b_model.css_get("height") * -1 ) + inner_height[0];
+            bottom = bottom + inner_height[1];
+        }
+        j_object.css("margin-top", margin_top);
+        j_object.css("bottom", bottom);
+        j_object.css("top", top);
+        j_object.css("position", "relative");
     }
 });
-

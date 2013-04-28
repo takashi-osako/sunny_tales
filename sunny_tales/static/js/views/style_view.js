@@ -70,8 +70,9 @@ StyleView = Backbone.View.extend({
         "change #underline" : "setStyle",
         "change #bold" : "setStyle",
         "change #italic" : "setStyle",
-        "change #color": "setStyle",
-        "change #background_color": "setStyle"
+        "change #color" : "setStyle",
+        "change #background_color" : "setStyle",
+        "change #vertical_align" : "setStyle"
     },
     setStyle : function(e) {
         var b_myModel = this.b_styleCollection.at(0).b_myModel;
@@ -87,6 +88,11 @@ StyleView = Backbone.View.extend({
     setTextValue : function(e) {
         var b_myModel = this.b_styleCollection.at(0).b_myModel;
         var newValue = $(e.currentTarget).val();
+        
+        // Sets the new text
+        // This must be set before we update model's value for vertical alignment to work properly
+        $('#' + b_myModel.cid + ' #value').text(newValue);
+        
         b_myModel.set("value", $(e.currentTarget).val());
 
         // Do we even care what is the value of html
@@ -94,9 +100,7 @@ StyleView = Backbone.View.extend({
         j_html = $(b_myModel.get("html"));
         $(j_html).find('#value').text(newValue);
         modifiedHtml = $('<div>').append($(j_html).clone()).html();
+        
         b_myModel.set("html", modifiedHtml);
-
-        // Sets the new text
-        $('#' + b_myModel.cid + ' #value').text(newValue);
     }
 });
