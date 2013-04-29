@@ -111,7 +111,7 @@
                 }, {
                     "name": "text",
                     "id": "text",
-                    "input_type": "text",
+                    "input_type": "textarea",
                     "editable": true,
                     "html": "<textarea/>",
                     "data_type": "string"

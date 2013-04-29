@@ -9,17 +9,18 @@ Tool = Backbone.Model.extend({
     //use "type" as Tool's id
     idAttribute : "type",
     initialize : function() {
-        html = this.get("html")
-        j_htmlObject = $(html)
+        var html = this.get("html");
+        var j_htmlObject = $(html);
         // Add id to identify where we should replace the text
-        j_htmlObject.attr("id", "value")
+        j_htmlObject.attr("id", "value");
         // Set the text
-        j_htmlObject.text(this.get("value"))
+        j_htmlObject.text(this.get("value"));
 
         // Add relevant classes
-        wrapper = $("<div class='ui-widget-content resizable draggable'></div>")
+        var wrapper = $("<div class='ui-widget-content resizable draggable'></div>");
         // Wrap around the html from config and convert to html string
-        $(j_htmlObject).appendTo(wrapper)
+        $(j_htmlObject).appendTo(wrapper);
+        
         j_htmlObject = $('<div>').append($(wrapper).clone()).html();
         this.set("html", j_htmlObject);
     }

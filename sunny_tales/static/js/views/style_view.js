@@ -4,6 +4,7 @@ StyleView = Backbone.View.extend({
     select_template : Handlebars.templates['style.select.template'],
     checkbox_template : Handlebars.templates['style.checkbox.template'],
     text_template : Handlebars.templates['style.text.template'],
+    textarea_template : Handlebars.templates['style.textarea.template'],
     render : function(b_styleModel) {
         // Template
         var template_html = this.template(b_styleModel.toJSON());
@@ -52,6 +53,7 @@ StyleView = Backbone.View.extend({
         Handlebars.registerPartial('style.select.template', this.select_template);
         Handlebars.registerPartial('style.checkbox.template', this.checkbox_template);
         Handlebars.registerPartial('style.text.template', this.text_template);
+        Handlebars.registerPartial('style.textarea.template', this.textarea_template);
     },
     clear : function() {
         this.$el.empty()
@@ -88,19 +90,29 @@ StyleView = Backbone.View.extend({
     setTextValue : function(e) {
         var b_myModel = this.b_styleCollection.at(0).b_myModel;
         var newValue = $(e.currentTarget).val();
-        
+
+        var htmlFriendlyValue = newValue.replace(/\r\n/g, '<br/>');
+
         // Sets the new text
         // This must be set before we update model's value for vertical alignment to work properly
-        $('#' + b_myModel.cid + ' #value').text(newValue);
-        
-        b_myModel.set("value", $(e.currentTarget).val());
+        $('#' + b_myModel.cid + ' #value').html(htmlFriendlyValue);
+
+        b_myModel.set("value", newValue);
 
         // Do we even care what is the value of html
         // This is not necessary but it's good to see the value is consistent
-        j_html = $(b_myModel.get("html"));
-        $(j_html).find('#value').text(newValue);
-        modifiedHtml = $('<div>').append($(j_html).clone()).html();
-        
+        var j_html = $(b_myModel.get("html"));
+        $(j_html).find('#value').text(htmlFriendlyValue);
+        var modifiedHtml = $('<div>').append($(j_html).clone()).html();
+
         b_myModel.set("html", modifiedHtml);
     }
 });
+
+
+// Check if we need \n or \r\n saved in template
+// $.valHooks.textarea = {
+    // get : function(elem) {
+        // return elem.value.replace(/\r?\n/g, "\r\n");
+    // }
+// }; 

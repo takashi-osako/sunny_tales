@@ -156,6 +156,8 @@ CanvasView = Backbone.View.extend({
         j_object.css("margin-top", margin_top);
         j_object.css("bottom", bottom);
         j_object.css("top", top);
+        // Important: these css values cannot be placed in .css file
         j_object.css("position", "relative");
+        j_object.css("white-space", "pre-wrap");
     }
 });
