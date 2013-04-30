@@ -120,7 +120,7 @@
                     "id": "color",
                     "input_type": "select",
                     "editable": false,
-                    "selection": ["black", "white", "red", "blue", "yellow", "green", "orange", "purple"],
+                    "selection": ["black", "cyan", "darkgray", "lightgray", "magenta", "pink", "white", "red", "blue", "yellow", "green", "orange"],
                     "css": [
                         {
                             "name": "color",
@@ -134,7 +134,7 @@
                     "id": "background_color",
                     "input_type": "select",
                     "editable": false,
-                    "selection": ["black", "white", "red", "blue", "yellow", "green", "orange", "purple"],
+                     "selection": ["black", "cyan", "darkgray", "lightgray", "magenta", "pink", "white", "red", "blue", "yellow", "green", "orange"],
                     "css": [
                         {
                             "name": "background-color",
