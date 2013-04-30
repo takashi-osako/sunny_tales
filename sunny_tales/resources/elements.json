@@ -134,12 +134,12 @@
                     "id": "background_color",
                     "input_type": "select",
                     "editable": false,
-                    "selection": ["black", "white", "red", "blue", "yellow", "green", "orange", "purple", "whitesmoke"],
+                    "selection": ["black", "white", "red", "blue", "yellow", "green", "orange", "purple"],
                     "css": [
                         {
                             "name": "background-color",
                             "format": "%s",
-                            "defaults": "whitesmoke",
+                            "defaults": "white",
                             "data_type": "string"
                         }
                     ]

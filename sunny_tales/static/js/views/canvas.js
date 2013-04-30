@@ -122,9 +122,6 @@ CanvasView = Backbone.View.extend({
         var b_myModel = this.b_components.get(event.currentTarget.id);
         b_myModel.css_set("width", width);
         b_myModel.css_set("height", height);
-
-        // We should only call this for tools that have text
-        this.setVerticalAlignment(b_myModel);
     },
     cssConvertToPoint : function(j_object, key) {
         // converts px to pt and return a list of [value, unit]
