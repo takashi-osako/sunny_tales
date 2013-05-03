@@ -394,7 +394,7 @@
 			"name": "Border style",
 			"input_type": "select",
 			"editable": false,
-			"selection": ["none", "solid", "dashed"],
+			"selection": ["none", "solid", "dotted"],
 			"css": [
 				{
 					"name": "border-style",
