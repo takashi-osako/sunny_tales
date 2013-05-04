@@ -5,7 +5,11 @@ Created on May 2, 2013
 '''
 import os
 from pycparser import parse_file
-from pycparser.c_ast import NodeVisitor
+from pycparser.c_ast import NodeVisitor, ArrayDecl, IdentifierType, Struct,\
+    TypeDecl
+from collections import OrderedDict
+import collections
+import json
 
 
 def parse_flat_file():
@@ -14,13 +18,41 @@ def parse_flat_file():
     f = os.path.join(here, '..', 'resources', 'test.h')
     ast = parse_file(f, use_cpp=True, cpp_path='/usr/bin/cpp-4.2')
     # Prints out parsed file structure
-    ast.show(attrnames=True)
+    ast.show(attrnames=True, nodenames=True)
 
+    result = OrderedDict()
     for child in ast.ext:
-        translator = Translator()
-        cv = SunnyVisitor(translator)
-        cv.visit(child)
-        print(translator.stack)
+        result = parse_struct(child)
+        json_str = json.dumps(result)
+        print(json_str)
+
+
+def parse_struct(node):
+    result = OrderedDict()
+    if node.type.name:
+        struct_name = node.type.name
+    elif node.type.declname:
+        struct_name = node.type.declname
+        
+    result[struct_name] = OrderedDict()
+    for decl in node.type.decls:
+        if type(decl.type) is ArrayDecl:
+            __size = int(decl.type.dim.value)
+            __type = decl.type.type.type
+            __name = decl.type.type.declname
+            if type(__type) is IdentifierType:
+                __format = __type.names[0]
+                result[struct_name][__name] = __size
+            elif type(__type) is Struct:
+                struct_result = parse_struct(decl.type.type)
+                result[struct_name][__name] = []
+                for i in range(__size):
+                    result[struct_name][__name].append(struct_result)
+        elif type(decl.type) is TypeDecl:
+            __name = decl.type.declname
+            struct_result = parse_struct(decl.type)
+            result[struct_name][__name] = struct_result
+    return result
 
 
 # Visits nodes of AST
