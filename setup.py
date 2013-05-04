@@ -13,7 +13,8 @@ requires = [
     'pymongo',
     'zope.component',
     'zope.interface',
-    'Ming'  # For unit test
+    'Ming',  # For unit test
+    'pycparser'
 ]
 
 setup(name='sunny_tales',

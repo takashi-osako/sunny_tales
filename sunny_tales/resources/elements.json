@@ -13,7 +13,7 @@
 					"id": "font_family",
 					"input_type": "select",
 					"editable": false,
-					"selection": ["Arial", "Courier", "Times New Roman", "Verdana", "Lucida Console"],
+					"selection": ["Courier", "Times New Roman", "Helvetica"],
 					"css": [
 						{
 							"name": "font-family",
@@ -157,7 +157,7 @@
 					"id": "font_family",
 					"input_type": "select",
 					"editable": false,
-					"selection": ["Arial", "Courier", "Times New Roman", "Verdana", "Lucida Console"],
+					"selection": ["Courier", "Times New Roman", "Helvetica"],
 					"css": [
 						{
 							"name": "font-family",
