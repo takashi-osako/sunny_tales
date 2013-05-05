@@ -57,7 +57,16 @@ CanvasView = Backbone.View.extend({
     },
     events : {
         "click .report-component" : "updateStyleView",
-        "resize .report-component" : "resize"
+        "resize .report-component" : "resize",
+        "mouseenter .report-component" : "growBox",
+        "mouseleave .report-component" : "resetGrowBox"
+    },
+    growBox : function(e) {
+        var targetDiv = $("#" + e.currentTarget.id)
+        targetDiv.css("box-shadow", "10pt 10pt 5pt #888888");
+    },
+    resetGrowBox : function(e) {
+        $("#" + e.currentTarget.id).css("box-shadow", "");
     },
     updateStyleView : function(e) {
         this.b_styleCollection.reset();
