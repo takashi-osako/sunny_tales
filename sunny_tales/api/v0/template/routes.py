@@ -107,7 +107,7 @@ def create_new_template(request):
 
     templates = Templates()
     return templates.insert(document)
-    
+
 
 def __get_payload(request):
     '''
