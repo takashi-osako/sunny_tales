@@ -10,10 +10,7 @@ requires = [
     'pyramid',
     'pyramid_debugtoolbar',
     'waitress',
-    'pymongo',
-    'zope.component',
-    'zope.interface',
-    'Ming',  # For unit test
+    'cloudy_tales'
 ]
 
 setup(name='sunny_tales',

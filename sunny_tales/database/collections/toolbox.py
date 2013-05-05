@@ -3,7 +3,7 @@ Created on Apr 7, 2013
 
 @author: dorisip
 '''
-from sunny_tales.database.collections.base import BaseCollection
+from cloudy_tales.database.collections.base import BaseCollection
 
 
 class Toolbox(BaseCollection):

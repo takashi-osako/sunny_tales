@@ -4,8 +4,8 @@ Created on Apr 14, 2013
 @author: dorisip
 '''
 import unittest
-from sunny_tales.database.tests.unittest_db_helper import create_in_memory_db_client
-from sunny_tales.database.connection import DbConnection
+from cloudy_tales.database.tests.unittest_db_helper import create_in_memory_db_client
+from cloudy_tales.database.connection import DbConnection
 from sunny_tales.api.v0.template.routes import get_toolbox, get_template,\
     save_custom_template, get_all_templates, create_new_template
 from sunny_tales.database.collections.toolbox import Toolbox
