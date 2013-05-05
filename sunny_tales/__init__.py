@@ -3,7 +3,6 @@ import subprocess
 import os
 import signal
 import atexit
-from sunny_tales.utils.flat_file_parser import parse_flat_file
 
 CAKE_PROCESS = None
 
@@ -19,7 +18,6 @@ def main(global_config, **settings):
     config.include('sunny_tales.api.v0.template', route_prefix='/api/v0')
     config.scan()
     precompile()
-    parse_flat_file()
     return config.make_wsgi_app()
 
 
