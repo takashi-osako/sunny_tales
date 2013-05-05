@@ -5,110 +5,117 @@ Created on May 2, 2013
 '''
 import os
 from pycparser import parse_file
-from pycparser.c_ast import NodeVisitor, ArrayDecl, IdentifierType, Struct,\
+from pycparser.c_ast import ArrayDecl, IdentifierType, Struct,\
     TypeDecl
 from collections import OrderedDict
-import collections
 import json
+import copy
 
 
 def parse_flat_file():
+    '''
+    Parses C header file, Reads flat file
+    '''
     os.environ['PATH'] += os.pathsep + '/usr/bin'
     here = os.path.abspath(os.path.dirname(__file__))
     f = os.path.join(here, '..', 'resources', 'test.h')
-    ast = parse_file(f, use_cpp=True, cpp_path='/usr/bin/cpp-4.2')
-    # Prints out parsed file structure
-    ast.show(attrnames=True, nodenames=True)
 
-    result = OrderedDict()
+    # Calls pycparser to precompile and parse the C header file
+    ast = parse_file(f, use_cpp=True, cpp_path='/usr/bin/cpp-4.2')
+    # Prints out parsed file structure for debugging
+    #ast.show(attrnames=True, nodenames=True)
+
+    # Go through each 'struct' that was parsed
+    # Theoretically there should only be one struct per header file
     for child in ast.ext:
         result = parse_struct(child)
-        json_str = json.dumps(result)
-        print(json_str)
+        content = read_from_flat_file()
+        print(json.dumps(result))
+
+        (rtn_result, rtn_content) = fill_values_with_content(result, content)
+
+        if len(rtn_content) != 0:
+            print("non zero flat file content! Remaining Content: %s", rtn_content)
+        print(json.dumps(rtn_result))
 
 
 def parse_struct(node):
+    '''
+    Given an AST node, creates an ordered dict representing the structure of the header file
+    from header:
+    struct address {
+        char address_line1[20];
+        char country[2];
+    };
+    generates the following ordered dict: {"address": {"address_line1": 20, "country": 2}}
+    '''
     result = OrderedDict()
-    if node.type.name:
-        struct_name = node.type.name
-    elif node.type.declname:
-        struct_name = node.type.declname
-        
+    node_type = node.type
+
+    if node_type.name:
+        struct_name = node_type.name
+    elif node_type.declname:
+        struct_name = node_type.declname
+
     result[struct_name] = OrderedDict()
-    for decl in node.type.decls:
-        if type(decl.type) is ArrayDecl:
-            __size = int(decl.type.dim.value)
-            __type = decl.type.type.type
-            __name = decl.type.type.declname
+    for decl in node_type.decls:
+        decl_type = decl.type
+        if type(decl_type) is ArrayDecl:
+            __size = int(decl_type.dim.value)
+            __type = decl_type.type.type
+            __name = decl_type.type.declname
             if type(__type) is IdentifierType:
                 __format = __type.names[0]
                 result[struct_name][__name] = __size
             elif type(__type) is Struct:
-                struct_result = parse_struct(decl.type.type)
+                struct_result = parse_struct(decl_type.type)
                 result[struct_name][__name] = []
                 for i in range(__size):
-                    result[struct_name][__name].append(struct_result)
-        elif type(decl.type) is TypeDecl:
-            __name = decl.type.declname
-            struct_result = parse_struct(decl.type)
-            result[struct_name][__name] = struct_result
+                    # Make a deep copy of the json object
+                    result[struct_name][__name].append(copy.deepcopy(struct_result))
+        elif type(decl_type) is TypeDecl:
+            __name = decl_type.declname
+            if type(decl_type.type) is Struct:
+                struct_result = parse_struct(decl_type)
+                result[struct_name][__name] = struct_result
+            elif type(decl_type.type) is IdentifierType:
+                # datatypes such as int falls into here
+                pass
     return result
 
 
-# Visits nodes of AST
-class SunnyVisitor(NodeVisitor):
-    def __init__(self, translator):
-        self.translator = translator
-
-    def visit_Decl(self, node):
-        if node.name is not None:
-            self.translator.add_decl(node.name)
-        NodeVisitor.generic_visit(self, node)
-
-    def visit_Struct(self, node):
-        self.translator.add_struct(node.name)
-        NodeVisitor.generic_visit(self, node)
-
-    def visit_ArrayDecl(self, node):
-        self.translator.mark_array()
-        NodeVisitor.generic_visit(self, node)
-        self.translator.mark_end_of_array()
-
-    def visit_TypeDecl(self, node):
-        #self.translator.add_variable(node.declname)
-        NodeVisitor.generic_visit(self, node)
-
-    def visit_IdentifierType(self, node):
-        self.translator.add_type(node.names)
-        NodeVisitor.generic_visit(self, node)
-
-    def visit_Constant(self, node):
-        self.translator.add_size(node.value)
+def read_from_flat_file():
+    '''
+    Read and return content from flat file
+    '''
+    here = os.path.abspath(os.path.dirname(__file__))
+    f = os.path.join(here, '..', 'resources', 'test_flat_file.txt')
+    with open(f, 'r') as reader:
+        content = reader.read()
+    return content
 
 
-class Translator():
-    def __init__(self):
-        self.stack = []
+def fill_values_with_content(json_obj, flat_content):
+    '''
+    Given a ordered dict generated based on interpretation of header file, and the content of the flat file,
+    Returns a json ordered dict with values filled in from content in flat file
+    '''
+    if type(json_obj) is list:
+        for i in range(len(json_obj)):
+            (json_obj[i], flat_content) = fill_values_with_content(json_obj[i], flat_content)
+    else:
+        for (key, value) in json_obj.items():
+            # leaf nodes have int as values
+            if type(value) is int:
+                if len(flat_content) == 0:
+                    json_obj[key] = ""
+                else:
+                    if (len(flat_content) < value):
+                        value = len(flat_content)
+                    # Trim white spaces
+                    json_obj[key] = flat_content[0: value].strip()
+                    flat_content = flat_content[value:]
+            else:
+                (json_obj[key], flat_content) = fill_values_with_content(value, flat_content)
 
-    def add_struct(self, name):
-        self.stack.append(name)
-
-    def add_decl(self, name):
-        self.stack.append(name)
-
-    def mark_array(self):
-        pass
-#        arr = self.stack.pop()
-#        self.stack.append({'name': arr, 'type': 'array'})
-
-    def mark_end_of_array(self):
-        pass
-
-    def add_variable(self, name):
-        self.stack.append(name)
-
-    def add_type(self, type_name):
-        self.stack.append(type_name[0])
-
-    def add_size(self, value):
-        self.stack.append(value)
+    return (json_obj, flat_content)

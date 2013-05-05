@@ -8,14 +8,16 @@ from bson import json_util
 import os
 import errno
 
+
 def mkdir_p(path):
     try:
         os.makedirs(path)
     except OSError as exc:
         if exc.errno == errno.EEXIST and os.path.isdir(path):
             pass
-        else: 
+        else:
             raise
+
 
 def export(data, tar_dir='/tmp'):
     file_name = os.path.join(tar_dir, 'template.json')
