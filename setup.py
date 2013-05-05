@@ -14,7 +14,6 @@ requires = [
     'zope.component',
     'zope.interface',
     'Ming',  # For unit test
-    'pycparser'
 ]
 
 setup(name='sunny_tales',
