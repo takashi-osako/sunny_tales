@@ -5,12 +5,14 @@ Created on Apr 7, 2013
 '''
 from cloudy_tales.database.collections.base import BaseCollection
 import pymongo
+from cloudy_tales.database.MongoOperationManager import MongoOperationManager
+from cloudy_tales.database.connection import DbConnection
 
 
 class Templates(BaseCollection):
 
     def __init__(self, name='templates'):
-        super(Templates, self).__init__(name)
+        super(Templates, self).__init__(MongoOperationManager(DbConnection('sunny')), name)
 
     def find_current(self, doc_id):
         '''

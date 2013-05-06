@@ -13,6 +13,7 @@ from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.database.collections.templates import Templates
 from sunny_tales.api.tests.dummy import SunnyDummyRequest,\
     SunnyDummyInvalidJsonBodyRequest
+from cloudy_tales.database.MongoOperationManager import MongoOperationManager
 
 
 class TestRoutes(unittest.TestCase):
@@ -22,7 +23,6 @@ class TestRoutes(unittest.TestCase):
         create_in_memory_db_client()
 
     def setUp(self):
-        self.__conn = DbConnection('testCollection')
         self.__toolbox = Toolbox()
         self.__template = Templates()
         self.__request = SunnyDummyRequest()
