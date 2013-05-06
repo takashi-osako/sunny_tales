@@ -6,14 +6,13 @@ Created on Apr 14, 2013
 import unittest
 from cloudy_tales.database.tests.unittest_db_helper import create_in_memory_db_client
 from cloudy_tales.database.connection import DbConnection
-from sunny_tales.api.v0.template.routes import get_toolbox, get_template,\
+from sunny_tales.api.v0.template.routes import get_toolbox, get_template, \
     save_custom_template, get_all_templates, create_new_template
 from sunny_tales.database.collections.toolbox import Toolbox
 from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.database.collections.templates import Templates
-from sunny_tales.api.tests.dummy import SunnyDummyRequest,\
+from sunny_tales.api.tests.dummy import SunnyDummyRequest, \
     SunnyDummyInvalidJsonBodyRequest
-from cloudy_tales.database.MongoOperationManager import MongoOperationManager
 
 
 class TestRoutes(unittest.TestCase):
@@ -23,8 +22,9 @@ class TestRoutes(unittest.TestCase):
         create_in_memory_db_client()
 
     def setUp(self):
-        self.__toolbox = Toolbox()
-        self.__template = Templates()
+        connection = DbConnection('sunny')
+        self.__toolbox = Toolbox(connection)
+        self.__template = Templates(connection)
         self.__request = SunnyDummyRequest()
 
     def tearDown(self):

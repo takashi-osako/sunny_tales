@@ -14,12 +14,14 @@ import json
 from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
 from sunny_tales.utils.exporter import export
+from cloudy_tales.database.connection import DbConnection
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
 def get_toolbox(request):
-    toolbox = Toolbox()
-    results = toolbox.find_one()
+    with DbConnection('sunny') as connection:
+        toolbox = Toolbox(connection)
+        results = toolbox.find_one()
 
     return results
 
@@ -32,8 +34,9 @@ def get_template(request):
     uuid = request.matchdict['uuid']
 
     # TODO: static class instead of instance?
-    templates = Templates()
-    results = templates.find_one_by_id(uuid)
+    with DbConnection('sunny') as connection:
+        templates = Templates(connection)
+        results = templates.find_one_by_id(uuid)
     if results is None:
         return HTTPNotFound()
 
@@ -55,19 +58,20 @@ def save_custom_template(request):
         return HTTPBadRequest()
     document['metadata'] = __generate_metadata(doc_id)
 
-    templates = Templates()
-    results = templates.find_one_by_id(doc_id)
-    if results is not None:
-        # Need to archive if uuid exists in db
-        # Current concept:  add metaData with timestamp and save 'parend_id'
-        # To get current revision, look for parent_id = uuid with latest timestamp
-        # To revert, delete/pop the latest timestamp
-        # Idea 2:  swap content, so document with _id is always the most uptodate
-        new_id = str(uuid.uuid4())
-        document['_id'] = new_id
-
-    # TODO: should I return the new_id or original id?
-    results = templates.save(document)
+    with DbConnection('sunny') as connection:
+        templates = Templates(connection)
+        results = templates.find_one_by_id(doc_id)
+        if results is not None:
+            # Need to archive if uuid exists in db
+            # Current concept:  add metaData with timestamp and save 'parend_id'
+            # To get current revision, look for parent_id = uuid with latest timestamp
+            # To revert, delete/pop the latest timestamp
+            # Idea 2:  swap content, so document with _id is always the most uptodate
+            new_id = str(uuid.uuid4())
+            document['_id'] = new_id
+    
+        # TODO: should I return the new_id or original id?
+        results = templates.save(document)
 
     if results is None:
         raise HTTPBadRequest()
@@ -79,8 +83,9 @@ def get_all_templates(request):
     '''
     Returns all custom templates' id
     '''
-    templates = Templates()
-    results = templates.find()
+    with DbConnection('sunny') as connection:
+        templates = Templates(connection)
+        results = templates.find()
     ids = []
     for result in results:
         ids.append(result['_id'])
@@ -105,8 +110,10 @@ def create_new_template(request):
     # Temporary output to /tmp/sunny
     export(document)
 
-    templates = Templates()
-    return templates.insert(document)
+    with DbConnection('sunny') as connection:
+        templates = Templates(connection)
+        result = templates.insert(document)
+    return result
 
 
 def __get_payload(request):
