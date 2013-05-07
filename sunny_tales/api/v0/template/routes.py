@@ -69,7 +69,7 @@ def save_custom_template(request):
             # Idea 2:  swap content, so document with _id is always the most uptodate
             new_id = str(uuid.uuid4())
             document['_id'] = new_id
-    
+
         # TODO: should I return the new_id or original id?
         results = templates.save(document)
 
