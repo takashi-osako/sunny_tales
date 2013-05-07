@@ -2,6 +2,7 @@ from sunny_tales.utils.element_loader import get_element_json
 import uuid
 from sunny_tales.database.collections.toolbox import Toolbox
 from cloudy_tales.database.client import create_db_client
+from sunny_tales.database.connection import SunnyDbConnection
 
 
 def includeme(config):
@@ -15,8 +16,9 @@ def includeme(config):
     config.scan()
 
     # Temp: On startup, insert document if none exists
-    toolbox = Toolbox()
-    toolbox.remove()
+    with SunnyDbConnection() as connector:
+        toolbox = Toolbox(connector)
+        toolbox.remove()
     document = {}
     document = get_element_json()
     document['_id'] = str(uuid.uuid4())

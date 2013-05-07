@@ -7,5 +7,5 @@ from cloudy_tales.database.connection import DbConnection
 
 class SunnyDbConnection(DbConnection):
 
-    def __init__(self, collection, db_name='sunny'):
-        DbConnection.__init__(self, collection, db_name)
+    def __init__(self, db_name='sunny'):
+        DbConnection.__init__(self, db_name)

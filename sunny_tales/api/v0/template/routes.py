@@ -14,12 +14,12 @@ import json
 from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
 from sunny_tales.utils.exporter import export
-from cloudy_tales.database.connection import DbConnection
+from sunny_tales.database.connection import SunnyDbConnection
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
 def get_toolbox(request):
-    with DbConnection('sunny') as connection:
+    with SunnyDbConnection() as connection:
         toolbox = Toolbox(connection)
         results = toolbox.find_one()
 
@@ -34,7 +34,7 @@ def get_template(request):
     uuid = request.matchdict['uuid']
 
     # TODO: static class instead of instance?
-    with DbConnection('sunny') as connection:
+    with SunnyDbConnection() as connection:
         templates = Templates(connection)
         results = templates.find_one_by_id(uuid)
     if results is None:
@@ -58,7 +58,7 @@ def save_custom_template(request):
         return HTTPBadRequest()
     document['metadata'] = __generate_metadata(doc_id)
 
-    with DbConnection('sunny') as connection:
+    with SunnyDbConnection() as connection:
         templates = Templates(connection)
         results = templates.find_one_by_id(doc_id)
         if results is not None:
@@ -83,7 +83,7 @@ def get_all_templates(request):
     '''
     Returns all custom templates' id
     '''
-    with DbConnection('sunny') as connection:
+    with SunnyDbConnection() as connection:
         templates = Templates(connection)
         results = templates.find()
     ids = []
@@ -110,7 +110,7 @@ def create_new_template(request):
     # Temporary output to /tmp/sunny
     export(document)
 
-    with DbConnection('sunny') as connection:
+    with SunnyDbConnection() as connection:
         templates = Templates(connection)
         result = templates.insert(document)
     return result

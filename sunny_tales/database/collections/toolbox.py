@@ -10,7 +10,7 @@ from cloudy_tales.database.MongoOperationManager import MongoOperationManager
 class Toolbox(BaseCollection):
 
     def __init__(self, connection, name='toolbox'):
-        super(Toolbox, self).__init__(MongoOperationManager(connection), name)
+        super(Toolbox, self).__init__(mongoOperationManager=MongoOperationManager(connection), name=name)
 
     def find_one(self, *args, **kwargs):
         results = super(Toolbox, self).find_one(*args, **kwargs)
