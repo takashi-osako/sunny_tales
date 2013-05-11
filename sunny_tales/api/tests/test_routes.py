@@ -103,11 +103,15 @@ class TestRoutes(unittest.TestCase):
         results = create_new_template(self.__request)
         self.assertIsInstance(results, HTTPBadRequest)
 
-    def test_ave_custom_template_invalid_json(self):
+    def test_save_custom_template_invalid_json(self):
         self.__request = SunnyDummyInvalidJsonBodyRequest()
         self.__request.matchdict['uuid'] = 123
         results = save_custom_template(self.__request)
         self.assertIsInstance(results, HTTPBadRequest)
+
+    def test_create_template(self):
+        self.__request.matchdict['uuid'] = 123
+        # TODO
 
 
 if __name__ == "__main__":

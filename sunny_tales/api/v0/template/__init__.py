@@ -9,6 +9,7 @@ def includeme(config):
     config.add_route('individual_template', '/templates/{uuid}')
     config.add_route('templates', '/templates')
     config.add_route('toolbox', 'toolbox')
+    config.add_route('create_pdf', '/createpdf/{uuid}')
 
     # Create mongo client connection
     create_db_client()

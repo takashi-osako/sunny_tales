@@ -15,6 +15,7 @@ from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
 from sunny_tales.database.connection import SunnyDbConnection
 from cloudy_tales.utils.exporter import export
+from cloudy_tales.data_fusion.translate import combine_template_with_data
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
@@ -41,8 +42,7 @@ def get_template(request):
         return HTTPNotFound()
 
     # We need this because of date formmating in mongo is not in json
-    json_str = json.dumps(results, default=json_util.default)
-    return json.loads(json_str)
+    return __convert_mongo_bson_to_json(results)
 
 
 @view_config(route_name='individual_template', request_method='PUT', renderer='json')
@@ -116,6 +116,24 @@ def create_new_template(request):
     return result
 
 
+@view_config(route_name='create_pdf', request_method='GET', renderer='json')
+def create_pdf(request):
+    '''
+    Handles GET requests /createpdf/{uuid}
+    '''
+    uuid = request.matchdict['uuid']
+
+    if uuid:
+        with SunnyDbConnection() as connection:
+            templates = Templates(connection)
+            result = templates.find_by_id(uuid)
+
+            # Calls data fusion service to template, if any, writes to /tmp/template.json
+            combine_template_with_data(result)
+
+    return __convert_mongo_bson_to_json(result)
+
+
 def __get_payload(request):
     '''
     Request python dictionary of request payload
@@ -133,3 +151,9 @@ def __generate_metadata(parent_id):
     Generate metadata for a template
     '''
     return {'parent_id': parent_id, 'timestamp': datetime.datetime.utcnow()}
+
+
+def __convert_mongo_bson_to_json(results):
+    # We need this because of date formmating in mongo is not in json
+    json_str = json.dumps(results, default=json_util.default)
+    return json.loads(json_str)
