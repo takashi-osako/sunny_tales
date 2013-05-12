@@ -15,5 +15,5 @@ $(function() {
     var canvasView = new CanvasView(toolMenu, templateModel, styleCollection);
     var saveTemplateView = new SaveTemplateView(templateModel);
     var styleView = new StyleView(styleCollection);
-
+    var createPdfView = new CreatePdfView(templateModel);
 });
