@@ -4,7 +4,8 @@ TemplateModel = Backbone.Model.extend({
         return this.isNew() ? url : url + "/" + this.id;
     },
     initialize : function() {
-        this.set("components", new ReportComponentsCollection)
+        this.set("name", "");
+        this.set("components", new ReportComponentsCollection);
     },
     idAttribute : "_id",
     components : null,
