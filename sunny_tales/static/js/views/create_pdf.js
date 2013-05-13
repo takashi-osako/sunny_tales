@@ -13,6 +13,7 @@ CreatePdfView = Backbone.View.extend({
         var id = this.b_template.id;
         if (id) {
             this.b_pdf.id = id;
+            this.b_pdf.trans_ref_no = $('#bol-trans_ref_no').val()
             this.b_pdf.fetch();
         }
     }

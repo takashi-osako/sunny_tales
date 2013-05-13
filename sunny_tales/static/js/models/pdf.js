@@ -1,7 +1,7 @@
 PdfModel = Backbone.Model.extend({
     url : function() {
         var url = '/api/v0/createpdf';
-        return url + "/" + this.id;
+        return url + "/" + this.id + '/' + this.trans_ref_no;
     },
     initialize : function() {
     },

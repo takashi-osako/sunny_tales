@@ -16,6 +16,8 @@ from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
 from sunny_tales.database.connection import SunnyDbConnection
 from cloudy_tales.utils.exporter import export
 from cloudy_tales.data_fusion.translate import combine_template_with_data
+from cloudy_tales.database.connectionManager import DbConnectionManager
+from cloudy_tales.database.collections.base import BaseCollection
 
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
@@ -119,9 +121,10 @@ def create_new_template(request):
 @view_config(route_name='create_pdf', request_method='GET', renderer='json')
 def create_pdf(request):
     '''
-    Handles GET requests /createpdf/{uuid}
+    Handles GET requests /createpdf/{uuid}/{trans_ref_no}
     '''
     uuid = request.matchdict['uuid']
+    trans_ref_no = request.matchdict['trans_ref_no']
 
     if uuid:
         with SunnyDbConnection() as connection:
@@ -129,8 +132,13 @@ def create_pdf(request):
             result = templates.find_by_id(uuid)
 
             # Calls data fusion service to template, if any, writes to /tmp/template.json
-            combine_template_with_data(result)
 
+    if trans_ref_no:
+        with DbConnectionManager('windy') as connection:
+            collection = BaseCollection(connection, 'Transheader')
+            key_data = {'key_data.trans_ref_no': trans_ref_no}
+            data = collection.find_one(key_data)
+    combine_template_with_data(template=result, data=data)
     return __convert_mongo_bson_to_json(result)
 
 
