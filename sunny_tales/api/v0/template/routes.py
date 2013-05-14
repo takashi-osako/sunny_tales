@@ -13,7 +13,6 @@ from bson import json_util
 import json
 from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.api.v0.template.exceptions import InvalidPayloadError
-from sunny_tales.database.connection import SunnyDbConnection
 from cloudy_tales.utils.exporter import export
 from cloudy_tales.data_fusion.translate import combine_template_with_data
 from cloudy_tales.database.connectionManager import DbConnectionManager
@@ -22,7 +21,7 @@ from cloudy_tales.database.collections.base import BaseCollection
 
 @view_config(route_name='toolbox', request_method='GET', renderer='json')
 def get_toolbox(request):
-    with SunnyDbConnection() as connection:
+    with DbConnectionManager() as connection:
         toolbox = Toolbox(connection)
         results = toolbox.find_one()
 
@@ -37,7 +36,7 @@ def get_template(request):
     uuid = request.matchdict['uuid']
 
     # TODO: static class instead of instance?
-    with SunnyDbConnection() as connection:
+    with DbConnectionManager() as connection:
         templates = Templates(connection)
         results = templates.find_one_by_id(uuid)
     if results is None:
@@ -60,7 +59,7 @@ def save_custom_template(request):
         return HTTPBadRequest()
     document['metadata'] = __generate_metadata(doc_id)
 
-    with SunnyDbConnection() as connection:
+    with DbConnectionManager() as connection:
         templates = Templates(connection)
         results = templates.find_one_by_id(doc_id)
         if results is not None:
@@ -85,7 +84,7 @@ def get_all_templates(request):
     '''
     Returns all custom templates' id
     '''
-    with SunnyDbConnection() as connection:
+    with DbConnectionManager() as connection:
         templates = Templates(connection)
         results = templates.find()
     ids = []
@@ -112,7 +111,7 @@ def create_new_template(request):
     # Temporary output to /tmp/sunny
     export(document)
 
-    with SunnyDbConnection() as connection:
+    with DbConnectionManager() as connection:
         templates = Templates(connection)
         result = templates.insert(document)
     return result
@@ -127,14 +126,14 @@ def create_pdf(request):
     trans_ref_no = request.matchdict['trans_ref_no']
 
     if uuid:
-        with SunnyDbConnection() as connection:
+        with DbConnectionManager() as connection:
             templates = Templates(connection)
             result = templates.find_by_id(uuid)
 
             # Calls data fusion service to template, if any, writes to /tmp/template.json
 
     if trans_ref_no:
-        with DbConnectionManager('windy') as connection:
+        with DbConnectionManager() as connection:
             collection = BaseCollection(connection, 'Transheader')
             key_data = {'key_data.trans_ref_no': trans_ref_no}
             data = collection.find_one(key_data)

@@ -4,7 +4,6 @@ Created on Apr 14, 2013
 @author: dorisip
 '''
 import unittest
-from cloudy_tales.database.tests.unittest_db_helper import create_in_memory_db_client
 from sunny_tales.api.v0.template.routes import get_toolbox, get_template, \
     save_custom_template, get_all_templates, create_new_template
 from sunny_tales.database.collections.toolbox import Toolbox
@@ -12,17 +11,14 @@ from pyramid.httpexceptions import HTTPNotFound, HTTPBadRequest
 from sunny_tales.database.collections.templates import Templates
 from sunny_tales.api.tests.dummy import SunnyDummyRequest, \
     SunnyDummyInvalidJsonBodyRequest
-from sunny_tales.database.connection import SunnyDbConnection
+from cloudy_tales.database.connectionManager import DbConnectionManager
+from cloudy_tales.database.tests.UnitTestWithMongoDB import UnitTestWithMongoDB
 
 
-class TestRoutes(unittest.TestCase):
-
-    @staticmethod
-    def setUpClass():
-        create_in_memory_db_client()
+class TestRoutes(UnitTestWithMongoDB):
 
     def setUp(self):
-        connection = SunnyDbConnection()
+        connection = DbConnectionManager()
         self.__toolbox = Toolbox(connection)
         self.__template = Templates(connection)
         self.__request = SunnyDummyRequest()
